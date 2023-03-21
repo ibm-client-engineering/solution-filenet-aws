@@ -1,7 +1,7 @@
 ---
 id: approach
-sidebar_position: 2
-title: User-Centric Approach
+sidebar_position: 3
+title: Approach
 ---
 
 # Design Thinking

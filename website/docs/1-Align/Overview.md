@@ -1,7 +1,7 @@
 ---
 id: overview
 sidebar_position: 1
-title: Solution Overview
+title: Overview
 ---
 
 ## Vision & Business Alignment

@@ -64,8 +64,12 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 5,
+    },
       navbar: {
-        title: '| My Solution',
+        title: '| IBM FileNet on AWS EKS',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
