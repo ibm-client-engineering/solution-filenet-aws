@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 slug: /
-title: 'Flight Path: IBM FileNet on AWS EKS'
+title: 'Flight Path | IBM FileNet on AWS'
 ---
 [![Build](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml)
 
