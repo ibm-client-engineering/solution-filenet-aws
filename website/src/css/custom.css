@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
 :root {
-  --ifm-font-family-base: 'IBM Plex Sans';
-  --ifm-font-size-base: 16px;
-  --ifm-font-family-monospace: 'IBM Plex Mono';
+  --ifm-font-family-base: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --ifm-font-size-base: 17px;
+  --ifm-font-family-monospace: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono',
+  'Bitstream Vera Sans Mono', Courier, monospace;
 }
 
 .navbar__brand {
@@ -52,10 +53,13 @@
 }
 :root {
     --ifm-navbar-height: 50px;
+    --ifm-link-color: #0f5cf4;
     --ifm-navbar-padding-horizontal: 20px;
+    --ifm-navbar-padding-vertical: 5px;
     --ifm-color-primary: #000205;
     --ifm-color-primary-dark: #35578f;
     --ifm-color-primary-darker: #2e466f;
+    --ifm-menu-color: #000205;
     /* --ifm-menu-color-background-active: #e8e8e8; */
     --ifm-color-primary-darkest: #202e78;
     --ifm-color-primary-light: #5e8ce5;
@@ -80,6 +84,7 @@
     --ifm-pagination-nav-border-radius: 0rem;
     --ifm-alert-border-radius: 0rem;
     --ifm-alert-background-color: #82b1ff;
+    --ifm-tip-background-color: #dafbe4;
     --ifm-alert-border-color: #82b1ff;
     --ifm-card-border-radius: 0;
 
@@ -109,6 +114,7 @@ html[data-theme='dark'] {
   --ifm-background-surface-color: #262626;
   --ifm-color-primary: #f0f3f6;
   --ifm-button-color: #525152;
+  --ifm-menu-color: #f0f3f6;
 
 }
 

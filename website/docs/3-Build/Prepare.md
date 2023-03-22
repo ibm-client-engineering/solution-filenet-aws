@@ -1,7 +1,7 @@
 ---
-id: solution-build
+id: solution-prepare
 sidebar_position: 1
-title: Deployment
+title: Prepare
 ---
 
 ## Pre-Requisites

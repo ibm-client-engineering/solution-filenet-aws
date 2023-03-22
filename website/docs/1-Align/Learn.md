@@ -1,10 +1,16 @@
 ---
-id: Learn
-sidebar_position: 2
+id: learn
+sidebar_position: 1
 title: Learn
 ---
 
 ## Learning Resources
+
+:::tip
+
+Prior to embarking on Containerizing IBM FileNet on AWS, you need to have a basic understanding of the AWS ecosystem. Here are some courses that will give you a basic foundation:
+
+:::
 
 - [AWS Fundamentals](https://www.pluralsight.com/paths/aws-certified-cloud-practitioner-clf-c01)
 The courses in this path will teach you the fundamentals of cloud computing, review the core AWS services, will provide an introduction to security and architecture on the platform.

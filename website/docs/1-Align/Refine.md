@@ -1,7 +1,7 @@
 ---
-id: approach
+id: refine
 sidebar_position: 3
-title: Approach
+title: Refine
 ---
 
 # Design Thinking

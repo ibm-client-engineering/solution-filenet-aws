@@ -6,7 +6,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+  themeConfig: {
+    mermaid: {
+      theme: { light: 'neutral', dark: 'forest' },
+    },
+  },
   title: 'IBM Client Engineering',
   tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
