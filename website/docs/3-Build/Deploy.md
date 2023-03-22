@@ -1,6 +1,6 @@
 ---
 id: solution-deploy
 sidebar_position: 2
-title: Deployment
+title: Deploy
 ---
 

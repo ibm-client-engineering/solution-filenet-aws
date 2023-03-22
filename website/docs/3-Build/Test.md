@@ -1,7 +1,7 @@
 ---
 id: solution-test
 sidebar_position: 3
-title: Testing
+title: Test
 ---
 
 ## Test
