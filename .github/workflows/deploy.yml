@@ -1,3 +1,7 @@
+defaults:
+    working-directory: website
+
+
 name: Deploy to GitHub Pages
 
 on:
