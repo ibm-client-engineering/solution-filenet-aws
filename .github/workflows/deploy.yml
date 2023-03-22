@@ -1,20 +1,17 @@
-defaults:
-    working-directory: website
-
-
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
 jobs:
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website # sets default working directory for all steps in the job
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
