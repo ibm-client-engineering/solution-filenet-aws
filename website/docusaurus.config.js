@@ -10,12 +10,6 @@ const config = {
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid'],
-  themeConfig: {
-    metadata: [{name: 'keywords', content: 'ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks'}],
-    mermaid: {
-      theme: { light: 'neutral', dark: 'forest' },
-    },
-  },
   title: 'IBM Client Engineering',
   tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
@@ -70,7 +64,12 @@ const config = {
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+
     ({
+      metadata: [{name: 'keywords', content: 'ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks'}],
+      mermaid: {
+        theme: { light: 'neutral', dark: 'dark' },
+      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       tableOfContents: {
