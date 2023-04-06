@@ -131,8 +131,8 @@ eksctl create cluster \
 Once the cluster is up, add it to your kube config
 
 ```
-aws eks update-kubeconfig --name mq-cluster --region us-east-1
-Added new context arn:aws:eks:us-east-1:748107796891:cluster/mq-cluster to /Users/user/.kube/config
+aws eks update-kubeconfig --name filenet-cluster-east --region us-east-1
+Added new context arn:aws:eks:us-east-1:748107796891:cluster/filenet-cluster-east to /Users/user/.kube/config
 ```
 
 #### Prepare the cluster for Ingress, Loadbalancer, and EFS
@@ -140,7 +140,7 @@ Added new context arn:aws:eks:us-east-1:748107796891:cluster/mq-cluster to /User
 Associated an IAM oidc provider with the cluster. Assuming our region is `us-east-1`.
 
 ```
-eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=mq-cluster --approve
+eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=filenet-cluster-east --approve
 ```
 
 Install the EKS helm repo
@@ -212,7 +212,7 @@ NOTES:
 AWS Load Balancer controller installed!
 ```
 
-#### Install NGINX Controller
+### Install NGINX Controller
 
 Pull down the NGINX controller deployment
 ```
@@ -320,7 +320,7 @@ eksctl get iamserviceaccount --cluster <cluster-name>
 
 NAMESPACE	NAME				ROLE ARN
 kube-system	aws-load-balancer-controller	arn:aws:iam::748107796891:role/AmazonEKSLoadBalancerControllerRole
-kube-system	efs-csi-controller-sa		arn:aws:iam::748107796891:role/eksctl-mq-cluster-addon-iamserviceaccount-ku-Role1-1SCBRU1DS52QY
+kube-system	efs-csi-controller-sa		arn:aws:iam::748107796891:role/eksctl-filenet-cluster-east-addon-iamserviceaccount-ku-Role1-1SCBRU1DS52QY
 ```
 Now we just need our add-on registry address. This can be found here: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
 
