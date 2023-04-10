@@ -491,7 +491,39 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 efs-sc          efs.csi.aws.com         Delete          Immediate              false                  7s
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  13d
 ```
-### Pull Images
+### Container Image preparation
+
+If there is a requirement to pre-stage the FileNet images whether in a private registry or airgapped installs, the following steps should be taken. 
+
+First retrieve your IBM ENTITLEMENT KEY from here 
+
+[IBM Container Library](https://myibm.ibm.com/products-services/containerlibrary)
+
+On a host with docker installed:
+
+```
+export ENTITLED_REGISTRY=cp.icr.io
+export ENTITLED_REGISTRY_USER=cp
+export ENTITLED_REGISTRY_KEY=[ENTITLEMENT KEY]
+```
+
+Also export your private registry credentials. You will need to know the values for "LOCAL REGISTRY ADDRESS," "LOCAL REGISTRY USER," and "LOCAL REGISTRY KEY". 
+
+```
+export LOCAL_REGISTRY=[LOCAL REGISTRY ADDRESS]
+export LOCAL_REGISTRY_USER=[LOCAL REGISTRY USER]
+export LOCAL_REGISTRY_KEY=[LOCAL REGISTRY KEY]
+```
+
+Login to IBM Entitled Registry with Docker
+
+```
+docker login "$ENTITLED_REGISTRY" -u "$ENTITLED_REGISTRY_USER" -p "$ENTITLED_REGISTRY_KEY"
+```
+
+The following image list comes from the IBM FileNet Content Manager Case File ver 1.6.2. 
+
+On your local host with docker installed, run the following pull commands:
 
 ```
 docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
@@ -516,6 +548,67 @@ docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003
 docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64
 docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
 ```
+
+Docker login to your private registry
+
+```
+docker login "$LOCAL_REGISTRY" -u "$LOCAL_REGISTRY_USER" -p "$LOCAL_REGISTRY_KEY"
+```
+
+Let's tag the images we've pulled to be pushed to the private registry:
+
+```
+docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
+docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 
+docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 
+docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001
+docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 
+docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103
+docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102 $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102
+docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
+docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
+docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102 $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102
+docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
+docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
+docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
+docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
+docker tag icr.io/cpopen/icp4a-content-operator:22.0.2-IF003 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003
+docker tag icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 
+docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1 $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
+```
+
+Now let's push the images to the local or private registry
+
+```
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
+docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003
+docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 
+docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
+```
+
+
+
 
 ### Configuring RDS/DB on AWS
 Create a security group. We're going to get our vpc for our filenet cluster first and use that here since we don't have any default vpc.
