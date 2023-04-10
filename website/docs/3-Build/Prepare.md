@@ -491,6 +491,31 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 efs-sc          efs.csi.aws.com         Delete          Immediate              false                  7s
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  13d
 ```
+### Pull Images
+
+```
+docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
+docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001
+docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001
+docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103
+docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102
+docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
+docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
+docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102
+docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
+docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
+docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
+docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
+docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
+docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003
+docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64
+docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
+```
 
 ### Configuring RDS/DB on AWS
 Create a security group. We're going to get our vpc for our filenet cluster first and use that here since we don't have any default vpc.
