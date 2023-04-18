@@ -1,4 +1,4 @@
-name: Sync Public GitHub to GitHub Enterprise
+name: Sync with GitHub Enterprise
 
 on:
   push:
@@ -10,21 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          set-safe-directory: '*'
-          fetch-depth: 0
-          
-      - name: Set ownership
-        run: |
-          # this is to fix GIT not liking owner of the checkout dir
-          chown -R $(id -u):$(id -g) $PWD
+    - name: Sync repository
+      run: |
+        git clone --mirror "https://github.com/${{ github.repository }}" sync-repo
+        cd sync-repo
+        git remote add github-enterprise "https://${{ secrets.GHE_USER }}@${{ secrets.ENTERPRISE_URL }}/${{ github.repository }}"
+        git config --global user.email "terrabot@us.ibm.com"
+        git config --global user.name "${{ secrets.GHE_USER }"
+        git config --global http.{{ secrets.ENTERPRISE_URL }}/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
+        git push --mirror --force github-enterprise
 
-      - name: Push to GitHub Enterprise
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.GH_ENTERPRISE_TOKEN }}
-          branch: ${{ github.ref }}
-          repository: ${{ github.event.repository.name }}
-          url: ${{ secrets.ENTERPRISE_URL }}
