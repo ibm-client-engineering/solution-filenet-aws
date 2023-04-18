@@ -11,10 +11,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           set-safe-directory: '*'
           fetch-depth: 0
+          
+      - name: Set ownership
+        run: |
+          # this is to fix GIT not liking owner of the checkout dir
+          chown -R $(id -u):$(id -g) $PWD
 
       - name: Push to GitHub Enterprise
         uses: ad-m/github-push-action@v0.5.0
