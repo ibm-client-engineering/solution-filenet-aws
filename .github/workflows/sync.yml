@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          set-safe-directory: '*'
 
       - name: Push to GitHub Enterprise
         uses: ad-m/github-push-action@v0.5.0
