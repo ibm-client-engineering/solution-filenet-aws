@@ -1,0 +1,22 @@
+name: Sync Public GitHub to GitHub Enterprise
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Push to GitHub Enterprise
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GH_ENTERPRISE_TOKEN }}
+          branch: ${{ github.ref }}
+          repository: ${{ github.event.repository.name }}
+          url: ${{ secrets.ENTERPRISE_URL }}
