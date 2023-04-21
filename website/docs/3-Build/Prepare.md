@@ -22,6 +22,47 @@ title: Prepare
 - IBM Entitled Registry entitlement key
   - Can be retrieved here https://myibm.ibm.com/products-services/containerlibrary
 
+### Resource Requirement Tables
+
+#### Small (targets development)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|1000|1000|3072|3072|1|
+|CSS|1000|1000|4096|4096|1|
+|CSGraphQL|500|1000|1536|1536|1|
+|Navigator|1000|1000|3072|3072|1|
+|External Share|500|1000|1536|1536|1|
+|Task Manager|500|1000|1536|1536|1|
+|CMIS|500|1000|1536|1536|1|
+
+#### Medium (targets production with high-availability)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|1500|2000|3072|3072|2|
+|CSS|1000|2000|8192|8192|2|
+|CSGraphQL|500|2000|3072|3072|2|
+|Navigator|2000|3000|4096|4096|2|
+|External Share|500|1000|1536|1536|2|
+|Task Manager|500|1000|1536|1536|2|
+|CMIS|500|1000|1536|1536|2|
+
+#### Large (targets production with high-availability)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|3000|4000|8192|8192|2|
+|CSS|2000|2000|8192|8192|2|
+|CSGraphQL|1000|2000|3072|3072|6|
+|Navigator|2000|4000|6144|6144|6|
+|External Share|500|1000|1536|1536|2|
+|Task Manager|500|1000|1536|1536|2|
+|CMIS|500|1000|1536|1536|2|
+
+ 
+ We are going to provision a 6 node cluster with the `m5.xlarge` sizing as this will give us 24 vcpu and 96 gigs RAM. This may be a lot for more deployments, so size accordingly based on the above charts. Our example will encompass a MEDIUM size deployment.
+
 ### Stage Requirements
 
 #### Set Up AWS Account
@@ -109,39 +150,41 @@ Delete or rename your `~/.aws/credentials` file and re-run `aws configure` with 
 
 Run the `eksctl` command below to create your first cluster and perform the following:
 
-- Create a 3-node Kubernetes cluster named `dev` with one node type as `m5.xlarge` and region as `us-east-1`. (this has 4 vCPU and 16 GB Memory)
-- Define a minimum of one node (`--nodes-min 1`) and a maximum of five-node (`--nodes-max 5`) for this node group managed by EKS. The node group is named `standard-workers`.
-- Create a node group with the name `standard-workers` and select a machine type for the `standard-workers` node group.
+-   Create a 6-node Kubernetes cluster named `filenet-east` with one node type as `m5.xlarge` and region as `us-east-1`.
+-   Define a minimum of one node (`--nodes-min 1`) and a maximum of six-node (`--nodes-max 6`) for this node group managed by EKS. The node group is named `standard-workers`.
+-   Create a node group with the name `filenet-workers` and select a machine type for the `filenet-workers` node group.
 
 ```
 eksctl create cluster \
---name filenet-cluster-east \
+--name filenet-east \
 --version 1.24 \
 --region us-east-1 \
---nodegroup-name standard-workers \
+--with-oidc \
+--zones us-east-1a,us-east-1b,us-east-1c \
+--nodegroup-name filenet-workers \
 --node-type m5.xlarge \
 --nodes 6 \
 --nodes-min 1 \
---nodes-max 7 \
+--nodes-max 6 \
+--tags "Product=FileNet" \
 --managed
 ```
 
+Associated an IAM oidc provider with the cluster if you didn't include `--with-oidc` above.
+```
+eksctl utils associate-iam-oidc-provider --region=us-west-1 --cluster=filenet-east --approve
+```
+
+
 #### Configure `kubectl`
 
-Once the cluster is up, add it to your kube config
+Once the cluster is up, add it to your kube config. `eksctl` will probably do this for you.
 
 ```
-aws eks update-kubeconfig --name filenet-cluster-east --region us-east-1
-Added new context arn:aws:eks:us-east-1:748107796891:cluster/filenet-cluster-east to /Users/user/.kube/config
+aws eks update-kubeconfig --name filenet-east --region us-east-1
 ```
 
-#### Prepare the cluster for Ingress, Loadbalancer, and EFS
-
-Associated an IAM oidc provider with the cluster. Assuming our region is `us-east-1`.
-
-```
-eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=filenet-cluster-east --approve
-```
+### Prepare the cluster for Ingress, Loadbalancer, EBS, and EFS
 
 Install the EKS helm repo
 
@@ -149,6 +192,163 @@ Install the EKS helm repo
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update
 ```
+
+#### Install the EBS driver to the cluster
+
+We install the EBS CSI driver as this gives us access to GP3 block storage.
+
+Download the example ebs iam policy
+
+```
+curl -o iam-policy-example-ebs.json https://raw.githubusercontent.com/kubernetes-sigs/aws-ebs-csi-driver/master/docs/example-iam-policy.json
+```
+
+Create the policy. You can change  `AmazonEKS_EBS_CSI_Driver_Policy` to a different name, but if you do, make sure to change it in later steps too.
+
+```
+aws iam create-policy \
+--policy-name AmazonEKS_EBS_CSI_Driver_Policy \
+--policy-document file://iam-policy-example-ebs.json
+
+{
+    "Policy": {
+        "PolicyName": "AmazonEKS_EBS_CSI_Driver_Policy",
+        "PolicyId": "ANPA24LVTCGN5YOUAVX2V",
+        "Arn": "arn:aws:iam::748107796891:policy/AmazonEKS_EBS_CSI_Driver_Policy",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2023-04-19T14:17:03+00:00",
+        "UpdateDate": "2023-04-19T14:17:03+00:00"
+    }
+}
+
+```
+Take note of the `arn` entry for the policy that is returned above as you will need it below.
+
+Create the service account
+```
+eksctl create iamserviceaccount \
+  --name ebs-csi-controller-sa \
+  --namespace kube-system \
+  --cluster filenet-east \
+  --attach-policy-arn arn:aws:iam::748107796891:policy/AmazonEKS_EBS_CSI_Driver_Policy \
+  --approve \
+  --role-only \
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+Take note of the `arn` entry for the role that is returned above as you will need it below.
+
+Create the addon for the cluster
+```
+eksctl create addon \
+--name aws-ebs-csi-driver \
+--cluster filenet-east \
+--service-account-role-arn arn:aws:iam::748107796891:role/AmazonEKS_EBS_CSI_DriverRole \
+--force
+```
+Create the following StorageClass yaml to use gp3
+`gp3-sc.yaml`
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-gp3-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  fsType: ext4
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+```
+
+Create the storage class
+```
+kubectl apply -f gp3-sc.yaml
+```
+
+### Prepare EFS storage for the cluster
+
+#### Enable EFS on the cluster
+
+By default when we create a cluster with eksctl it defines and installs `gp2` storage class which is backed by Amazon's EBS (elastic block storage). After that we installed the EBS CSI driver to support `gp3`. However, both `gp2` and `gp3` are both block storage. They will not support RWX in our cluster. We need to install an EFS storage class.
+
+Download the IAM policy document from GitHub. You can also view the [policy document](https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json)
+        
+```
+curl -o iam-policy-example-efs.json https://raw.githubusercontent.com/kubernetes-sigs/aws-efs-csi-driver/master/docs/iam-policy-example.json
+```
+
+Create the policy. You can change `` `AmazonEKS_EFS_CSI_Driver_Policy` `` to a different name, but if you do, make sure to change it in later steps too.
+
+```
+aws iam create-policy \
+--policy-name AmazonEKS_EFS_CSI_Driver_Policy \
+--policy-document file://iam-policy-example-efs.json
+
+{
+    "Policy": {
+        "PolicyName": "AmazonEKS_EFS_CSI_Driver_Policy",
+        "PolicyId": "ANPA24LVTCGN7YGDYRWJT",
+        "Arn": "arn:aws:iam::748107796891:policy/AmazonEKS_EFS_CSI_Driver_Policy",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2023-01-24T17:24:00+00:00",
+        "UpdateDate": "2023-01-24T17:24:00+00:00"
+    }
+}
+```
+Take note of the returned policy arn as you will need it in the next step.
+
+Create an IAM role and attach the IAM policy to it. Annotate the Kubernetes service account with the IAM role ARN and the IAM role with the Kubernetes service account name. You can create the role using `eksctl` or the AWS CLI. We're gonna use `eksctl`, Also our `Arn` is returned in the output above, so we'll use it here.
+
+```
+eksctl create iamserviceaccount \
+    --cluster filenet-east \
+    --namespace kube-system \
+    --name efs-csi-controller-sa \
+    --attach-policy-arn arn:aws:iam::748107796891:policy/AmazonEKS_EFS_CSI_Driver_Policy \
+    --approve \
+    --region us-east-1
+```
+Now we just need our add-on registry address. This can be found here: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
+
+Let's install the driver add-on to our clusters. We're going to use `helm` for this.
+```
+helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+
+helm repo update
+
+```
+
+Install a release of the driver using the Helm chart. Replace the repository address with the cluster's [container image address](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html).
+
+```
+helm upgrade -i aws-efs-csi-driver aws-efs-csi-driver/aws-efs-csi-driver \
+    --namespace kube-system \
+    --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/aws-efs-csi-driver \
+    --set controller.serviceAccount.create=false \
+    --set controller.serviceAccount.name=efs-csi-controller-sa
+
+```
+Now we need to create the filesystem in EFS so we can use it
+
+```
+export clustername=filenet-east
+export region=us-east-1
+```
+
+
+
+### Create an IAM policy and role
+
+Create an IAM policy and assign it to an IAM role. The policy will allow the Amazon EFS driver to interact with your file system.
+
 
 Download an IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs on your behalf.
 
@@ -178,16 +378,17 @@ aws iam create-policy \
     }
 }
 ```
+Take note of the returned policy `arn` value from the policy above as you will need it in the next step.
 
-Create an IAM role. Create a Kubernetes service account named `aws-load-balancer-controller` in the `kube-system` namespace for the AWS Load Balancer Controller and annotate the Kubernetes service account with the name of the IAM role.
+### Create an IAM role. 
 
-**Replace `` `my-cluster` `` with the name of your cluster, `` `111122223333` `` with your account ID, and then run the command. If your cluster is in the AWS GovCloud (US-East) or AWS GovCloud (US-West) AWS Regions, then replace `arn:aws:` with `arn:aws-us-gov:`.
+Create a Kubernetes service account named `aws-load-balancer-controller` in the `kube-system` namespace for the AWS Load Balancer Controller and annotate the Kubernetes service account with the name of the IAM role.
 
-For our example, we are calling the cluster `filenet-cluster-east`
+For our example, we are calling the cluster `filenet-east`
 
 ```
 eksctl create iamserviceaccount \
-  --cluster=filenet-cluster-east \
+  --cluster=filenet-east \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
@@ -198,7 +399,7 @@ eksctl create iamserviceaccount \
 ```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
-  --set clusterName=filenet-cluster-east \
+  --set clusterName=filenet-east \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller 
 
