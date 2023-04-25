@@ -20,6 +20,7 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/solution-filenet-aws/',
 
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'ibm-client-engineering', // Usually your GitHub org/user name.
@@ -64,7 +65,6 @@ const config = {
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-
     ({
       metadata: [{name: 'keywords', content: 'ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks'}],
       mermaid: {
@@ -120,8 +120,8 @@ const config = {
         ]
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: require('prism-react-renderer/themes/oceanicNext'),
+        darkTheme: require('prism-react-renderer/themes/synthwave84'),
       },
     }),
 };

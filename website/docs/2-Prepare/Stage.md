@@ -1,13 +1,14 @@
 ---
-id: solution-prepare
-sidebar_position: 1
-title: Prepare
+id: stage
+sidebar_position: 3
+title: Stage
 ---
+
 
 ## Pre-Requisites
 
 - Minimum Requirements
-  - Software
+  - IBM FileNet Software (Images)
   - Kubectl
   - AWS CLI
   - IAM
@@ -19,12 +20,9 @@ title: Prepare
     - Default storage class defined
   - Jump Server/Bastion Host for staging requirements
 
-- IBM Entitled Registry entitlement key
-  - Can be retrieved here https://myibm.ibm.com/products-services/containerlibrary
+Sizing
 
-### Resource Requirement Tables
-
-#### Small (targets development)
+### Small (targets development)
 
 |Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
 |---|----|---|---|---|--|
@@ -36,7 +34,7 @@ title: Prepare
 |Task Manager|500|1000|1536|1536|1|
 |CMIS|500|1000|1536|1536|1|
 
-#### Medium (targets production with high-availability)
+### Medium (targets production with high-availability)
 
 |Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
 |---|----|---|---|---|--|
@@ -48,7 +46,7 @@ title: Prepare
 |Task Manager|500|1000|1536|1536|2|
 |CMIS|500|1000|1536|1536|2|
 
-#### Large (targets production with high-availability)
+### Large (targets production with high-availability)
 
 |Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
 |---|----|---|---|---|--|
@@ -60,12 +58,9 @@ title: Prepare
 |Task Manager|500|1000|1536|1536|2|
 |CMIS|500|1000|1536|1536|2|
 
- 
- We are going to provision a 6 node cluster with the `m5.xlarge` sizing as this will give us 24 vcpu and 96 gigs RAM. This may be a lot for more deployments, so size accordingly based on the above charts. Our example will encompass a MEDIUM size deployment.
+We are going with MEDIUM, so technically we only need 12 vcpus and 24 gigs RAM. We are going to provision a 6 node cluster with the `m5.xlarge` sizing as this will give us 24 vcpu and 96 gigs RAM, which is way more than we need anyway. Man, if there was only a sizing in AWS that was 4 VCPU/8 GIGS, that would be idea as we're going to have twice as many vpcus and 4 times as much RAM as we need.
 
-### Stage Requirements
-
-#### Set Up AWS Account
+## Set Up AWS Account
 
 - CMDLINE Client install (MacOS)
 
@@ -89,7 +84,7 @@ aws configure
 
 Answer all the questions with the info you got. If you already have a profile configured, you can add a named profile to your credentials
 
-```
+```tsx
 vi ~/.aws/credentials
 
 [default]
@@ -103,7 +98,7 @@ aws_secret_access_key=
 
 Also add location info to the config file
 
-```
+```tsx
 vi ~/.aws/config
 
 [default]
@@ -117,8 +112,8 @@ output=json
 
 We are also going to use some env magic to make sure we stick with the second profile
 
-```
-export AWS_PROFILE=748107796891_AWSAdmin
+```tsx
+export AWS_PROFILE=xxxxxxx_AWSAdmin
 ```
 
 You may also copy the following out of the aws portal and paste it into your shell
@@ -128,13 +123,13 @@ export AWS_ACCESS_KEY_ID=""
 export AWS_SECRET_ACCESS_KEY=""
 ```
 
-#### Create AWS VPC and EKS Cluster
+## Create AWS VPC and EKS Cluster
 
 - Installing or updating `eksctl`
 
 For this we are going to use homebrew
 
-```
+```tsx
 brew tap weaveworks/tap
 
 brew install weaveworks/tap/eksctl
@@ -154,7 +149,7 @@ Run the `eksctl` command below to create your first cluster and perform the foll
 -   Define a minimum of one node (`--nodes-min 1`) and a maximum of six-node (`--nodes-max 6`) for this node group managed by EKS. The node group is named `standard-workers`.
 -   Create a node group with the name `filenet-workers` and select a machine type for the `filenet-workers` node group.
 
-```
+```tsx
 eksctl create cluster \
 --name filenet-east \
 --version 1.24 \
@@ -188,7 +183,7 @@ aws eks update-kubeconfig --name filenet-east --region us-east-1
 
 Install the EKS helm repo
 
-```
+```tsx
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update
 ```
@@ -352,13 +347,13 @@ Create an IAM policy and assign it to an IAM role. The policy will allow the Ama
 
 Download an IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs on your behalf.
 
-```
+```tsx
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/install/iam_policy.json
 ```
 
 Create an IAM policy using the policy downloaded in the previous step.
 
-```
+```tsx
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
