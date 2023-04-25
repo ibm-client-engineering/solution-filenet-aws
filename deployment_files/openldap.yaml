@@ -1,0 +1,207 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: openldap-env
+  labels:
+    app: filenet-openldap
+data:
+  BITNAMI_DEBUG: 'true'
+  LDAP_ORGANISATION: filnet.internal
+  LDAP_ROOT: 'dc=filenet,dc=internal'
+  LDAP_DOMAIN: filenet.internal
+  LDAP_CUSTOM_LDIF_DIR: /ldifs
+  LDAP_ADMIN_USERNAME: admin
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: openldap-customldif
+  labels:
+    app: filenet-openldap
+data:
+  01-default-users.ldif: |-
+    # cp.internal
+    dn: dc=filenet,dc=internal
+    objectClass: top
+    objectClass: dcObject
+    objectClass: organization
+    o: filenet.internal
+    dc: filenet
+
+    # Units
+    dn: ou=Users,dc=filenet,dc=internal
+    objectClass: organizationalUnit
+    ou: Users
+
+    dn: ou=Groups,dc=filenet,dc=internal
+    objectClass: organizationalUnit
+    ou: Groups
+
+    # Users
+    dn: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpadmin
+    sn: cpadmin
+    uid: cpadmin
+    mail: cpadmin@cp.internal
+    userpassword: Password
+    employeeType: admin
+
+    dn: uid=cpuser,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpuser
+    sn: cpuser
+    uid: cpuser
+    mail: cpuser@cp.internal
+    userpassword: Password
+
+    # Groups
+    dn: cn=cpadmins,ou=Groups,dc=filenet,dc=internal
+    objectClass: groupOfNames
+    objectClass: top
+    cn: cpadmins
+    member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+
+    dn: cn=cpusers,ou=Groups,dc=filenet,dc=internal
+    objectClass: groupOfNames
+    objectClass: top
+    cn: cpusers
+    member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+    member: uid=cpuser,ou=Users,dc=filenet,dc=internal
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: openldap
+  labels:
+    app: filenet-openldap
+stringData:
+  LDAP_ADMIN_PASSWORD: p@ssw0rd
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: ldap-bind-secret
+  labels:
+    app: filenet-openldap
+stringData:
+  ldapUsername: "cn=admin,dc=filenet,dc=internal"
+  ldapPassword: p@ssw0rd
+  externalLdapUsername: "cn=admin,dc=filenet,dc=internal"
+  externalLdapPassword: p@ssw0rd
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: openldap-data
+  labels:
+    app: filenet-openldap
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: efs-sc
+  volumeMode: Filesystem
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: openldap-deploy
+  labels:
+    app: filenet-openldap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filenet-openldap
+  template:
+    metadata:
+      labels:
+        app: filenet-openldap
+    spec:
+      containers:
+        - name: openldap
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          startupProbe:
+            tcpSocket:
+              port: ldap-port
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 30
+          readinessProbe:
+            tcpSocket:
+              port: ldap-port
+            initialDelaySeconds: 60
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
+          livenessProbe:
+            tcpSocket:
+              port: ldap-port
+            initialDelaySeconds: 60
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
+          terminationMessagePath: /dev/termination-log
+          ports:
+            - name: ldap-port
+              containerPort: 1389
+              protocol: TCP
+          image: 'bitnami/openldap:latest'
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/openldap/
+            - name: custom-ldif-files
+              mountPath: /ldifs/
+          terminationMessagePolicy: File
+          envFrom:
+            - configMapRef:
+                name: openldap-env
+            - secretRef:
+                name: openldap
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: openldap-data
+        - name: custom-ldif-files
+          configMap:
+            name: openldap-customldif
+            defaultMode: 420
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: openldap
+  labels:
+    app: filenet-openldap
+spec:
+  ports:
+    - name: ldap-port
+      protocol: TCP
+      port: 389
+      targetPort: ldap-port
+  type: NodePort
+  selector:
+    app: filenet-openldap

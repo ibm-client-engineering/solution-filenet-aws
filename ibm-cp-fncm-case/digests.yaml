@@ -1,0 +1,142 @@
+digests:
+  digestDefs:
+    case:
+      digest: sha256:c7fc87565425db458326d290ea82cc5de046f2aed61786e21f3513435b88b636
+      size: 21175
+      skip: false
+    certification:
+      ibmccscp:
+        resources:
+          resourceDefs:
+            files:
+            - digest: sha256:123a77b889dcb896111cefe34138c775a3de0a0a841e92c1f571d7329117e2d1
+              size: 470760
+              skip: false
+    inventory:
+      fncmOperator:
+        imageManifest: {}
+        readme:
+          digest: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+          skip: false
+        resources:
+          resourceDefs:
+            containerImages:
+            - digest: sha256:50cbbaa13d5460a58ee4a176eb119b5405db16dbfa3f55346c656be305256915
+              skip: false
+            - digest: sha256:9131d6883744c84d4b3d90f1dd6741e1ea039909f318b0ba8e6cf92029e93992
+              skip: false
+            - digest: sha256:1a3449ea2dce573a27841462a95ce1be922a7ce6e077f704ecf7d8cf40575bbe
+              skip: false
+            - digest: sha256:e5cb703e6e2f4f158d93a46b032039cd0d478928b75cfd24843178f1f8100610
+              skip: false
+            - digest: sha256:198023590e452972516cc0a74ebd1915b00e9dc9d9adbec079046979d164cf84
+              skip: false
+            - digest: sha256:42644baa21813e7d95d32a011136b81a3cc1080c659b52e9d4b1e03839667e3f
+              skip: false
+            - digest: sha256:5ae9db93151394023d8cf652aa2d8555787a013b1b4fce169ba2f3f9011791fb
+              skip: false
+            - digest: sha256:963d9682570db3a4a58b6f56df6160535103d6fbb4ca6216e0885c4b89533b8f
+              skip: false
+            - digest: sha256:ff36b99c2462ed1eeb3bb435a3a390df142dfd00d1306b2eda69e06b08854fc5
+              skip: false
+            - digest: sha256:5e0f30992b67245c1d21f5c6a8cebd7d6eb30338ed100c02053c041df88746d7
+              skip: false
+            - digest: sha256:1b4d308a9e81f1ac2753f36ae3b4d0cd46a8df51af5fcd4c03e75e4abfeaf176
+              skip: false
+            - digest: sha256:6ec78070c405db11f1e7734497672084a617f4c90cffc67d95ffead207af3594
+              skip: false
+            - digest: sha256:d73675dc0e5af24531c3b209b35fc7c068e6a99b77ba51947b270eb17032cbdf
+              skip: false
+            - digest: sha256:77fde6e4f698fc715b74d1c644777505d4bec6fc5b2c989b7f8c58266e4e3e05
+              skip: false
+            - digest: sha256:6cdf7e7720b6b6bd854956dc386462c047f0f9134bfefd02a5aa93f30353888f
+              skip: false
+            - digest: sha256:6e4cc169de5695240ef4e068a1a2038564008dedde115fca03feb91be4bbaea2
+              skip: false
+            - digest: sha256:297df26de6b3865d0589e603ed9fc5b9e344f1ba2d0e2bad7c63a91f6afbf4f2
+              skip: false
+            - digest: sha256:1c4a73eb51d0b33acb0b3dc8d8f2b2e65b28b5cd00ac1bce72295b5e604d3ed7
+              skip: false
+            files:
+            - digest: sha256:c7bda6a0ff0dc7d2d8122cfeadb07c1e003afc9368aca4d06c96400a2a949ea8
+              size: 43796
+              skip: false
+            - digest: sha256:ba4689388e7e69a25d51f14411bf4f6f8c15425fe0780ad42fcb4f52c80a6111
+              size: 37657
+              skip: false
+            - digest: sha256:4f71995bb8f35ad2c423564958a60e0b6cb33f66eff585d379a973c5257f6494
+              size: 10873718
+              skip: false
+      fncmOperatorSetup:
+        imageManifest: {}
+        readme:
+          digest: sha256:a57143f5e16aaa5ea9a9103caac5df201558022c74915ac77f0556ab96f05ead
+          size: 3711
+          skip: false
+        resources:
+          resourceDefs:
+            containerImages:
+            - digest: sha256:777108704e09e1dad432bd552b73f60493d414120fc60095e3a1b148c5e35fe4
+              skip: false
+            - digest: sha256:a1f0f924b8a438ad8232c178994b242c79fb09def11f14ad633048f1ec26c377
+              skip: false
+            - digest: sha256:e87d9056787b934746faeca2fb386c1dcc8f7fd09b4fce3bb909c04f9c92c292
+              skip: false
+            - digest: sha256:b5a849ea04f2008804880a914b7629593a322216893962eaf004b12d70e9b2b7
+              skip: false
+            files:
+            - digest: sha256:1c3b5611f6de3d0cce661ac42f3203fe428f5316e547dc6dcf4fd4bce8665da4
+              size: 111718
+              skip: false
+            - digest: sha256:30d16a13b3573cd64878e52ee85f33ddca58f2d6b87d38e1151d30c05ddb4dde
+              size: 31975
+              skip: false
+            - digest: sha256:a13b44b9f7dbd2834d24bb837e11098a663e01263a5041e50c1535c10843dfac
+              size: 14082
+              skip: false
+            - digest: sha256:c54fd352052ce32c84d50d812aad1112b0285519caf4c477d10d1f34fb28da54
+              size: 3494
+              skip: false
+            - digest: sha256:aa1b8994fdd4df163b2f09c8eece9c3098a98827e96d33f86cb5edf27891b952
+              size: 780
+              skip: false
+            - digest: sha256:cf16b50d02f0a38e175003692d0bcdee7684864fb2121aa6193eccf11e9db875
+              size: 2506
+              skip: false
+            - digest: sha256:5c21c453b01fce40172a30030c074538db5e84be368784df0c4b4c7c2968fb51
+              size: 728
+              skip: false
+            - digest: sha256:182877b988e75aa0d57b3dd0ae57363824bdf567649edfd0e8ae06e452d81536
+              size: 17889
+              skip: false
+            - digest: sha256:c7bda6a0ff0dc7d2d8122cfeadb07c1e003afc9368aca4d06c96400a2a949ea8
+              size: 43796
+              skip: false
+            - digest: sha256:a8086eb435642da89c8e20e274730fcd78f839dccf1f426497713f4b3732bf8e
+              size: 1115
+              skip: false
+            - digest: sha256:525b0f42c46351a8233046ffd0010c474b1d99da4584fa448f95bcbf6a4f68aa
+              size: 190
+              skip: false
+            - digest: sha256:7df1a1b7a1949a7b330dbfc8ff1ad2307447c25374008394a25d9279e12241a0
+              size: 308
+              skip: false
+            - digest: sha256:abb071879eddc223af98074720a2a671d00e2b0f0921010dba918fd3966b8720
+              size: 775
+              skip: false
+            - digest: sha256:2128294fcf49ca1bffe848edcc3c3a69f52f80ce1a7ebe5bb09556683769eb45
+              size: 783
+              skip: false
+    license:
+      digest: sha256:354b6c66de02552084a87836027755625da60836ec9777b620c0d1800c157563
+      size: 11346
+      skip: false
+    licenses:
+      fncm:
+        digest: sha256:c744c86f6a0513616e324497a870f45f591ed0783c01811857f870f16454c81b
+        size: 21664
+        skip: false
+    readme:
+      digest: sha256:a57143f5e16aaa5ea9a9103caac5df201558022c74915ac77f0556ab96f05ead
+      size: 3711
+      skip: false

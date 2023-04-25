@@ -1,0 +1,101 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: defaultdb
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: p@ssw0rd
+  PGDATA: /var/lib/postgresql/data/pgdata
+---  
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-data
+  namespace: filenet
+  labels:
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: ebs-gp3-sc
+  volumeMode: Filesystem
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-tablespaces
+  labels:
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ebs-gp3-sc
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres  # Sets Deployment name
+  namespace: filenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 65536
+      containers:
+        - name: postgres
+          image: postgres:latest # Sets Image
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432  # Exposes container port
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb
+            - mountPath: /pgsqldata
+              name: postgres-tablespaces  
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-data
+        - name: postgres-tablespace
+          persistentVolumeClaim:
+            claimName: postgres-tablespace
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  ports:
+    - name: pgsql-port
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: NodePort
+  selector:
+    app: postgres
+
+

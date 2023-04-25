@@ -1,0 +1,79 @@
+resources:
+  metadata:
+    name: fncmOperatorSetup
+  resourceDefs:
+    containerImages:
+    - image: cpopen/icp4a-content-operator
+      tag: "22.0.2-IF003"
+      digest: sha256:777108704e09e1dad432bd552b73f60493d414120fc60095e3a1b148c5e35fe4
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: icr.io
+      manifests:
+      - digest: sha256:a1f0f924b8a438ad8232c178994b242c79fb09def11f14ad633048f1ec26c377
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: 22.0.2-IF003-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - metadata:
+        name: ibm_fncm_operator_bundle
+        displayName: IBM FileNet Content Manager Operator Bundle
+        operators_operatorframework_io:
+          bundle:
+            mediaType: registry+v1
+            cpcicd_ibm_com:
+              targetCatalogs:
+                catalogRefs:
+                - ibm-public: {}
+      image: cpopen/ibm-fncm-operator-bundle
+      tag: "55.10.1"
+      digest: sha256:e87d9056787b934746faeca2fb386c1dcc8f7fd09b4fce3bb909c04f9c92c292
+      mediaType: application/vnd.docker.distribution.manifest.v2
+      registries:
+      - host: icr.io
+      platform:
+        architecture: amd64
+        os: linux
+    - metadata:
+        operators_operatorframework_io:
+          catalog:
+            mediaType: registry+v1
+      image: cpopen/ibm-fncm-catalog
+      tag: v55.10.1-20230324.030503-04EF7959B
+      digest: sha256:b5a849ea04f2008804880a914b7629593a322216893962eaf004b12d70e9b2b7
+      mediaType: application/vnd.docker.distribution.manifest.v2
+      registries:
+      - host: icr.io
+      platform:
+        architecture: amd64
+        os: linux
+    files:
+    - ref: airgap.sh
+      mediaType: application/vnd.case.resource.script.bash.v1
+    - ref: launch.sh
+      mediaType: application/vnd.case.resource.script.bash.v1+launcher
+    - ref: launch-impl.sh
+      mediaType: application/vnd.case.resource.script.bash.v1
+    - ref: op-cli/operator.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/role_binding.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/role.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/service_account.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/fncm_v1_fncm_crd.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/fncm_v1_fncm_cr.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-cli/operator-shared-pvc.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-olm/operator_group.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-olm/subscription.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-olm/cv_catalog_source.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml
+    - ref: op-olm/test_catalog_source.yaml
+      mediaType: application/vnd.case.resource.k8s.v1+yaml

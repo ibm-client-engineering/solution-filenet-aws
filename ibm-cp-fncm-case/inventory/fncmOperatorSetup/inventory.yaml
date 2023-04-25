@@ -1,0 +1,7 @@
+inventory:
+  metadata:
+    name: fncmOperatorSetup
+    description: Setup fncm Operator
+    displayName: FNCM Operator Setup
+    displayDescription: Setup the cp4a operator so it can install fncm
+  k8sScope: cluster

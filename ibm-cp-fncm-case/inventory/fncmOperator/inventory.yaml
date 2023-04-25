@@ -1,0 +1,7 @@
+inventory:
+  metadata:
+    name: fncmOperator
+    description: Installs fncm
+    displayName: fncm installer
+    displayDescription: Installs FNCM into the cluster 
+  k8sScope: namespace

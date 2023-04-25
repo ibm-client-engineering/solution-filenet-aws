@@ -1,0 +1,156 @@
+resources:
+  metadata:
+    name: fncmOperator
+  resourceDefs:
+    containerImages:
+    - image: cp/cp4a/fncm/cpe
+      metadata:
+        description: Content Process Engine Image
+        name: fncmContentProcessEngine
+      tag: ga-5510-p8cpe-if001
+      digest: sha256:50cbbaa13d5460a58ee4a176eb119b5405db16dbfa3f55346c656be305256915
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:9131d6883744c84d4b3d90f1dd6741e1ea039909f318b0ba8e6cf92029e93992
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-5510-p8cpe-if001-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/cpe-sso
+      metadata:
+        description: Content Process Engine SSO Image
+        name: fncmContentProcessEngineSSO
+      tag: ga-5510-p8cpe-if001
+      digest: sha256:1a3449ea2dce573a27841462a95ce1be922a7ce6e077f704ecf7d8cf40575bbe
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:e5cb703e6e2f4f158d93a46b032039cd0d478928b75cfd24843178f1f8100610
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-5510-p8cpe-if001-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/css
+      metadata:
+        description: Content Search Services Image
+        name: fncmContentSearchServices
+      tag: ga-5510-p8css-if001
+      digest: sha256:198023590e452972516cc0a74ebd1915b00e9dc9d9adbec079046979d164cf84
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:42644baa21813e7d95d32a011136b81a3cc1080c659b52e9d4b1e03839667e3f
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-5510-p8css-if001-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/cmis
+      metadata:
+        description: Content Management Interoperability Services Image
+        name: fncmContentManagementInteroperabilityServices
+      tag: ga-307-cmis-la103
+      digest: sha256:5ae9db93151394023d8cf652aa2d8555787a013b1b4fce169ba2f3f9011791fb
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:963d9682570db3a4a58b6f56df6160535103d6fbb4ca6216e0885c4b89533b8f
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-307-cmis-la103-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/extshare
+      metadata:
+        description: FileNet Content Engine External Share Image
+        name: fncmExternalShare
+      tag: ga-3013-es-la102
+      digest: sha256:ff36b99c2462ed1eeb3bb435a3a390df142dfd00d1306b2eda69e06b08854fc5
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:5e0f30992b67245c1d21f5c6a8cebd7d6eb30338ed100c02053c041df88746d7
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-3013-es-la102-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/graphql
+      metadata:
+        description: FileNet Content Engine GraphQL API Image
+        name: fncmGraphQLApi
+      tag: ga-5510-p8cgql-if001
+      digest: sha256:1b4d308a9e81f1ac2753f36ae3b4d0cd46a8df51af5fcd4c03e75e4abfeaf176
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:6ec78070c405db11f1e7734497672084a617f4c90cffc67d95ffead207af3594
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-5510-p8cgql-if001-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/ban/navigator
+      metadata:
+        description: Business Automation Navigator Image
+        name: fncmBusinessAutomationNavigator
+      tag: ga-3013-icn-la102
+      digest: sha256:d73675dc0e5af24531c3b209b35fc7c068e6a99b77ba51947b270eb17032cbdf
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:77fde6e4f698fc715b74d1c644777505d4bec6fc5b2c989b7f8c58266e4e3e05
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-3013-icn-la102-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/ban/navigator-sso
+      metadata:
+        description: Business Automation Navigator SSO Image
+        name: fncmBusinessAutomationNavigatorSSO
+      tag: ga-3013-icn-la102
+      digest: sha256:6cdf7e7720b6b6bd854956dc386462c047f0f9134bfefd02a5aa93f30353888f
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:6e4cc169de5695240ef4e068a1a2038564008dedde115fca03feb91be4bbaea2
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-3013-icn-la102-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    - image: cp/cp4a/fncm/taskmgr
+      metadata:
+        description: Content Navigator Task Manager Image
+        name: fncmTaskManager
+      tag: ga-3013-tm-la102
+      digest: sha256:297df26de6b3865d0589e603ed9fc5b9e344f1ba2d0e2bad7c63a91f6afbf4f2
+      mediaType: application/vnd.docker.distribution.manifest.list.v2
+      registries:
+      - host: cp.icr.io
+      manifests:
+      - digest: sha256:1c4a73eb51d0b33acb0b3dc8d8f2b2e65b28b5cd00ac1bce72295b5e604d3ed7
+        mediaType: application/vnd.docker.distribution.manifest.v2
+        tag: ga-3013-tm-la102-amd64
+        platform:
+          architecture: amd64
+          os: linux
+    files:
+    - mediaType: application/vnd.case.resource.k8s.v1+yaml
+      ref: deploy/crs/fncm_v1_fncm_cr.yaml
+    - mediaType: application/vnd.case.resource.k8s.v1+yaml
+      ref: deploy/crs/fncm_v1_fncm_cr_template.yaml
+    - mediaType: application/vnd.case.resource.k8s.v1+yaml
+      ref: deploy/crs/container-samples-5.5.10.tar

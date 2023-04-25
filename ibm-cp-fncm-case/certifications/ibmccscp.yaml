@@ -1,0 +1,18 @@
+certification:
+  metadata:
+    name: ibmccscp
+    displayName: Certified container software for Cloud Pak
+    description: Certification for ibm-cp-fncm-case
+  id: 323fabcd-8c54-42f1-a55d-38631b6107fc
+  provider: ibm
+  type: ccscp
+  issueDate: 06/24/2022
+  expirationDate: 06/30/2023
+  terms: >-
+    Valid from date of issue. Security vulnerability management and enhancements
+    are delivered on the latest version of the chart and images
+resources:
+  resourceDefs:
+    files:
+      - ref: ExternalSecurityReport.pdf
+        mediaType: application/pdf
