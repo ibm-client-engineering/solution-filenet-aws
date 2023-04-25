@@ -15,7 +15,7 @@ title: 'The Why'
 This is a _living document_ that delivers a "flight path" or adoption journey using the Value Engineering Method, which consolidates the best practices for successfully implementing a Proof of Concept aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)**.
 
 ### Value Engineering Method
-<center><img src="https://user-images.githubusercontent.com/95059/234157742-2ecebab2-e5b8-44e6-a2d8-666f8ad4dc24.svg" width="400" height="400" /></center>
+<center><img src="https://user-images.githubusercontent.com/95059/234157742-2ecebab2-e5b8-44e6-a2d8-666f8ad4dc24.svg" width="500" height="300" /></center>
 
 ```mermaid
 graph LR;
