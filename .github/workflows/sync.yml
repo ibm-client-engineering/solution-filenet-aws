@@ -1,0 +1,22 @@
+name: Sync with GitHub Enterprise
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Sync repository
+      run: |
+        git clone --mirror "https://github.com/${{ github.repository }}" sync-repo
+        cd sync-repo
+        git remote add github-enterprise "https://${{ secrets.GHE_USER }}@${{ secrets.ENTERPRISE_URL }}/${{ github.repository }}"
+        git config --global user.email "terrabot@us.ibm.com"
+        git config --global user.name "${{ secrets.GHE_USER }}"
+        git config --global http.https://{{ secrets.ENTERPRISE_URL }}/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
+        git push --mirror --force github-enterprise
+
