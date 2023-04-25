@@ -1,7 +1,7 @@
 ---
-id: solution-test
-sidebar_position: 3
-title: Test
+id: solution-validate
+sidebar_position: 2
+title: Validate
 ---
 
 ## Test
