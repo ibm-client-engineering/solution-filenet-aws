@@ -1,7 +1,7 @@
 {
   "label": "Create",
   "position": 3,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "generated-index",
     "description": "Co-Create to prove value"
