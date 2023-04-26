@@ -23,6 +23,7 @@
     "@carbon/type": "^11.16.0",
     "@cmfcmf/docusaurus-search-local": "^1.0.0",
     "@docusaurus/core": "^2.4.0",
+    "@docusaurus/plugin-google-gtag": "^2.4.0",
     "@docusaurus/plugin-sitemap": "^2.4.0",
     "@docusaurus/preset-classic": "^2.4.0",
     "@docusaurus/theme-live-codeblock": "^2.4.0",

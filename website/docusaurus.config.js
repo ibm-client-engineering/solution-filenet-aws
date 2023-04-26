@@ -44,6 +44,13 @@ const config = {
         priority: 0.5
       },
     ],
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-GB0XWXF3GE',
+        anonymizeIP: true,
+      },
+    ],
   ],
 
   // or, if you want to specify options
