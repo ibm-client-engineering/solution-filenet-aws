@@ -251,6 +251,8 @@ spec:
               containerPort: 1389
               protocol: TCP
           image: 'bitnami/openldap:latest'
+#          imagePullSecrets:
+#            - name: regcred
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -389,6 +391,8 @@ spec:
 ```
 ### Create Deployment
 Create a deployment for postgres
+
+`postgres-deploy.yaml`
 
 ```yaml showLineNumbers
 apiVersion: apps/v1
