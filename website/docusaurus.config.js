@@ -32,17 +32,18 @@ const config = {
   // ...
   plugins: [
     [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
-      {
-        // options for the search plugin
-      }
-    ],
-    [ '@docusaurus/plugin-sitemap', { changefreq: 'hourly', priority: 0.5
-        // additional options for the sitemap plugin
-      }
-    ]
-  ],
+      require.resolve('@cmfcmf/docusaurus-search-local'), {
 
+      },
+    ],
+    ['@docusaurus/plugin-sitemap',
+      {
+        changefreq: 'hourly',
+        filename: 'sitemap.xml',
+        priority: 0.5
+      },
+    ],
+  ],
 
   // or, if you want to specify options
 
