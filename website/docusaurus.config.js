@@ -9,7 +9,7 @@ const config = {
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
   title: 'IBM Client Engineering',
   tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
@@ -30,7 +30,19 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
 
   // ...
-  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
+  plugins: [
+    [
+      require.resolve('@cmfcmf/docusaurus-search-local'),
+      {
+        // options for the search plugin
+      }
+    ],
+    [ '@docusaurus/plugin-sitemap', { changefreq: 'hourly', priority: 0.5
+        // additional options for the sitemap plugin
+      }
+    ]
+  ],
+
 
   // or, if you want to specify options
 
@@ -121,7 +133,7 @@ const config = {
       },
       prism: {
         theme: require('prism-react-renderer/themes/oceanicNext'),
-        darkTheme: require('prism-react-renderer/themes/synthwave84'),
+        darkTheme: require('prism-react-renderer/themes/oceanicNext'),
       },
     }),
 };

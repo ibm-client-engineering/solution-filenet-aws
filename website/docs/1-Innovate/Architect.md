@@ -1,7 +1,7 @@
 ---
-id: align
+id: architect
 sidebar_position: 3
-title: Align
+title: Architect
 ---
 
 

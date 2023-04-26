@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 slug: /
-title: 'The Why'
+title: 'Flight Path'
 ---
 [![Site Build](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml/badge.svg)](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml)  ![Site Build](https://img.shields.io/badge/Stage-Co--Create-Co--Create)
 
@@ -9,7 +9,7 @@ title: 'The Why'
 
 ### Purpose
 
-This is a _living document_ that delivers a "flight path" or adoption journey using the Value Engineering Method, which consolidates the best practices for successfully implementing a Proof of Concept aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)**.
+This is _living document_ delivers a "flight path" or adoption journey using the Value Engineering Method to successfully implement a Proof of Concept aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)**.
 
 ### Value Engineering Method
 
