@@ -251,8 +251,6 @@ spec:
               containerPort: 1389
               protocol: TCP
           image: 'bitnami/openldap:latest'
-#          imagePullSecrets:
-#            - name: regcred
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -273,6 +271,8 @@ spec:
                 name: openldap-env
             - secretRef:
                 name: openldap
+#      imagePullSecrets:
+#        - name: regcred
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -437,13 +437,15 @@ spec:
               name: postgredb
             - mountPath: /pgsqldata
               name: postgres-tablespaces
+#      imagePullSecrets:
+#        - name: regcred
       volumes:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-data
-     - name: postgres-tablespaces
-    persistentVolumeClaim:
-      claimName: postgres-tablespaces
+        - name: postgres-tablespaces
+          persistentVolumeClaim:
+            claimName: postgres-tablespaces
 ```
 ### Create Postgres Service
 Create the service for postgres
