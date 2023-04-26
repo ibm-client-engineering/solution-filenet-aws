@@ -411,6 +411,16 @@ spec:
         fsGroup: 65536
       containers:
         - name: postgres
+          args:
+            - '-c'
+            - max_prepared_transactions=500
+            - '-c'
+            - max_connections=500
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              memory: 4Gi
           image: postgres:latest # Sets Image
           imagePullPolicy: "IfNotPresent"
           ports:
