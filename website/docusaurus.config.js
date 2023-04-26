@@ -39,6 +39,7 @@ const config = {
     ['@docusaurus/plugin-sitemap',
       {
         changefreq: 'hourly',
+        id: 'site',
         filename: 'sitemap.xml',
         priority: 0.5
       },
