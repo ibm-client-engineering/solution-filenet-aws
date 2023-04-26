@@ -422,8 +422,10 @@ spec:
             - max_connections=500
           resources:
             limits:
+              cpu: 100m
               memory: 4Gi
             requests:
+              cpu: 100m
               memory: 4Gi
           image: postgres:latest # Sets Image
           imagePullPolicy: "IfNotPresent"
@@ -469,6 +471,7 @@ spec:
     app: postgres
 
 ```
+### Validate postgres instance
 
 Verify the postgres default database we configured above is up by connecting to the service.
 ```tsx
