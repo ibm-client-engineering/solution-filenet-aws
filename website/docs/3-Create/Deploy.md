@@ -563,18 +563,6 @@ CREATE TABLESPACE icndb_tbs OWNER ceuser LOCATION '/pgsqldata/icndb';
 GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 ```
 
-Create the Object Store
-
-```tsx
-CREATE DATABASE osdb OWNER ceuser TEMPLATE template0 ENCODING UTF8 ;
-GRANT ALL ON DATABASE osdb TO ceuser;
-REVOKE CONNECT ON DATABASE osdb FROM public;
-\connect osdb
-CREATE TABLESPACE osdb_tbs OWNER ceuser LOCATION '/pgsqldata/osdb';
-GRANT CREATE ON TABLESPACE osdb_tbs TO ceuser;
-exit
-```
-
 ## Deploy FileNet Operator
 
 ### Retrieve the IBM FileNet Content Manager case file
