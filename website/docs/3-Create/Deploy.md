@@ -112,7 +112,7 @@ metadata:
     app: filenet-openldap
 data:
   BITNAMI_DEBUG: 'true'
-  LDAP_ORGANISATION: filnet.internal
+  LDAP_ORGANISATION: filenet.internal
   LDAP_ROOT: 'dc=filenet,dc=internal'
   LDAP_DOMAIN: filenet.internal
   LDAP_CUSTOM_LDIF_DIR: /ldifs
@@ -575,8 +575,9 @@ GRANT CREATE ON TABLESPACE osdb_tbs TO ceuser;
 exit
 ```
 
-## Deploy FilNet Operator
+## Deploy FileNet Operator
 
+### Retrieve the IBM FileNet Content Manager case file
 :::note
 
 These steps **need to be run** on a host that has `docker` or `podman` available and active.
@@ -604,6 +605,7 @@ tar xvf container-samples-5.5.10.tar
 
 cd container-samples/scripts
 ```
+### Create a silent install file
 
 Create `filenetvars.sh`
 
@@ -627,9 +629,10 @@ export FNCM_LICENSE_ACCEPT="Accept"
 export FNCM_STORAGE_CLASS="efs-sc"
 export FNCM_ENTITLEMENT_KEY="<ENTITLEMENT_KEY>"
 ```
-
 You can retrieve your entitlement key from this URL:
 <https://myibm.ibm.com/products-services/containerlibrary>
+
+### Run the deployment script for the operator
 
 Source the `filenetvars.sh` file and then run the installation script from that directory:
 
