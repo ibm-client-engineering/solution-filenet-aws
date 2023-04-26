@@ -9,7 +9,7 @@ title: 'Flight Path'
 
 ### Purpose
 
-This is _living document_ delivers a "flight path" or adoption journey using the Value Engineering Method to successfully implement a Proof of Concept aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)**.
+This _living document_ delivers a "flight path" or adoption journey using IBM Client Engineering's Value Engineering Method. The flight path is an open blueprint for a successful implementation for a Proof of Concept aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)** at one of IBM's customers.
 
 ### Value Engineering Method
 
@@ -22,7 +22,7 @@ graph LR;
     C --> D(Transition);
 ```
 
-The Value Engineering Method is a human and design-led approach to solve complex business problems with transformative technology. This approach uses a proven co-creation methodology that aligns our experts, utilize leadership based on thousands of projects, with key client stakeholders to quickly identify business or technology challenges and build Proof of Experiences (PoXs) that solve and ‘de-risk’ those problems using IBM hybrid cloud and AI technology.
+The Value Engineering Method is a human and design-led approach to solve complex business problems with transformative technology. This approach uses a proven co-creation methodology that aligns our experts, utilize leadership based on thousands of projects, with key client stakeholders to quickly identify business or technology challenges and build Proof of Experiences (PoXs) that solve and ‘de-risk’ those problems using IBM technology.
 
 :::info
 <img src="https://user-images.githubusercontent.com/95059/166857681-99c92cdc-fa62-4141-b903-969bd6ec1a41.png" width="300" height="100" />
@@ -31,6 +31,6 @@ The Value Engineering Method is a human and design-led approach to solve complex
 
 :::
 
-### Working In The Open
+## Working In The Open
 
 The Flight Path approach embodies IBM Client Engineering's dedication to transparency and collaboration, which is evident through the creation of this accessible repository that showcases real-life customer experiences. By sharing this knowledge, IBM aims to develop user-friendly and scalable landing zones for customers that encourage the adoption of IBM Technology while prioritizing innovation and user experience. This repository represents IBM Client Engineering's commitment to _working in the open_, where stakeholders and interested parties can participate, provide feedback and benefit from collective knowledge.
