@@ -282,6 +282,7 @@ spec:
             name: openldap-customldif
             defaultMode: 420
 ```
+Apply it to the cluster
 
 ```bash
 kubectl apply -f openldap-deploy.yaml
@@ -353,6 +354,11 @@ data:
   PGDATA: /var/lib/postgresql/data/pgdata
 
 ```
+Apply it to the cluster
+```bash
+kubectl apply -f postgres_configmap.yaml
+```
+
 ### Create Storage PVCs
 Now lets create a couple of ebs storage device PVCs for the database to use. We'll make them 5Gi for now.
 
@@ -389,6 +395,12 @@ spec:
   storageClassName: ebs-gp3-sc
   volumeMode: Filesystem
 ```
+
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-pvc.yaml
+```
+
 ### Create Deployment
 Create a deployment for postgres
 
@@ -449,6 +461,11 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-tablespaces
 ```
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-deploy.yaml
+```
+
 ### Create Postgres Service
 Create the service for postgres
 `postgres-service.yaml`
@@ -471,6 +488,12 @@ spec:
     app: postgres
 
 ```
+
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-service.yaml
+```
+
 ### Validate postgres instance
 
 Verify the postgres default database we configured above is up by connecting to the service.
