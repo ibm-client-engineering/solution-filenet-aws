@@ -112,7 +112,7 @@ metadata:
     app: filenet-openldap
 data:
   BITNAMI_DEBUG: 'true'
-  LDAP_ORGANISATION: filnet.internal
+  LDAP_ORGANISATION: filenet.internal
   LDAP_ROOT: 'dc=filenet,dc=internal'
   LDAP_DOMAIN: filenet.internal
   LDAP_CUSTOM_LDIF_DIR: /ldifs
@@ -271,6 +271,8 @@ spec:
                 name: openldap-env
             - secretRef:
                 name: openldap
+#      imagePullSecrets:
+#        - name: regcred
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -280,6 +282,7 @@ spec:
             name: openldap-customldif
             defaultMode: 420
 ```
+Apply it to the cluster
 
 ```bash
 kubectl apply -f openldap-deploy.yaml
@@ -351,6 +354,11 @@ data:
   PGDATA: /var/lib/postgresql/data/pgdata
 
 ```
+Apply it to the cluster
+```bash
+kubectl apply -f postgres_configmap.yaml
+```
+
 ### Create Storage PVCs
 Now lets create a couple of ebs storage device PVCs for the database to use. We'll make them 5Gi for now.
 
@@ -387,8 +395,16 @@ spec:
   storageClassName: ebs-gp3-sc
   volumeMode: Filesystem
 ```
+
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-pvc.yaml
+```
+
 ### Create Deployment
 Create a deployment for postgres
+
+`postgres-deploy.yaml`
 
 ```yaml showLineNumbers
 apiVersion: apps/v1
@@ -411,6 +427,18 @@ spec:
         fsGroup: 65536
       containers:
         - name: postgres
+          args:
+            - '-c'
+            - max_prepared_transactions=500
+            - '-c'
+            - max_connections=500
+          resources:
+            limits:
+              cpu: 100m
+              memory: 4Gi
+            requests:
+              cpu: 100m
+              memory: 4Gi
           image: postgres:latest # Sets Image
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -423,14 +451,21 @@ spec:
               name: postgredb
             - mountPath: /pgsqldata
               name: postgres-tablespaces
+#      imagePullSecrets:
+#        - name: regcred
       volumes:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-data
-     - name: postgres-tablespaces
-    persistentVolumeClaim:
-      claimName: postgres-tablespaces
+        - name: postgres-tablespaces
+          persistentVolumeClaim:
+            claimName: postgres-tablespaces
 ```
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-deploy.yaml
+```
+
 ### Create Postgres Service
 Create the service for postgres
 `postgres-service.yaml`
@@ -453,6 +488,13 @@ spec:
     app: postgres
 
 ```
+
+Apply it to the cluster
+```bash
+kubectl apply -f postgres-service.yaml
+```
+
+### Validate postgres instance
 
 Verify the postgres default database we configured above is up by connecting to the service.
 ```tsx
@@ -521,20 +563,9 @@ CREATE TABLESPACE icndb_tbs OWNER ceuser LOCATION '/pgsqldata/icndb';
 GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 ```
 
-Create the Object Store
+## Deploy FileNet Operator
 
-```tsx
-CREATE DATABASE osdb OWNER ceuser TEMPLATE template0 ENCODING UTF8 ;
-GRANT ALL ON DATABASE osdb TO ceuser;
-REVOKE CONNECT ON DATABASE osdb FROM public;
-\connect osdb
-CREATE TABLESPACE osdb_tbs OWNER ceuser LOCATION '/pgsqldata/osdb';
-GRANT CREATE ON TABLESPACE osdb_tbs TO ceuser;
-exit
-```
-
-## Deploy FilNet Operator
-
+### Retrieve the IBM FileNet Content Manager case file
 :::note
 
 These steps **need to be run** on a host that has `docker` or `podman` available and active.
@@ -562,6 +593,7 @@ tar xvf container-samples-5.5.10.tar
 
 cd container-samples/scripts
 ```
+### Create a silent install file
 
 Create `filenetvars.sh`
 
@@ -585,9 +617,10 @@ export FNCM_LICENSE_ACCEPT="Accept"
 export FNCM_STORAGE_CLASS="efs-sc"
 export FNCM_ENTITLEMENT_KEY="<ENTITLEMENT_KEY>"
 ```
-
 You can retrieve your entitlement key from this URL:
 <https://myibm.ibm.com/products-services/containerlibrary>
+
+### Run the deployment script for the operator
 
 Source the `filenetvars.sh` file and then run the installation script from that directory:
 
