@@ -99,7 +99,6 @@
     --ifm-card-background-color: #0e62fe;
     --ifm-background-color: #f4f4f4;
     --ifm-footer-link-color: #f4f4f4;
-    --ifm-footer-title-color: #f4f4f4
     --ifm-color-emphasis-800: #f4f4f4;
     --ifm-color-emphasis-800: #f4f4f4;
     --ifm-background-surface-color: #262626;
@@ -136,7 +135,9 @@ article {
   margin-left: auto;
   margin-right: auto;
 }
-
+html[data-theme='light'] {
+  --ifm-footer-title-color: #f4f4f4
+}
 html[data-theme='dark'] {
   --ifm-background-color: #161616;
   --ifm-background-surface-color: #262626;
