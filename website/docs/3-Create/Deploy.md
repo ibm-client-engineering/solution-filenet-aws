@@ -635,7 +635,6 @@ source ./filenetvars.sh
 kubectl create secret generic ibm-fncm-secret \
 --from-literal=gcdDBUsername="ceuser" --from-literal=gcdDBPassword="p@ssw0rd" \
 --from-literal=osDBUsername="ceuser" --from-literal=osDBPassword="p@ssw0rd" \
---from-literal=icnDBUsername="ceuser" --from-literal=
 --from-literal=appLoginUsername="filenet_admin" --from-literal=appLoginPassword="p@ssw0rd" \
 --from-literal=keystorePassword="p@ssw0rd" \
 --from-literal=ltpaPassword="p@ssw0rd"
