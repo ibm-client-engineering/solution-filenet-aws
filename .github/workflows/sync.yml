@@ -21,7 +21,7 @@ jobs:
         echo "3"
         echo #git config --global user.name "${{ secrets.GHE_USER }}"
         echo "4"
-        echo git config --global http.https://{{ secrets.ENTERPRISE_URL }}/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
+        echo git config --global http.https://github.ibm.com/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
         echo "5"
         git push --mirror --force github-enterprise
 
