@@ -40,6 +40,10 @@ async function createconfig() {
 
         },
       ],
+           [
+        require.resolve('docusaurus-plugin-image-zoom'), {
+        },
+      ],
       ['@docusaurus/plugin-sitemap',
         {
           changefreq: 'hourly',
@@ -85,6 +89,19 @@ async function createconfig() {
           theme: {
             customCss: require.resolve('./src/css/custom.css'),
           },
+          blog: {
+            path: 'flight-logs',
+            // Simple use-case: string editUrl
+            // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
+            // Advanced use-case: functional editUrl
+            editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
+              `https://github.com/ibm-client-engineering/solution-filenet-aws/edit/main/website/${blogDirPath}/${blogPath}`,
+            blogTitle: 'Journey Log',
+            blogSidebarTitle: 'All our logs',
+            postsPerPage: 10,
+            remarkPlugins: [],
+            rehypePlugins: [],
+          }
         }),
       ],
     ],
@@ -102,6 +119,16 @@ async function createconfig() {
           minHeadingLevel: 2,
           maxHeadingLevel: 5,
         },
+        zoom: {
+          selector: '.markdown :not(a) > img',
+          background: {
+            light: 'rgb(255, 255, 255)',
+            dark: 'rgb(50, 50, 50)'
+          },
+          config: {
+            // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+          },
+        },
         navbar: {
           title: '| IBM FileNet on AWS EKS',
           logo: {
@@ -118,7 +145,8 @@ async function createconfig() {
             //   position: 'left',
             //   label: 'Section',
             // },
-
+            {to: '/', label: 'Flight Path', position: 'right'},
+            {to: 'blog', label: 'Flight Logs', position: 'right'},
             {
               href: 'https://github.com/ibm-client-engineering/solution-filenet-aws',
               className: "header-github-link",
@@ -127,20 +155,29 @@ async function createconfig() {
           ],
         },
         footer: {
+          logo: {
+              alt: 'IBM Logo',
+              src: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg',
+              href: 'https://ibm.com',
+              height: 150,
+              width: 150,
+
+          },
           // style: 'dark',
           links: [
             {
-              title: 'Links',
+              title: 'Explore',
               items: [
                 {
                   label: 'IBM',
                   to: 'https://www.ibm.com/',
                 },
                 {
-                  label: 'IBM Client Engineering',
+                  label: 'IBM Client Engineering - Open Solutions Library',
                   to: 'https://www.ibm.com/client-engineering',
                 },
               ],
+
             }
 
           ]
