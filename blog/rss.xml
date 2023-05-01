@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>IBM Client Engineering Blog</title>
+        <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</link>
+        <description>IBM Client Engineering Blog</description>
+        <lastBuildDate>Fri, 28 Apr 2023 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Log - Sprint 1 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1</guid>
+            <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons Learned<a href="#lessons-learned" class="hash-link" aria-label="Direct link to Lessons Learned" title="Direct link to Lessons Learned">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="up-next">Up Next<a href="#up-next" class="hash-link" aria-label="Direct link to Up Next" title="Direct link to Up Next">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="metrics">Metrics<a href="#metrics" class="hash-link" aria-label="Direct link to Metrics" title="Direct link to Metrics">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="notes">Notes<a href="#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes">​</a></h2><h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>]]></content:encoded>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+    </channel>
+</rss>
