@@ -14,9 +14,15 @@ jobs:
       run: |
         git clone --mirror "https://github.com/${{ github.repository }}" sync-repo
         cd sync-repo
-        git remote add github-enterprise "https://${{ secrets.GHE_USER }}@${{ secrets.ENTERPRISE_URL }}/${{ github.repository }}"
+        echo "1"
+        git remote add github-enterprise "https://cebot@ibm.com@$github.ibm.com/${{ github.repository }}"
+        echo "2"
         git config --global user.email "terrabot@us.ibm.com"
-        git config --global user.name "${{ secrets.GHE_USER }}"
-        git config --global http.https://{{ secrets.ENTERPRISE_URL }}/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
+        echo "3"
+        echo #git config --global user.name "${{ secrets.GHE_USER }}"
+        echo "4"
+        echo git config --global http.https://{{ secrets.ENTERPRISE_URL }}/.extraheader "AUTHORIZATION: token ${{ secrets.GH_ENTERPRISE_TOKEN }}"
+        echo "5"
         git push --mirror --force github-enterprise
+
 
