@@ -15,7 +15,7 @@ jobs:
         git clone --mirror "https://github.com/${{ github.repository }}" sync-repo
         cd sync-repo
         echo "1"
-        git remote add github-enterprise "https://cebot@ibm.com@$github.ibm.com/${{ github.repository }}"
+        git remote add github-enterprise "https://cebot@github.ibm.com/${{ github.repository }}"
         echo "2"
         git config --global user.email "terrabot@us.ibm.com"
         echo "3"
