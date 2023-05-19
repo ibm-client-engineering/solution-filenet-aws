@@ -31,6 +31,30 @@ kubectl config set-context --current --namespace=filenet-openldap
 ### Create configmaps and secrets
 Let's create some configmaps for the ldap service
 
+`openldap-schemas-configmap.yaml`
+
+```yaml showLineNumbers
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: openldap-customschema
+  labels:
+    app: filenet-openldap
+data:
+#  01-sds-schema.ldif: |-
+  custom.ldif: |-
+    dn: cn=sds,cn=schema,cn=config
+    objectClass: olcSchemaConfig
+    cn: sds
+    olcAttributeTypes: {0}( 1.3.6.1.4.1.42.2.27.4.1.6 NAME 'ibm-entryuuid' DESC 
+      'Uniquely identifies a directory entry throughout its life.' EQUALITY caseIgnoreMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+    olcObjectClasses: {0}( 1.3.6.1.4.1.42.2.27.4.2.1 NAME 'sds' DESC 'sds' SUP top AUXILIARY MUST ( cn $ ibm-entryuuid ) )
+```
+
+```
+kubectl apply -f openldap-schemas-configmap.yaml
+```
+
 `openldap-ldif-configmap.yaml`
 
 ```yaml showLineNumbers
@@ -38,7 +62,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: openldap-customldif
-  namespace: filenet
   labels:
     app: filenet-openldap
 data:
@@ -64,33 +87,41 @@ data:
     dn: uid=cpadmin,ou=Users,dc=filenet,dc=internal
     objectClass: inetOrgPerson
     objectClass: top
+    objectClass: sds
     cn: cpadmin
     sn: cpadmin
     uid: cpadmin
     mail: cpadmin@cp.internal
     userpassword: Password
     employeeType: admin
+    ibm-entryuuid: e6c41859-ced3-4772-bfa3-6ebbc58ec78a
 
     dn: uid=cpuser,ou=Users,dc=filenet,dc=internal
     objectClass: inetOrgPerson
     objectClass: top
+    objectClass: sds
     cn: cpuser
     sn: cpuser
     uid: cpuser
     mail: cpuser@cp.internal
     userpassword: Password
+    ibm-entryuuid: 30183bb0-1012-4d23-8ae2-f94816b91a75
 
     # Groups
     dn: cn=cpadmins,ou=Groups,dc=filenet,dc=internal
     objectClass: groupOfNames
     objectClass: top
+    objectClass: sds
     cn: cpadmins
+    ibm-entryuuid: 4196cb9e-1ed7-4c02-bb0d-792cb7bfa768
     member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
 
     dn: cn=cpusers,ou=Groups,dc=filenet,dc=internal
     objectClass: groupOfNames
     objectClass: top
+    objectClass: sds
     cn: cpusers
+    ibm-entryuuid: fc4ded27-8c6a-4a8c-ad9e-7be65369758c
     member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
     member: uid=cpuser,ou=Users,dc=filenet,dc=internal
 ```
@@ -165,31 +196,6 @@ Apply it to the cluster
 ```tsx
 kubectl apply -f ldap_secrets.yaml
 ```
-### Create PVC for OpenLdap
-Let's create our storage pvc using EFS
-
-`openldap-pvc.yaml`
-
-```yaml showLineNumbers
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: openldap-data
-  labels:
-    app: filenet-openldap
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: efs-sc
-  volumeMode: Filesystem
-```
-
-```
-kubectl apply -f openldap-pvc.yaml
-```
 
 ### Create Openldap Deployment
 Now let's create a deployment.
@@ -261,8 +267,8 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
-            - name: data
-              mountPath: /bitnami/openldap/
+            - name: custom-schema-files
+              mountPath: /schemas/
             - name: custom-ldif-files
               mountPath: /ldifs/
           terminationMessagePolicy: File
@@ -274,9 +280,10 @@ spec:
 #      imagePullSecrets:
 #        - name: regcred
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: openldap-data
+        - name: custom-schema-files
+          configMap:
+            name: openldap-customschema
+            defaultMode: 420
         - name: custom-ldif-files
           configMap:
             name: openldap-customldif
