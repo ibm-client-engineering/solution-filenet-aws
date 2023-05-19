@@ -78,7 +78,7 @@ async function createconfig() {
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
-            remarkPlugins: [[remarkKroki, { server: "https://kroki.io/" }]],
+            remarkPlugins: [[remarkKroki, { server: "https://kroki.io/", output: 'inline-svg' }]],
             routeBasePath: '/',
             sidebarPath: require.resolve('./sidebars.js'),
             // Please change this to your repo.
