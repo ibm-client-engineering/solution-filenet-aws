@@ -1310,9 +1310,138 @@ spec:
 #        vc_icn_desktop_id: "desktop1"
 
 ```
+Before applying the CR file, be sure to check if the quota requested resources match what is available within your environment. This can be found under 'Spec:' within the CR YAML file ie:
+```yaml 
+resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+```
 
 Once the CR file has been appropriately modified, it is applied to the cluster:
 
 ```
 kubectl apply -f ibm_fncm_cr_production.yaml
 ```
+
+View the status of your pods using the command:
+
+```
+kubectl get pods -w
+```
+
+When all of the pods are "Running", you can access the status of your services using the command:
+```
+kubectl get pods -w
+```
+
+## Creating an Ingress Resource 
+
+:::info
+Pre-req: 
+You have a type of ingress controller as part of your certified Kubernetes environment.
+- You can install following examples of Ingress controllers on your certified Kubernetes environment.
+- AWS Load Balancer controller
+    - Used on AWS EKS clusters. https://kubernetes-sigs.github.io/aws-load-balancer-controller/
+- NGINX Ingress controller
+    - Can be installed on most certified Kubernetes environment. https://docs.nginx.com/nginx-ingress-controller/
+You can install a DNS controller in your certified Kubernetes environment to automatically sync your custom hostname to the DNS provided on your Kubernetes Cloud Platform.
+- ExternalDNS
+    - https://github.com/kubernetes-sigs/external-dns
+:::
+
+You can create an Ingress resource to control web access to your deployed containers. These steps are completed post deployment and outside of the Operator
+
+The Ingress will need a custom domain for the host.  Perform the following changes to the CR under 'Spec' in the following location:
+- Change 'sc_service_type' to NodePort
+- Add a new line for 'sc_deployment_hostname_suffix' above 'sc_ingress_annotations' and give it the value of your desired hostname.
+
+```yaml
+sc_deployment_context: FNCM
+    show_sensitive_log: true
+// highlight-start
+    sc_ingress_enable: true
+    // highlight-next-line
+    sc_service_type: NodePort
+    // highlight-next-line
+    sc_deployment_hostname_suffix: 'your hostname here'
+    sc_ingress_annotations:
+      - nginx.ingress.kubernetes.io/affinity: cookie
+      - nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      - nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      - nginx.ingress.kubernetes.io/secure-backends: "true"
+      - nginx.ingress.kubernetes.io/session-cookie-name: route
+      - nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+      - kubernetes.io/ingress.class: nginx
+```
+
+Delete the old CR from the cluser and reapply it then scale Operator down and back up in order to get pods online.
+
+Next we will edit the Ingress object using the following command:
+
+```
+Kubectl edit ingress fncmdeploy-fncm-ingress
+```
+Under 'Spec:', and then 'Rules', make the following changes:
+
+```yaml
+spec:
+  rules:
+  // highlight-next-line
+  - host: "your host name here"
+    http:
+      paths:
+      - backend:
+        service:
+          name: fncmdeploy-cpe-svc
+          port:
+            number: 9443
+```
+
+After completing these edits, give the Ingress external DNS operator time to pick up the new host name from the newly edited Rules (~ 5-10 minutes).
+
+Attempt to visit the host in your browser.  You shoul dbe met with an 'Insecure Connection' page, proceed with this insecure connection and you should be met wiht the filenet login page.
+
+If you wish to only use a secure connection, or are stuck in a loop when you try to proceed wit the insecure connection, follow the steps below to create certificate:
+
+*List cert creation steps here*
+
+
+
+
+
+
+<!---Apply the Ingress Object:
+
+```
+kubectl apply fncm-ingress.yaml -n <namespace> 
+```
+
+Verify that the object was created:
+
+```
+kubectl get ingress -n <namespace>
+```
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
