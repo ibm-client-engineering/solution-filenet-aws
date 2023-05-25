@@ -678,7 +678,7 @@ kubectl apply -f ldap_secrets.yaml
 
 ## Deploying CR
 
-Here is our example CR. Use it as reference. It would be applied with the following command to the cluster. Make sure your in your correct namespace or have your namespace context set.
+Here is our example CR. Use it as reference. It would be applied with the following command to the cluster. Make sure you're in your correct namespace or have your namespace context set.
 
 ```bash
 kubectl apply -f ibm_fncm_cr_production_abrv.yaml
