@@ -273,6 +273,10 @@ spec:
                 name: openldap-env
             - secretRef:
                 name: openldap
+      # If you have a custom pull secret and have staged the image somewhere
+#      imagePullSecrets:
+#        - name: <CUSTOM PULL SECRET>
+      #
       volumes:
         - name: custom-schema-files
           configMap:
@@ -645,8 +649,8 @@ kubectl create secret generic ibm-ban-secret \
   --from-literal=navigatorDBPassword="p@ssw0rd" \
   --from-literal=keystorePassword="p@ssw0rd" \
   --from-literal=ltpaPassword="p@ssw0rd" \
-  --from-literal=appLoginUsername=“cpadmin” \
-  --from-literal=appLoginPassword=“Password” \
+  --from-literal=appLoginUsername="cpadmin" \
+  --from-literal=appLoginPassword="Password" \
   --from-literal=jMailUsername="mailadmin" \
   --from-literal=jMailPassword="{xor}GDoxNiosbg=="
 ```
