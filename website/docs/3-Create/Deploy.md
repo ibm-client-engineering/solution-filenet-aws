@@ -1356,7 +1356,7 @@ You can install a DNS controller in your certified Kubernetes environment to aut
 You can create an Ingress resource to control web access to your deployed containers. These steps are completed post deployment and outside of the Operator
 
 The Ingress will need a custom domain for the host.  Perform the following changes to the CR under 'Spec' in the following location:
-- Change 'sc_service_type' to NodePort
+- Change 'sc_service_type' to have the value 'NodePort'
 - Add a new line for 'sc_deployment_hostname_suffix' above 'sc_ingress_annotations' and give it the value of your desired hostname.
 
 ```yaml
@@ -1378,7 +1378,7 @@ sc_deployment_context: FNCM
       - kubernetes.io/ingress.class: nginx
 ```
 
-Delete the old CR from the cluser and reapply it then scale Operator down and back up in order to get pods online.
+Delete the old CR from the cluster and reapply it, then scale the Operator down and back up in order to get pods online.
 
 Next we will edit the Ingress object using the following command:
 
@@ -1403,11 +1403,11 @@ spec:
 
 After completing these edits, give the Ingress external DNS operator time to pick up the new host name from the newly edited Rules (~ 5-10 minutes).
 
-Attempt to visit the host in your browser.  You shoul dbe met with an 'Insecure Connection' page, proceed with this insecure connection and you should be met wiht the filenet login page.
+Attempt to visit the host in your browser.  You should be met with an 'Insecure Connection' page, proceed with this insecure connection and you should see the FileNet login page.
 
-If you wish to only use a secure connection, or are stuck in a loop when you try to proceed wit the insecure connection, follow the steps below to create certificate:
+If you wish to only use a secure connection, or are stuck in a loop when you try to proceed with the insecure connection, follow the steps below to create a certificate for the connection.
 
-*List cert creation steps here*
+
 
 
 
