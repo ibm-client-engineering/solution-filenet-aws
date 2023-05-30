@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"All our logs","items":[{"title":"Log - Sprint 2 \ud83d\udeeb","permalink":"/solution-filenet-aws/blog/flight-log-2"},{"title":"Log - Sprint 1 \ud83d\udeeb","permalink":"/solution-filenet-aws/blog/flight-log-1"}]}')}}]);
