@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - ".github/workflows/deploy.yml"
-      - "website/**"
     branches:
       - main
     # Review gh actions docs if you want to further define triggers, paths, etc
@@ -18,9 +17,6 @@ jobs:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    defaults:
-      run:
-        working-directory: website
     steps:
       - uses: actions/checkout@v3
 

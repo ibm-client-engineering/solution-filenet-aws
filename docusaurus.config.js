@@ -95,7 +95,7 @@ async function createconfig() {
             // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
             // Advanced use-case: functional editUrl
             editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
-              `https://github.com/ibm-client-engineering/solution-filenet-aws/edit/main/website/${blogDirPath}/${blogPath}`,
+              `https://github.com/ibm-client-engineering/solution-filenet-aws/edit/main/${blogDirPath}/${blogPath}`,
             blogTitle: 'Journey Log',
             blogSidebarTitle: 'All our logs',
             postsPerPage: 10,
