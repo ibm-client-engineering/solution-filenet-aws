@@ -40,7 +40,7 @@ async function createconfig() {
 
         },
       ],
-           [
+          [
         require.resolve('docusaurus-plugin-image-zoom'), {
         },
       ],
