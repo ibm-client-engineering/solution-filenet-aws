@@ -689,6 +689,20 @@ docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64
 docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
 ```
 
+If including the IER operator and IER container, also pull those images:
+
+:::note
+
+As of this writing the latest IER version is [5.2.1.8-IER-IF005](https://www.ibm.com/support/fixcentral/swg/doSelectFixes?options.selectedFixes=5.2.1.8-IER-IF005&continue=1&source=dbluesearch&mhsrc=ibmsearch_a&mhq=enterprise+records)
+
+:::
+
+```
+docker pull cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
+docker pull cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005
+```
+
+
 Docker login to your private registry
 
 ```
@@ -721,6 +735,12 @@ docker tag icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 $LOCAL_REGIST
 docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1 $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
 ```
 
+If including IER
+```
+docker tag cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023 $LOCAL_REGISTRY/cp/cp4a/icp4a-operator:21.0.3-IF023
+docker tag cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005 $LOCAL_REGISTRY/cp/cp4a/ier/ier:ga-5218-ier-if005
+```
+
 Now let's push the images to the local or private registry
 
 ```
@@ -745,6 +765,12 @@ docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
 docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003
 docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 
 docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
+```
+
+If including IER
+```
+docker push $LOCAL_REGISTRY/cp/cp4a/icp4a-operator:21.0.3-IF023
+docker push $LOCAL_REGISTRY/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 
 ## Configuring RDS/DB on AWS (Optional)
