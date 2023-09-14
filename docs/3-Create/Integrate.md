@@ -77,11 +77,12 @@ Now let’s create another Advanced Storage Device. We will be setting up an S3 
 Next, we will be prompted to enter a display name for our S3 device in FileNet. This does not have to be the same name as your actual S3 bucket. This will be the device name within FileNet. Fill this out and select "Next".
 
 ![FileNet Replication Adv Storage S3 Name.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/a39b88a0-910a-4af5-a060-5b011e190a99)
-On the next page, enter the details for your user Key ID, Secret Access Key and the S3 bucket details. Then click "next".
+
+On the next page, enter the details for your user Key ID, Secret Access Key, and the S3 bucket details. Then click "next".
 
 ![FileNet Replication Adv Storage S3 setup.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/bad61b23-e7fe-4e87-81a9-6236b5d7e21f)
 
-The following page will display all your selected options and entered values for the S3 configuration. Validate the information and everything looks correct select "Finish". FileNet will then try to connect to that S3 bucket. When it successfully connects you should see a confirmation message.
+The following page will display all your selected options and entered values for the S3 configuration. Validate the information and if everything looks correct select "Finish". FileNet will then try to connect to that S3 bucket. When it successfully connects you should see a confirmation message.
 
 ![FileNet Replication Adv Storage s3 Confirmation.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/ef072216-3d76-4a5c-9343-c411f7eb12b1)
 
@@ -117,7 +118,7 @@ You should now see the newly created Advanced Storage Area in the list.
 
 ### Configuring FileNet Replication
 
-Once we have a have a created an Advanced Storage Area and have attached Advanced Storage Devices, we can now configure how the replication within that Advanced Storage Area. To configure the replication, navigate to Administrative -> Storage -> Advanced Storage -> Advanced Storage Areas. Here we should see the Advanced Storage Area we created in the previous section. Click on the name of the Advanced Storage Area.
+Once we have created an Advanced Storage Area and have attached Advanced Storage Devices, we can now configure the replication within that Advanced Storage Area. To configure the replication, navigate to Administrative -> Storage -> Advanced Storage -> Advanced Storage Areas. Here we should see the Advanced Storage Area we created in the previous section. Click on the name of the Advanced Storage Area.
 
 ![FileNet Replication Adv Storage Area.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/7421f1ea-5daf-474e-9283-257e5a47f5b4)
 
@@ -171,7 +172,7 @@ Asynchronous jobs waiting to be executed by the Content Replication Sweep remain
 
 ### Testing Synchronous/Asynchronous Replication in FileNet
 
-To test our synchronous/asynchronous configurations we can upload a document to FileNet. Withing the Admin Console, select the Object Store that you used to create you Advanced Storage Area and Devices. Then navigate to Browse. Within browse there will be a folder called "Root Folder". We can upload a document here or create another folder and upload it there. For our testing, let upload to the Root Folder. Click on the Root Folder to enter. Once inside the Root Folder Select the "Actions" dropdown and select "New Document".
+To test our synchronous/asynchronous configurations we can upload a document to FileNet. Withing the Admin Console, select the Object Store that you used to create you Advanced Storage Area and Devices. Then navigate to Browse. Within browse there will be a folder called "Root Folder". We can upload a document here or create another folder and upload it there. For our testing, lets upload to the Root Folder. Click on the Root Folder to enter. Once inside the Root Folder Select the "Actions" dropdown and select "New Document".
 
 ![FileNet Replication Content Replication Test Location.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/f6380fcb-4bba-4f24-98c6-de614b44d6ae)
 
@@ -184,7 +185,7 @@ We will now need to add content to the document. To add a file, click "Add" in t
 ![FileNet Replication Test Add Content.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/db4bb1f6-677c-4497-8260-6909324a17cc)
 ![FileNet Replication Test Add Content page.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/aad8b52f-5238-49d3-a133-f862374d7d4c)
 
-Keep selecting next and leaving all setting default until you get to the "Advanced Features" page. Here we need to select the Advanced Storage Area we created in the previous section. Once we have selected the storage area, select "next".
+Keep selecting next and leaving all settings default until you get to the "Advanced Features" page. Here we need to select the Advanced Storage Area we created in the previous section. Once we have selected the storage area, select "next".
 
 ![FileNEt Replication Test Storage Area Selection.png](https://zenhub.ibm.com/images/6442f46ac0371b5acaba3fc4/75f27860-e33a-4c5b-9f25-12ccef025b21)
 
