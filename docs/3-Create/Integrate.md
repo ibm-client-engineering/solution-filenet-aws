@@ -14,7 +14,7 @@ title: Integrate
 
 ### Prerequisites
 - A Java Runtime Environment (JRE)
-- Install the Process Designer package from IBM Passport Advantage using the part number
+- Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the part number `M0CTDML`
 
 ### Setup Steps:
 
