@@ -13,7 +13,8 @@ title: Integrate
 - IBM Content Navigator 3.0.13
 
 ### Prerequisites
-- A Java Runtime Environment (JRE)
+- A [Java Runtime Environment](https://www.java.com/en/download/) (JRE 1.8 or newer)
+- [Add Java to PATH](https://www.ibm.com/docs/en/b2b-integrator/6.0.2?topic=installation-setting-java-variables)
 - Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the part number `M0CTDML`
 
 ### Setup Steps:
@@ -30,7 +31,19 @@ title: Integrate
     9. Review all the details and click _Finish_.
     10. Navigate to _Workflow System->Connection Points_ to confirm that it was successfully created.
 
-2. Configuring and Launching the Process Designer
+2. SSL Configuration (adding the site certificate into the jre keystore)
+    1. Launch Chrome
+    2. Navigate to the ACCE console
+    3. Click on the Lock Icon on the left side of the url -> Connection is Secure -> Certificate is Valid -> Details -> Export...
+    4. Export **full certificate chain** (usually the second option in Save as) and **change extension to .crt** instead of .cert
+    run appropriate command to import it into your JRE keystore
+      - Windows:
+    `..\..\bin\keytool -import -keystore ..\..\lib\security\cacerts -file cpe_websphere_ssl_cert.crt`
+      - Linux:
+    `../../bin/keytool -import -keystore ../../lib/security/cacerts -file cpe_websphere_ssl_cert.crt`
+    5. You should see an `added to keystore` message
+
+3. Configuring and Launching the Process Designer
     1. Unzip the Process Designer zip file and all zip files within it for your platform.
     2. Navigate to: `<unzipped_folder>/cpetools-<platform>/peclient/`
     3. Open this folder in any text editor or IDE (ex. code .).
@@ -49,7 +62,7 @@ title: Integrate
     9. Run:
       - `sh ./pedesigner.sh <connection_point>` (Linux/Mac)
       - `pedesigner.bat <connection_point>` (Windows)
-    10. Enter credentials.
+    10. Enter credentials used to login to the ACCE console.
     11. Process Designer should open up!
 
 ## Synchronous/Asynchronous Replication in FileNet
