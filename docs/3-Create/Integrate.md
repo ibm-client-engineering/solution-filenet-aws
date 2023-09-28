@@ -274,6 +274,10 @@ You can now check your storage devices to verify the document was uploaded. Asyn
   - service.yaml
     - ensure the *ports* section is consistent with deployment.yaml and that all names match
 - update the configuration by running `kubectl apply -f k8s/<>.yaml` for each of the yaml files
+- use the updated configuration by deleting the pod
+  - run `kubectl get pod` and not the slack connector pod name
+  - run `kubectl delete pod <slack-connector-pod-name>`
+  - the pod will be brought back with the newly applied config 
 
 ### Installing Event-Driven External Service Extensinons
 
