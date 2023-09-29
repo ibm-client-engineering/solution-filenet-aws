@@ -65,6 +65,37 @@ title: Integrate
     10. Enter credentials used to login to the ACCE console.
     11. Process Designer should open up!
 
+## Enabling Workflow Tab on Content Navigator
+
+### Prerequisites
+- Workflow system and connection point have been created via the acce console in Object Store X (OSX)
+
+### Configuration Steps
+1. Open the Navigator
+2. Navigate to *Administration->Repositories->OSX* (double click)
+3. Click *Connect*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/7ed9e621-9c62-44b4-a3cb-38db5f11db1e)
+4. Navigate to *Configuration Parameters -> Workflow Connection Point -> WF_CON_POINT_NAME* (for this repo we want to use this connection point):
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/fb8d266a-371d-4fa4-acc8-938aaf006a46)
+4. Click *Save and Close*
+5. Navigate to *Administration->Desktops->icn_desktop* (default one)
+6. Double check that the default repo matches OSX:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/4f2616a6-7c3c-4c5b-aae6-6ec358a484c9)
+7. Navigate to *Layout->Check Work*:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/2376c113-0a9c-4f91-8380-5c0e2180e6de)
+8. Navigate to *Workflows->Select OSX repo under Repository*:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/b6de3c23-f814-44a1-88c5-dcee6bc45e5f)
+9. Select ApplicationSpace DefaultApplication and add it to the Selected Application Spaces:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/01bdc0b2-7d6e-4a2c-a75c-8ab6f4dd272d)
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/3cf30464-de1e-4be5-9f14-c3542e2eaee5)
+10. Click *Save and Close* and *Refresh*
+11. You should see the Work tab (with in-baskets, if you have created and committed them via the Process Designer):
+
+&emsp;&emsp;&emsp;&emsp;&emsp;
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/6fc830ea-081b-4442-ad41-4c0a3e311ddc) 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/222bbe90-5145-40dd-8ddb-1062f8d78305)
+
 ## Synchronous/Asynchronous Replication in FileNet
 
 ### Creating an Advanced Storage Device
