@@ -4,10 +4,28 @@
         <title>IBM Client Engineering Blog</title>
         <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</link>
         <description>IBM Client Engineering Blog</description>
-        <lastBuildDate>Thu, 21 Sep 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 27 Sep 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Log - Sprint 18 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18</guid>
+            <pubDate>Wed, 27 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+        <item>
+            <title><![CDATA[Log - Sprint 17 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17</guid>
+            <pubDate>Tue, 26 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
         <item>
             <title><![CDATA[Log - Sprint 16 🛫]]></title>
             <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16</link>
