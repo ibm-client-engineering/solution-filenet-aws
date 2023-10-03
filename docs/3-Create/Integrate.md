@@ -328,10 +328,10 @@ You can now check your storage devices to verify the document was uploaded. Asyn
     - set *External Event Receiver Registration Identifier* to be any name
   - Click *Finish* to Create the new Event
 - Under *Data Design -> Classes -> Document*, click on *Actions -> New Class*
-![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/78d1b378-b779-47e8-a058-a784fb72ffac)
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/facf4320-6dca-43fe-b0c9-f573641c52ac)
   - Enter any names you would like and proceed through the final screen (click *Finish*)
 - Navigate to *Subscriptions* (also under *Events, Actions, Processes*) and create a New Subscription
-![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/facf4320-6dca-43fe-b0c9-f573641c52ac)
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/78d1b378-b779-47e8-a058-a784fb72ffac)
   - Under *Select Classes*, choose Document for the Class Type and your newly created class for the *Class*
   ![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/2ab11b5b-876c-43b2-a99f-bef028dfb45e)
   - For *Scope*, choose the *Applies to all objects of this class*
