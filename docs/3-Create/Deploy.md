@@ -403,7 +403,10 @@ spec:
   volumeMode: Filesystem
 ```
 
-Create a deployment for postgres
+Create a deployment for postgres. As per the IBM recommendations we are setting the following args for postgres to 500:
+
+- `max_prepared_transactions=500`
+- `max_connections=500`
 
 `postgres-deploy.yaml`
 
@@ -429,6 +432,11 @@ spec:
         fsGroup: 65536
       containers:
         - name: postgres
+          args:
+            - '-c'
+            - max_prepared_transactions=500
+            - '-c'
+            - max_connections=500
           image: postgres:latest # Sets Image
           imagePullPolicy: "IfNotPresent"
           ports:
