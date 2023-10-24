@@ -1358,6 +1358,75 @@ spec:
     ## Enabling this will give the user the option to sign-in using the LDAP.
     #enable_ldap: true
 ```
+## Upgrading FNCM in the cluster
+
+Download the most recent IBM Case file for FileNet Content Manager. As of this writing it is v1.7.1. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+
+```
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
+```
+
+Extract the case file
+
+```
+tar zxvf ibm-cp-fncm-case-1.7.1.tgz
+```
+
+Change into the operator directory and extract the container samples file
+
+```tsx
+cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
+
+tar xvf container-samples-5.5.11.tar
+```
+
+### Upgrading the operator manually
+
+:::info
+It's important to note that if you are running airgapped and you have already staged the operator image to your repository, you will need to update the image path in the `operator.yaml` file. The below example uses `sed` and updates every `image:` entry.
+```
+sed -i "s/image:.*/image: \"<REPO URL>\/path\/to\/icp4a-content-operator:23.0.1-IF003\"/" operator.yaml
+```
+This needs to be done **before** applying the `operator.yaml`! 
+
+:::
+
+If you cannot run the deployment script, follow these steps to deploy the operator manually.
+
+From the `container-samples` directory:
+
+```tsx
+cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/container-samples
+kubectl apply -f ./descriptors/operator.yaml
+```
+
+Wait for the operator to come back online after upgrading and completes its reconciliation. 
+
+### Upgrading FNCM containers
+
+Once the operator has been upgraded, update your CR file to the latest image tags. You can also grab the latest CR from the case directory you extracted above:
+
+```
+cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/container-samples/descriptors/ibm_fncm_cr_production_FC_content.yaml
+
+```
+
+Now apply your updated CR to the cluster:
+
+```
+kubectl apply -f ibm_fncm_cr_production.yaml
+```
+
+### Secret menu items
+
+:::info
+As of [23.0.1-IF003](https://www.ibm.com/support/pages/node/7032026) the secret menu item for disabling readonly root fs on FNCM and BAN components is available. Simply add the following to your CR:
+```
+shared_configuration:
+  sc_disable_read_only_root_filesystem: true
+``` 
+This helps when you have agents like Dynatrace that inject certain configs into each container rootfs as they come up.
+:::
 
 ## Deploy IER Operator
 
