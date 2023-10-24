@@ -69,6 +69,34 @@ source ./filenetvars.sh
 
 If you cannot run the deployment script, follow these steps to deploy the operator manually.
 
+:::info
+
+Available as of 22.0.2-IF004 and greater
+
+If your cluster has resource limits required via cluster policy, you will need to update the `operator.yaml` to set those limits for the operator's init containers.
+
+```yaml
+      initContainers:
+        - name: folder-prepare-container
+          image: "docker-cotsimage-gts-dev.gslb.thc.travp.net/cpopen/icp4a-content-operator:23.0.1-IF003"
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+              - ALL
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+
+```
+:::
+
 From the `container-samples` directory:
 
 ```tsx
