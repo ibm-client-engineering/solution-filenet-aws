@@ -4,10 +4,37 @@
         <title>IBM Client Engineering Blog</title>
         <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</link>
         <description>IBM Client Engineering Blog</description>
-        <lastBuildDate>Wed, 18 Oct 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Oct 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Log - Sprint 28 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28</guid>
+            <pubDate>Thu, 26 Oct 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+        <item>
+            <title><![CDATA[Log - Sprint 27 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27</guid>
+            <pubDate>Wed, 25 Oct 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+        <item>
+            <title><![CDATA[Log - Sprint 26 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26</guid>
+            <pubDate>Tue, 24 Oct 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
         <item>
             <title><![CDATA[Log - Sprint 25 🛫]]></title>
             <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25</link>
