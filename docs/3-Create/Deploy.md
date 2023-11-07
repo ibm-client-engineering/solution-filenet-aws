@@ -258,6 +258,8 @@ spec:
             capabilities:
               drop:
                 - ALL
+              add:
+                - NET_BIND_SERVICE
             runAsNonRoot: true
             allowPrivilegeEscalation: false
             seccompProfile:
