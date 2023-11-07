@@ -566,7 +566,7 @@ service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 
 Also search for the following configmap entry in the deployment file:
 
-```
+```tsx
 ---
 apiVersion: v1
 data:
@@ -585,9 +585,32 @@ metadata:
 ```
 We want to add the following annotations:
 
-```
+```tsx
 allow-snippet-annotations: "true"
 enable-underscores-in-headers: "true"
+nginx.ingress.kubernetes.io/proxy-body-size: "0"
+```
+So now our config map should look like this
+```
+---
+apiVersion: v1
+data:
+  allow-snippet-annotations: "false"
+kind: ConfigMap
+metadata:
+  annotations:
+    allow-snippet-annotations: "true"
+    enable-underscores-in-headers: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0" 
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.9.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+---
 ```
 
 Now apply the deployment
