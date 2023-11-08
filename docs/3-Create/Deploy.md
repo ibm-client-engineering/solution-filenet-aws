@@ -448,7 +448,7 @@ spec:
                 name: postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-data
             - mountPath: /pgsqldata
               name: postgres-tablespaces
       volumes:
@@ -563,16 +563,16 @@ GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 
 ## Deploy Operator
 
-Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.6.2**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.7.1**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
 ```
-wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.6.2/ibm-cp-fncm-case-1.6.2.tgz
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
 ```
 
 Extract the case file
 
 ```
-tar zxvf ibm-cp-fncm-case-1.6.2.tgz
+tar zxvf ibm-cp-fncm-case-1.7.1.tgz
 ```
 
 Change into the operator directory and extract the container samples file
@@ -580,7 +580,7 @@ Change into the operator directory and extract the container samples file
 ```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
 
-tar xvf container-samples-5.5.10.tar
+tar xvf container-samples-5.5.11.tar
 ```
 
 ### Scripted Operator deployment
