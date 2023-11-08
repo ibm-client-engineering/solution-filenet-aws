@@ -1478,7 +1478,7 @@ The following step is only required if you did not install the FileNet operator.
 
 Create a shared PVC
 
-This PVC is needed for jdbc drivers.
+This PVC is needed for jdbc drivers. You only need the `operator-shared-pvc` if it hasn't already been created by the FileNet operator. But you will need `cp4a-shared-log-pvc`. Make sure to edit accordingly to reflect your storage class.
 
 ```
 apiVersion: v1
@@ -1526,7 +1526,7 @@ kubectl create -f descriptors/operator-shared-pvc.yaml
 
 If your cluster does not already have this secret `admin.registrykey` this needs to be created.
 
-Typically this would point to the IBM Cloud Registry, but can be modified to point to private registries instead.
+Typically this would point to the IBM Cloud Registry, but can be modified to point to private registries instead. If the `ibm-entitlement-key` already exists in your namespace, just point it to that.
 
 ```
 imagePullSecrets:
@@ -1556,18 +1556,12 @@ Under the `ier-samples` repo, the following files need to be updated
 
 Modify the `image` parameter for containers (ansible and operator) and the `imagePullSecrets` name in `descriptors/operator.yaml` to a valid image registry URL. The value for `imagePullSecrets` should be the IBM Pull secret or the registry secret set for your private registry.
 
-Also update the tag to the latest ifix level for the operator.
+Also update the tag to the latest ifix level for the operator. As of this writing, it is `21.0.3-IF025`.
 ```
-      containers:
-        - name: operator
-          # Replace this with the built image name
-#          image: cp.icr.io/cp/cp4a/icp4a-operator@sha256:8c88f9268d06d1f8f86b572cfd0a481758f13ea2fb67011a473a1cc4a99523ac
-          image: cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
-  -    
-  -   
   - name: operator
        # Replace this with the built image name
-       image: "cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023"      
+               // highlight-next-line
+       image: "cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF025"      
  
  imagePullSecrets:
    - name: "admin.registrykey"
@@ -1603,7 +1597,7 @@ Make sure to set the following secret name in the CR:
 ```
 This is important if you've already installed the FileNet operator in the cluster.
 
-Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry.
+Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry. Also make sure the correct image tag is set. As of this writing it is `ga-5218-if004-ier-2301-if003`.
 
 `ier_cr_full.yaml`
 ```
@@ -1685,7 +1679,8 @@ spec:
       
       image:
         repository: cp.icr.io/cp/cp4a/ier/ier
-        tag: ga-5218-ier-if005
+        // highlight-next-line
+        tag: ga-5218-if004-ier-2301-if003
 #        tag: ga-5217-ier-if012
         pull_policy: IfNotPresent
       ier_secret_name: ibm-fncm-secret

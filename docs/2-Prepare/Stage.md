@@ -5,15 +5,6 @@ title: Stage
 ---
 # Stage
 
-## IBM Trial License
-
-In order to use IBM Sterling B2Bi in your environment, you will require IBM licensing. Follow these steps.
-
-1. Using your IBM ID, submit for SFG trial request using: https://www.ibm.com/account/reg/us-en/signup?formid=urx-51433
-
-2. Use the access token for IBM Entitled Registry from Step 1 to pull and stage images (in their internal image repository, if necessary).
-
-
 ## Pre-Requisites
 
 - Minimum Requirements
