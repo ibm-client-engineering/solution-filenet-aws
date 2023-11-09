@@ -564,7 +564,33 @@ service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
 service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 ```
 
-Apply the deployment
+Also search for the following configmap entry in the deployment file:
+
+```
+---
+apiVersion: v1
+data:
+  allow-snippet-annotations: "false"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.9.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+---
+```
+We want to add the following annotations:
+
+```
+allow-snippet-annotations: "true"
+enable-underscores-in-headers: "true"
+```
+
+Now apply the deployment
 ```bash
 kubectl apply -f nginx-deploy.yaml
 ```
