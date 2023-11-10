@@ -2,11 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</id>
     <title>IBM Client Engineering Blog</title>
-    <updated>2023-11-02T00:00:00.000Z</updated>
+    <updated>2023-11-09T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog"/>
     <subtitle>IBM Client Engineering Blog</subtitle>
     <icon>https://ibm-client-engineering.github.io/solution-filenet-aws/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 34 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34"/>
+        <updated>2023-11-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 33 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33"/>
+        <updated>2023-11-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 32 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32"/>
+        <updated>2023-11-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 31 🛫]]></title>
         <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31</id>
