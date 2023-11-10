@@ -1419,12 +1419,17 @@ kubectl apply -f ibm_fncm_cr_production.yaml
 
 :::infowarning
 
-When upgrading FileNet, its possible that Navigator can become inaccessible. This is a result of FileNet defaulting to a different port number. This can be found in the CR under the following section:
+As of 5.5.11, the `add_repo_ce_wsi_url` was updated in the default CR shipped with that case. It no longer uses `http` for access and now uses `https`. So this must be taken into account if you are using an older CR that you've updated:
+
 `navigator_configuration.initialize_configuration.ic_icn_init_info.icn_repos`
+```
+ add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"
+```
+Would now be
+```
+add_repo_ce_wsi_url: "https://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9443/wsi/FNCEWS40MTOM/"
+```
 
-In this section you should see the following entry for the Navigator URL and port. Make sure this is the correct port number.
-
- ```add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"```
 :::
 
 ### Secret menu items
