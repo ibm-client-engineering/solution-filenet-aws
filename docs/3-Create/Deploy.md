@@ -1417,6 +1417,16 @@ Now apply your updated CR to the cluster:
 kubectl apply -f ibm_fncm_cr_production.yaml
 ```
 
+:::infowarning
+
+When upgrading FileNet, its possible that Navigator can become inaccessible. This is a result of FileNet defaulting to a different port number. This can be found in the CR under the following section:
+`navigator_configuration.initialize_configuration.ic_icn_init_info.icn_repos`
+
+In this section you should see the following entry for the Navigator URL and port. Make sure this is the correct port number.
+
+ ```add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"```
+:::
+
 ### Secret menu items
 
 :::info
