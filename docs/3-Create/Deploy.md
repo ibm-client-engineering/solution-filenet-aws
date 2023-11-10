@@ -565,11 +565,7 @@ GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 
 Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.7.1**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
-<<<<<<< HEAD
-```
-=======
 ```tsx
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
 ```
 
@@ -647,10 +643,7 @@ If your cluster has resource limits required via cluster policy, you will need t
             capabilities:
               drop:
               - ALL
-<<<<<<< HEAD
-=======
         // highlight-start
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
           resources:
             limits:
               cpu: "1"
@@ -658,10 +651,7 @@ If your cluster has resource limits required via cluster policy, you will need t
             requests:
               cpu: "500m"
               memory: "512Mi"
-<<<<<<< HEAD
-=======
         // highlight-end
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 
 ```
 :::
@@ -1496,20 +1486,6 @@ git clone git@github.com:ibm-ecm/ier-samples.git
 ```
 
 ### Create the `ibm-ier-secret`
-<<<<<<< HEAD
-
-If deploying IER, create the following
-```
-kubectl create secret generic ibm-ier-secret \
---from-literal=appLoginUsername="cpadmin" \
---from-literal=appLoginPassword="Password" \
---from-literal=keystorePassword="p@ssw0rd" \
---from-literal=ltpaPassword="p@ssw0rd"
-```
-
-### Updating CR for IER deployment
-
-=======
 If deploying IER, create the following
  ```tsx
 kubectl create secret generic ibm-ier-secret \
@@ -1519,7 +1495,6 @@ kubectl create secret generic ibm-ier-secret \
 --from-literal=ltpaPassword="p@ssw0rd"
 ```
 ### Updating CR for IER deployment
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 
 The following is an example CR for the IER operator.
 
@@ -1544,7 +1519,6 @@ In the filenet CR you used to deploy the cluster, make the following changes and
     ier: true
     // highlight-end
 ```
-<<<<<<< HEAD
      ier_secret_name: ibm-ier-secret
 ```
 This is important if you've already installed the FileNet operator in the cluster.
@@ -1566,8 +1540,6 @@ In the filenet CR you used to deploy the cluster, make the following changes and
     // highlight-end
 
 ```
-=======
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 After the `navigator_configuration` entry in the CR, add the following section
 ```yaml
   ier_configuration:
@@ -1583,11 +1555,7 @@ After the `navigator_configuration` entry in the CR, add the following section
       // highlight-end
         tag: ga-5218-ier-if005
         pull_policy: IfNotPresent
-<<<<<<< HEAD
-      ier_secret_name: ibm-fncm-secret
-=======
       ier_secret_name: ibm-ier-secret
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
       log:
         format: json
       resources:
@@ -1621,16 +1589,6 @@ After the `navigator_configuration` entry in the CR, add the following section
 ```
 
 Apply the CR after making these updates
-<<<<<<< HEAD
-
-```bash
-kubectl apply -f ibm_fncm_cr_production.yaml
-```
-
-Wait for about five minutes or so and then check to see if the pod has spun up.
-
-```
-=======
  
 ```bash
 kubectl apply -f ibm_fncm_cr_production.yaml
@@ -1639,7 +1597,6 @@ kubectl apply -f ibm_fncm_cr_production.yaml
 Wait for about five minutes or so and then check to see if the pod has spun up.
  
 ```tsx
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 kubectl get pods
 NAME                                          READY   STATUS    RESTARTS   AGE
 fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
@@ -1654,9 +1611,5 @@ fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
 fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
 ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
-<<<<<<< HEAD
 
 ```
-=======
-```
->>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
