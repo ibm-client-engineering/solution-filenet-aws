@@ -23,80 +23,83 @@ title: Integrate
 ##### Setup Steps
 
 ###### Creating a Workflow System and Connection Point within Filenet
-    1. Open up and log into the acce console.
-    2. Open the Object Store in which you want to store Workflow data.
-    3. Click on _Administrative->Workflow_ System.
-    4. Click New.
-    5. Under _Table Spaces -> Data_, enter the tablespace where you want workflow files to be stored. &emsp;&emsp; _Note: see [Create Databases](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#create-databases) for the tablespaces configuration, including their names._
-    6. Under _Workflow System Security Groups -> Administration Group_, enter the admin group you want to assign to the Workflow System. These two can be found in your filenet configuration within the CR. &emsp;&emsp; _Note: see [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#deploying-cr). The admin group is specified under_ `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
-    7. Continue through the steps, adding Connection Point and Isolated Region names and enter the _Isolated Region Number_ (1 if it’s your first in this object store, and so on).
-    8. If you wish, you can _Specify Isolated Region Table Space (Optional)_.
-    9. Review all the details and click _Finish_.
-    10. Navigate to _Workflow System->Connection Points_ to confirm that it was successfully created:
+1. Open up and log into the acce console.
+2. Open the Object Store in which you want to store Workflow data.
+3. Click on _Administrative->Workflow_ System.
+4. Click New.
+5. Under _Table Spaces -> Data_, enter the tablespace where you want workflow files to be stored. &emsp;&emsp; _Note: see [Create Databases](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#create-databases) for the tablespaces configuration, including their names._
+6. Under _Workflow System Security Groups -> Administration Group_, enter the admin group you want to assign to the Workflow System. These two can be found in your filenet configuration within the CR. &emsp;&emsp; _Note: see [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#deploying-cr). The admin group is specified under_ `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
+7. Continue through the steps, adding Connection Point and Isolated Region names and enter the _Isolated Region Number_ (1 if it’s your first in this object store, and so on).
+8. If you wish, you can _Specify Isolated Region Table Space (Optional)_.
+9. Review all the details and click _Finish_.
+10. Navigate to _Workflow System->Connection Points_ to confirm that it was successfully created:
 
-    ![](https://media.github.ibm.com/user/436100/files/9fa61a24-ae0d-4cf1-8b49-ca529857c829)
+![](https://media.github.ibm.com/user/436100/files/9fa61a24-ae0d-4cf1-8b49-ca529857c829)
 
 ###### SSL Configuration (adding the site certificate into the jre keystore)
-    1. Launch [Google Chrome](https://www.google.com/chrome/)
-    2. Navigate to the ACCE console
-    3. Click on the following- 
-    
-    - The _Lock Icon_ on the left side of the url:
-    ![](https://media.github.ibm.com/user/436100/files/dfb9f7d5-12b9-42ee-8ced-376e2772ac48)
+1. Launch [Google Chrome](https://www.google.com/chrome/)
+2. Navigate to the ACCE console
+3. Click on the following- 
 
-    - _Connection is secure_:
-    ![](https://media.github.ibm.com/user/436100/files/e0855502-5992-4a16-9e66-e061f298a4e6)
+- The _Lock Icon_ on the left side of the url:
 
-    - _Certificate is valid_, _Details_ and then _Export..._:
-    ![](https://media.github.ibm.com/user/436100/files/857a7863-5d60-4822-acea-b7d111065669)
+![](https://media.github.ibm.com/user/436100/files/dfb9f7d5-12b9-42ee-8ced-376e2772ac48)
 
-    4. Export **full certificate chain** (usually the second option in Save as) and **change extension to .crt** instead of .cert:
+- _Connection is secure_:
 
-    ![](https://media.github.ibm.com/user/436100/files/0b848a56-7cd9-43bb-b44c-32dc49fe35b5)
+![](https://media.github.ibm.com/user/436100/files/e0855502-5992-4a16-9e66-e061f298a4e6)
 
-    5. Run the appropriate command to import it into your JRE keystore (keystore tool is found in the JAVA HOME directory under the bin folder)
-      - Windows:
-    `..\..\bin\keytool -import -keystore ..\..\lib\security\cacerts -file cpe_websphere_ssl_cert.crt`
-      - Mac/Linux:
-    `../../bin/keytool -import -keystore ../../lib/security/cacerts -file cpe_websphere_ssl_cert.crt`
-    6. When prompted with _Trust this certificate? [no]_, respond with _yes_
-    7. You should see an `added to keystore` message
+- _Certificate is valid_, _Details_ and then _Export..._:
 
-:::note
-    _Note:_
-    If you are importing a key again, you may encounter the following error: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    `keytool error: java.lang.Exception: Certificate not imported, alias <mykey> already exists`
+![](https://media.github.ibm.com/user/436100/files/857a7863-5d60-4822-acea-b7d111065669)
 
-    In which case you must delete the old key before importing the new one. Do so by running the following command with administrator priviledges (On Windows, run cmd as an Administrator. On Mac/Linux prepend `sudo` to the following command):&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    `keytool -delete -keystore ../lib/security/cacerts -alias mykey`
-:::
+4. Export **full certificate chain** (usually the second option in Save as) and **change extension to .crt** instead of .cert:
+
+![](https://media.github.ibm.com/user/436100/files/0b848a56-7cd9-43bb-b44c-32dc49fe35b5)
+
+5. Run the appropriate command to import it into your JRE keystore (keystore tool is found in the JAVA HOME directory under the bin folder)
+  - Windows:
+`..\..\bin\keytool -import -keystore ..\..\lib\security\cacerts -file cpe_websphere_ssl_cert.crt`
+  - Mac/Linux:
+`../../bin/keytool -import -keystore ../../lib/security/cacerts -file cpe_websphere_ssl_cert.crt`
+6. When prompted with _Trust this certificate? [no]_, respond with _yes_
+7. You should see an `added to keystore` message
+
+_Note:_
+If you are importing a key again, you may encounter the following error: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+`keytool error: java.lang.Exception: Certificate not imported, alias <mykey> already exists`
+
+In which case you must delete the old key before importing the new one. Do so by running the following command with administrator priviledges (On Windows, run cmd as an Administrator. On Mac/Linux prepend `sudo` to the following command):
+
+    keytool -delete -keystore ../lib/security/cacerts -alias mykey
 
 ###### Configuring and Launching the Process Designer
-    1. Unzip the Process Designer zip file and all zip files within it for your platform. Beware that on Windows, unzipping the folders leads to a slightly different folder structure by default- there will be two peclient folders, one inside another. This can be 'fixed' by moving the one with the content into its parent.
-    2. Navigate to: `<unzipped_folder>/cpetools-<platform>/peclient/`
-    3. Open this folder in any text editor or IDE (ex. code .).
-    4. Open:
-      - `shell/cpetoolenv.sh` (Linux/Mac)
-      - `batch/cpetoolenv.bat` (Windows)
-    4. Set the `PE_CLIENT_INSTALL_DIR` to the full path of the `cpe_tools-<platform>` directory, i.e., `/Users/…/<unzipped_folder>/cpetools-linux`, beware of any spaces in the folder path.
-    5. Open `config/WcmApiConfig.properties`.
-    6. Set the `RemoteServerUrl`
-      - If you access the acce console at `<host_link>/acce/`, then confirm you can access the ping page at `<host_link>/peengine/IOR/ping`:
-      ![](https://media.github.ibm.com/user/436100/files/b287ddce-8d76-44a8-a848-b01e06184755)
+1. Unzip the Process Designer zip file and all zip files within it for your platform. Beware that on Windows, unzipping the folders leads to a slightly different folder structure by default- there will be two peclient folders, one inside another. This can be 'fixed' by moving the one with the content into its parent.
+2. Navigate to: `<unzipped_folder>/cpetools-<platform>/peclient/`
+3. Open this folder in any text editor or IDE (ex. code .).
+4. Open:
+  - `shell/cpetoolenv.sh` (Linux/Mac)
+  - `batch/cpetoolenv.bat` (Windows)
+4. Set the `PE_CLIENT_INSTALL_DIR` to the full path of the `cpe_tools-<platform>` directory, i.e., `/Users/…/<unzipped_folder>/cpetools-linux`, beware of any spaces in the folder path.
+5. Open `config/WcmApiConfig.properties`.
+6. Set the `RemoteServerUrl`
+  - If you access the acce console at `<host_link>/acce/`, then confirm you can access the ping page at `<host_link>/peengine/IOR/ping`:
+    
+  ![](https://media.github.ibm.com/user/436100/files/b287ddce-8d76-44a8-a848-b01e06184755)
 
-      - If you can get to this page, then your `RemoteServerUrl` is likely to be `<host_link>/wsi/FNCEWS40TOM`. Check that you can also reach this page. If successful, it should display an xml document like so:
-      ![](https://media.github.ibm.com/user/436100/files/ff515d36-8ec7-4c9f-b7c9-0a3bcbf02907)
-      
+  - If you can get to this page, then your `RemoteServerUrl` is likely to be `<host_link>/wsi/FNCEWS40TOM`. Check that you can also reach this page. If successful, it should display an xml document like so:
+  ![](https://media.github.ibm.com/user/436100/files/ff515d36-8ec7-4c9f-b7c9-0a3bcbf02907)
+  
 
-    7. Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).
-    8. Navigate (cd) to:
-      - Windows: `<unzipped_folder>/cpetools-win/peclient/batch`
-      - Mac/Linux: `<unzipped_folder>/cpetools-linux/peclient/shell`
-    9. Run:
-      - Windows: `pedesigner.bat <connection_point>`
-      - Mac/Linux: `sh ./pedesigner.sh <connection_point>`
-    10. Enter credentials used to login to the ACCE console.
-    11. Process Designer should open up!
+7. Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).
+8. Navigate (cd) to:
+  - Windows: `<unzipped_folder>/cpetools-win/peclient/batch`
+  - Mac/Linux: `<unzipped_folder>/cpetools-linux/peclient/shell`
+9. Run:
+  - Windows: `pedesigner.bat <connection_point>`
+  - Mac/Linux: `sh ./pedesigner.sh <connection_point>`
+10. Enter credentials used to login to the ACCE console.
+11. Process Designer should open up!
 
 #### Enabling Workflow Tab on Content Navigator
 
@@ -149,21 +152,27 @@ Workflow download:
 #### Using Web Services
 
 - In order to enable pasting wsdl partner links, navigate to _View -> Configuration_:
+
 ![](https://media.github.ibm.com/user/436100/files/db04cbaf-6cdd-439e-9310-38b6e2d594b6)
 
-- Right click on the connection point and click _Properties..._: 
+- Right click on the connection point and click _Properties..._:
+  
 ![](https://media.github.ibm.com/user/436100/files/bb20e3ed-ad22-4927-9bac-531eec0f55e1)
 
 - Under _Web Services_, check _Enable Process Designer to enter WSDL links without browsing for Web services_:
+  
 ![](https://media.github.ibm.com/user/436100/files/95c4e89d-fabc-41d0-85ec-a51fe141a1b5)
 
-- Now you can paste links in _Workflow Properties_ under _Web Services_ in the _Partner Links_ section: 
+- Now you can paste links in _Workflow Properties_ under _Web Services_ in the _Partner Links_ section:
+  
 ![](https://media.github.ibm.com/user/436100/files/29c67c90-2903-4f98-92cb-8a3d0ad3dd26)
 
 - Next, open up the Palette Menu and check _Web Services Palette_:
+  
 ![](https://media.github.ibm.com/user/436100/files/7a174e99-650e-4a98-8860-f368ba4eb496)
 
 - Now you can drag in _Invoke_ and select the created _Partner Link_ as well as the desired _Operation_:
+  
 ![](https://media.github.ibm.com/user/436100/files/719a4799-369b-4e6b-b09a-ec76c3e24a78)
 
 Note that for web services that require SSL (ex. _https://..._), you must add a secret containing the certificate to the trusted_certificate_list in the CR.
@@ -183,7 +192,8 @@ If desired, you can create a subclass of an exisitng one to use as a more specif
 - Enter a name and description:
 ![](https://media.github.ibm.com/user/436100/files/6a4aad75-72ae-46c0-8d5c-04c90fb04096)
 
-- Click _Finish_:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+- Click _Finish_:
+  
 ![](https://media.github.ibm.com/user/436100/files/cc0ab9b9-380f-4701-91ec-387615d123f2)
 
 ##### Creating the Subscription
@@ -211,7 +221,8 @@ If desired, you can create a subclass of an exisitng one to use as a more specif
 - Ensure the subscription is enabled and if you would like, include subclasses:
 ![](https://media.github.ibm.com/user/436100/files/72fdeb48-fbf6-40d8-935f-1c4fdae3ae7c)
 
-- Review the details and click _Finish_:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+- Review the details and click _Finish_:
+  
 ![](https://media.github.ibm.com/user/436100/files/73330507-6e63-4524-a224-45e5cfb928ec)
 ![](https://media.github.ibm.com/user/436100/files/bb803613-3dd6-4134-8272-c40790343a2d)
 
@@ -220,12 +231,14 @@ If desired, you can create a subclass of an exisitng one to use as a more specif
 - Under _Workflow Properties_ in the _Attachments_ tab, create an attachment by double clicking under the _Name_ field, typing a name and pressing Enter:
 ![](https://media.github.ibm.com/user/436100/files/75ca2f4b-f3f5-4aec-ab24-f5c05553aed1)
 
-- On the right sidebar, mark this as the _Initiating attachment_ by clicking the following icon, which should then appear left of the attachment name:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+- On the right sidebar, mark this as the _Initiating attachment_ by clicking the following icon, which should then appear left of the attachment name:
+  
 ![](https://media.github.ibm.com/user/436100/files/c9a35503-02b8-44c1-bec0-7da6611ba876)
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 ![](https://media.github.ibm.com/user/436100/files/33d603f9-6313-4a6f-9036-10d4ad9e82e2)
 
 - From the palette menu, drag in a component node:
+  
 ![](https://media.github.ibm.com/user/436100/files/83dabcd3-90e6-4dbb-b881-cbce049fb45f)
 
 - Configure this component by selecting an operation to extract information from the uploaded attachment, such as its given title, for example, which corresponds to symbolicPropName:
