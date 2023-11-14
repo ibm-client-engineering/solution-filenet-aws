@@ -565,7 +565,11 @@ GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 
 Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.7.1**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
+<<<<<<< HEAD
 ```
+=======
+```tsx
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
 ```
 
@@ -643,6 +647,10 @@ If your cluster has resource limits required via cluster policy, you will need t
             capabilities:
               drop:
               - ALL
+<<<<<<< HEAD
+=======
+        // highlight-start
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
           resources:
             limits:
               cpu: "1"
@@ -650,6 +658,10 @@ If your cluster has resource limits required via cluster policy, you will need t
             requests:
               cpu: "500m"
               memory: "512Mi"
+<<<<<<< HEAD
+=======
+        // highlight-end
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 
 ```
 :::
@@ -1436,16 +1448,31 @@ Wait for the operator to come back online after upgrading and completes its reco
 
 Once the operator has been upgraded, update your CR file to the latest image tags. You can also grab the latest CR from the case directory you extracted above:
 
-```
+```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/container-samples/descriptors/ibm_fncm_cr_production_FC_content.yaml
 
 ```
 
 Now apply your updated CR to the cluster:
 
-```
+```tsx
 kubectl apply -f ibm_fncm_cr_production.yaml
 ```
+
+:::infowarning
+
+As of 5.5.11, the `add_repo_ce_wsi_url` was updated in the default CR shipped with that case. It no longer uses `http` for access and now uses `https`. So this must be taken into account if you are using an older CR that you've updated:
+
+`navigator_configuration.initialize_configuration.ic_icn_init_info.icn_repos`
+```tsx
+ add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"
+```
+Would now be
+```tsx
+add_repo_ce_wsi_url: "https://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9443/wsi/FNCEWS40MTOM/"
+```
+
+:::
 
 ### Secret menu items
 
@@ -1469,6 +1496,7 @@ git clone git@github.com:ibm-ecm/ier-samples.git
 ```
 
 ### Create the `ibm-ier-secret`
+<<<<<<< HEAD
 
 If deploying IER, create the following
 ```
@@ -1481,11 +1509,42 @@ kubectl create secret generic ibm-ier-secret \
 
 ### Updating CR for IER deployment
 
+=======
+If deploying IER, create the following
+ ```tsx
+kubectl create secret generic ibm-ier-secret \
+--from-literal=appLoginUsername="cpadmin" \
+--from-literal=appLoginPassword="Password" \
+--from-literal=keystorePassword="p@ssw0rd" \
+--from-literal=ltpaPassword="p@ssw0rd"
+```
+### Updating CR for IER deployment
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 
 The following is an example CR for the IER operator.
 
 Make sure to set the following secret name in the CR:
+ ```tsx
+    ier_secret_name: ibm-ier-secret
+ ```
+
+Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry. Also make sure the correct image tag is set. As of this writing it is `ga-5218-if004-ier-2301-if003`.
+
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
+```tsx
+  content_optional_components:
+    cpe: true
+    graphql: true
+    cmis: false
+    css: false
+    es: false
+    tm: false
+    ban: true
+    // highlight-start
+    ier: true
+    // highlight-end
 ```
+<<<<<<< HEAD
      ier_secret_name: ibm-ier-secret
 ```
 This is important if you've already installed the FileNet operator in the cluster.
@@ -1507,6 +1566,8 @@ In the filenet CR you used to deploy the cluster, make the following changes and
     // highlight-end
 
 ```
+=======
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 After the `navigator_configuration` entry in the CR, add the following section
 ```yaml
   ier_configuration:
@@ -1515,7 +1576,6 @@ After the `navigator_configuration` entry in the CR, add the following section
       replica_count: 1
       ier_ext_tls_secret_name:
       ier_auth_ca_secret_name:
-      
       image:
       // highlight-start
       # This should point to whatever repo you staged the image in. Leave this as default if using IBM's registry
@@ -1523,13 +1583,16 @@ After the `navigator_configuration` entry in the CR, add the following section
       // highlight-end
         tag: ga-5218-ier-if005
         pull_policy: IfNotPresent
+<<<<<<< HEAD
       ier_secret_name: ibm-fncm-secret
+=======
+      ier_secret_name: ibm-ier-secret
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
       log:
         format: json
       resources:
         requests:
           cpu: 500m
-          memory: 512Mi
         limits:
           cpu: 1
           memory: 1536Mi
@@ -1544,7 +1607,6 @@ After the `navigator_configuration` entry in the CR, add the following section
       run_as_user: 
       datavolume:
         existing_pvc_for_ier_instance: ""
-        
       probe:
         readiness:
           initial_delay_seconds: 120
@@ -1559,6 +1621,7 @@ After the `navigator_configuration` entry in the CR, add the following section
 ```
 
 Apply the CR after making these updates
+<<<<<<< HEAD
 
 ```bash
 kubectl apply -f ibm_fncm_cr_production.yaml
@@ -1567,6 +1630,16 @@ kubectl apply -f ibm_fncm_cr_production.yaml
 Wait for about five minutes or so and then check to see if the pod has spun up.
 
 ```
+=======
+ 
+```bash
+kubectl apply -f ibm_fncm_cr_production.yaml
+```
+
+Wait for about five minutes or so and then check to see if the pod has spun up.
+ 
+```tsx
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
 kubectl get pods
 NAME                                          READY   STATUS    RESTARTS   AGE
 fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
@@ -1581,5 +1654,9 @@ fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
 fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
 ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
+<<<<<<< HEAD
 
 ```
+=======
+```
+>>>>>>> 7167196 (Updating IER deployment and other edits to Stage.md)
