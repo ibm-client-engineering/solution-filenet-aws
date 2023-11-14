@@ -1,0 +1,121 @@
+---
+id: solution-filenet-event-actions
+sidebar_position: 3
+title: Event Actions
+---
+
+# Event Actions
+
+## Slack Connector
+
+### Building and Pushing the Image
+
+#### Prerequisites
+- [Docker](https://www.docker.com/)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- A [Slack](https://slack.com/) account with admin access to a workspace
+- Clone the [filenet-slack-connector](https://github.ibm.com/TechnologyGarageUKI/filenet-slack-connector) repo
+
+#### Staging
+- Download the slack connector image by running: (or follow repo instructions to build the image w/ Docker)
+  - `curl -O https://publicimages.s3.us-east.cloud-object-storage.appdomain.cloud/slack-connector-ibm.tar.gz`
+- For the following steps, refer to [Pushing a Docker Image (Amazon)](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) as needed
+- Stage the image in your environment. One way to do this is Using *docker* & *aws cli*:
+  - `docker import /path/to/exampleimage.tgz`
+  - Retreive an authentication token & authenticate the docker client to your registry
+    - `aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com`
+  - If you haven't already, [create a repository in Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html#cli-create-repository):
+    - `aws ecr create-repository \
+      --repository-name my-repository \
+      --image-scanning-configuration scanOnPush=true \
+      --region region`
+  - Tag your image with the Amazon ECR registry
+    - `docker tag <local-image-id> aws_account_id.dkr.ecr.us-west-2.amazonaws.com/my-repository:tag`
+  - Push the image
+    -  `docker push aws_account_id.dkr.ecr.us-west-2.amazonaws.com/my-repository:tag`
+
+### Configure Slack App, Environment Variables
+
+#### Slack Setup
+- [Navigate](https://api.slack.com/apps?new_app=1) to create a new app ![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/631b2d58-abda-4ced-bf89-a72c5a27194d)
+- Once the app is created, open it (click on it) and go to *Incoming Webhooks*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/b9c85c5d-d77e-43f2-9b77-56c593155ffb)
+  - Activate incoming webhooks:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/4d194d14-eb67-4870-838e-395c80d045a4)
+  - Add one to your workspace:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/5fa104a4-432a-4b6b-b2e5-dd07a6043e81)  
+- Navigate to *OAuth & Permissions*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/f5b84bfd-0a88-4e6d-8779-30c63b841ebc)
+  - Copy the *Bot User OAuth Token*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/f62e6ee6-4145-4857-b484-f8a878a35117)
+- On the same page, add OAuth scopes for *incoming-webhook*, *chat:write* and *channels:read*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/6d8e90ce-15db-47cd-9260-9ae4cba0566b) 
+- Go to your slack channel and invite the bot to it:
+  - `/invite @BOT_NAME`
+
+#### Environment Variables
+- The yaml files are found under the k8s folder of your project directory
+  - secret.yaml
+    - paste the bot token into SLACK.TOKEN
+      - ex: `SLACK.TOKEN: "xoxb-5877962588738-5884133198226-8uBpNhurApo0kMZ0hMtHdmow"`
+    - Ensure the channel name (*SLACK.CHANNEL*) matches with what you have in Slack
+  - deployment.yaml
+    - ensure the image points to the image location in ecr:
+      ```
+      - name: slack-connector
+          image: >-
+            748107796891.dkr.ecr.us-east-1.amazonaws.com/slack-connector:latest
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+      ```
+  - service.yaml
+    - ensure the *ports* section is consistent with deployment.yaml and that all names match
+- update the configuration by running `kubectl apply -f k8s/<>.yaml` for each of the yaml files
+- use the updated configuration by deleting the pod
+  - run `kubectl get pod` and not the slack connector pod name
+  - run `kubectl delete pod <slack-connector-pod-name>`
+  - the pod will be brought back with the newly applied config 
+
+### Installing Event-Driven External Service Extensinons
+
+- [Insall addon](https://www.ibm.com/docs/en/filenet-p8-platform/5.5.x?topic=features-installing-add-feature-object-store) *5.5.4 Event-Driven External Service Invocation Extensions*
+
+### Create Event and Subscription
+
+- From the ACCE Console, select and Object Store and navigate to *Events, Actions, Processes -> Event Actions* and create a new Event Action
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/989a8942-173c-4e30-8302-945bb69955b4)
+
+  - Give it a name of your choice and under *Event Action Type Selection*, select *Webhook*
+  ![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/6c4386ee-d373-4ace-86a1-d57e9e8b021b)
+  - Under *Webhook Configurations*:
+    - set *External Event Receiver URL* to be `http://<image-name>:<port>/slack`
+      - ex: `http://slack-connector:8080/slack`
+    - set *External Event Receiver Registration Identifier* to be any name
+  - Click *Finish* to Create the new Event
+- Under *Data Design -> Classes -> Document*, click on *Actions -> New Class*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/facf4320-6dca-43fe-b0c9-f573641c52ac)
+  - Enter any names you would like and proceed through the final screen (click *Finish*)
+- Navigate to *Subscriptions* (also under *Events, Actions, Processes*) and create a New Subscription
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/78d1b378-b779-47e8-a058-a784fb72ffac)
+  - Under *Select Classes*, choose Document for the Class Type and your newly created class for the *Class*
+  ![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/2ab11b5b-876c-43b2-a99f-bef028dfb45e)
+  - For *Scope*, choose the *Applies to all objects of this class*
+  - Under *Select the Triggers*, select *Creation Event* and *Update Event*
+  - Under *Select an Event Action*, choose the Event Action you created in the previous step
+  - Choose default options for the rest and click *Finish*
+
+### Test the App (Trigger Event Action)
+
+- To Trigger the Event Action, Navigate to *Browse -> Root Folder* & create a new document
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/688bd10d-6375-4d70-8066-a8558c111804)
+- Under *Define New Document Objects*, be sure to select your newly created subclass for the *Class*
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/e294827e-0b5f-4e77-93f0-962b9f2ebc43)
+- Select any other options as you wish and click *Finish* to create the document
+- Under the *Root Folder -> Content*, select your newly created document
+- Click on *Properties* and modify one of them, for example, *Document Title*:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/15db8abe-e0f7-4996-b1a0-91e6b59a87c1)
+- Open your Slack Channel. You should see the bot posting about the triggered Webhook:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/95235964-fdf0-498e-a3f2-409a7dbf3eb5)

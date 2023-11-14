@@ -1,6 +1,6 @@
 {
-  "label": "Deploy",
-  "position": 1,
+  "label": "Create",
+  "position": 3,
   "collapsed": false,
   "link": {
     "type": "generated-index",
