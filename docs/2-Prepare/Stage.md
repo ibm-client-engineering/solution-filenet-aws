@@ -5,15 +5,6 @@ title: Stage
 ---
 # Stage
 
-## IBM Trial License
-
-In order to use IBM Sterling B2Bi in your environment, you will require IBM licensing. Follow these steps.
-
-1. Using your IBM ID, submit for SFG trial request using: https://www.ibm.com/account/reg/us-en/signup?formid=urx-51433
-
-2. Use the access token for IBM Entitled Registry from Step 1 to pull and stage images (in their internal image repository, if necessary).
-
-
 ## Pre-Requisites
 
 - Minimum Requirements
@@ -566,7 +557,7 @@ service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 
 Also search for the following configmap entry in the deployment file:
 
-```
+```tsx
 ---
 apiVersion: v1
 data:
@@ -585,9 +576,32 @@ metadata:
 ```
 We want to add the following annotations:
 
-```
+```tsx
 allow-snippet-annotations: "true"
 enable-underscores-in-headers: "true"
+nginx.ingress.kubernetes.io/proxy-body-size: "0"
+```
+So now our config map should look like this
+```tsx
+---
+apiVersion: v1
+data:
+  allow-snippet-annotations: "false"
+kind: ConfigMap
+metadata:
+  annotations:
+    allow-snippet-annotations: "true"
+    enable-underscores-in-headers: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0" 
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.9.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+---
 ```
 
 Now apply the deployment
@@ -693,29 +707,18 @@ On your local host with docker installed, run the following pull commands:
 
 ```
 docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
-docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001
-docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001
-docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103
-docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102
-docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
-docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
 docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102
-docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
 docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
-docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
 docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
-docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
-docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003
-docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64
 docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
 ```
 
-If including the IER operator and IER container, also pull those images:
+If including the IER container, also pull that image:
 
 :::note
 
@@ -724,7 +727,6 @@ As of this writing the latest IER version is [5.2.1.8-IER-IF005](https://www.ibm
 :::
 
 ```
-docker pull cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
 docker pull cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 
@@ -763,7 +765,6 @@ docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1 $LOCAL_REGISTRY/cpopen
 
 If including IER
 ```
-docker tag cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023 $LOCAL_REGISTRY/cp/cp4a/icp4a-operator:21.0.3-IF023
 docker tag cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005 $LOCAL_REGISTRY/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 

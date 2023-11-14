@@ -1,3 +1,9 @@
+---
+id: solution-lessons
+sidebar_position: 1
+title: Lessons Learned
+---
+
 Throughout our journey on this project, the team encountered many obstacles. This section will outline any errors, blockers, and setbacks the team faced. We will discuss how these blockers were identified and resolved. 
 
 ### **DynaTrace and FileNet**
@@ -38,7 +44,7 @@ Dynatrace requires write access to the filesystem of the host or container where
 
 Earlier versions of FileNet have the filesystem set to read only by default. However, with the release of FileNet Version 5.5.11, FileNet deployments now have the option to set the filesystem to read/write. 
 
-To accomplish this, we needed to update FileNet version 5.5.11 and then set the filesystem to read/write. For instructions on updating, please reference [Upgrading FNCM In The Cluster](/solution-filenet-aws/Create/solution-deploy#upgrading-fncm-in-the-cluster).
+To accomplish this, we needed to update FileNet version 5.5.11 and then set the filesystem to read/write. For instructions on updating, please reference the upgrade section.
 
 Once FileNet is upgraded to 5.5.11, we can enable the read/write file system in the CR with the following line:
 ```
@@ -48,6 +54,6 @@ shared_configuration:
 
 Now that the filesystem has been set to read/write, DynaTrace will no longer crash the pods.
 
-####  **Summary**
+#### Summary
 
-DynaTrace requires a read/wite filesystem to operate correctly. FileNet has a read-only filesystem by default. The team upgraded to FileNet version 5.5.11 that has an option to disable read-only filesystem. This fixed the crashing pods. 
+DynaTrace requires a read/wite filesystem to operate correctly. FileNet has a read-only filesystem by default. The team upgraded to FileNet version 5.5.11 that has an option to disable read-only filesystem. This fixed the crashing pods.
