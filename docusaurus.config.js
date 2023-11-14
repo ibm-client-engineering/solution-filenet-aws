@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer").themes.github;
-const darkCodeTheme = require("prism-react-renderer").themes.dracula;
+const lightCodeTheme = require("prism-react-renderer").themes.oceanicNext;
+const darkCodeTheme = require("prism-react-renderer").themes.oceanicNext;
 
 async function createconfig() {
   const { remarkKroki } = await import("remark-kroki");
@@ -18,10 +18,10 @@ async function createconfig() {
     favicon: "img/favicon.ico",
 
     // Set the production url of your site here
-    url: "https://ibm-client-engineering.github.io",
+    url: "https://filenet-eks.thinkforward.work/",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: "/solution-filenet-aws/",
+    baseUrl: "/",
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
@@ -94,7 +94,7 @@ async function createconfig() {
               `https://github.com/ibm-client-engineering/solution-filenet-aws/edit/main/${blogDirPath}/${blogPath}`,
             blogTitle: "Journey Log",
             blogSidebarTitle: "All our logs",
-            postsPerPage: 10,
+            postsPerPage: 20,
             remarkPlugins: [],
             rehypePlugins: [],
           },

@@ -54,6 +54,6 @@ shared_configuration:
 
 Now that the filesystem has been set to read/write, DynaTrace will no longer crash the pods.
 
-####  **Summary**
+#### Summary
 
-DynaTrace requires a read/wite filesystem to operate correctly. FileNet has a read-only filesystem by default. The team upgraded to FileNet version 5.5.11 that has an option to disable read-only filesystem. This fixed the crashing pods. 
+DynaTrace requires a read/wite filesystem to operate correctly. FileNet has a read-only filesystem by default. The team upgraded to FileNet version 5.5.11 that has an option to disable read-only filesystem. This fixed the crashing pods.
