@@ -122,7 +122,9 @@ shared_configuration:
   ## The deployment context as selected. 
   sc_deployment_context: FNCM
   show_sensitive_log: true
-  no_log: false sc_ingress_enable: true sc_service_type: NodePort
+  no_log: false 
+  sc_ingress_enable: true 
+  sc_service_type: NodePort
   sc_deployment_hostname_suffix: 
   sc_ingress_tis_secret_name: "filenet-poc-tls"
   sc_ingress_annotations:
