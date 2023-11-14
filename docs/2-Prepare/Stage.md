@@ -729,7 +729,7 @@ docker pull icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64
 docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
 ```
 
-If including the IER operator and IER container, also pull those images:
+If including the IER container, also pull that image:
 
 :::note
 
@@ -738,7 +738,6 @@ As of this writing the latest IER version is [5.2.1.8-IER-IF005](https://www.ibm
 :::
 
 ```
-docker pull cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
 docker pull cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 
@@ -777,7 +776,6 @@ docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1 $LOCAL_REGISTRY/cpopen
 
 If including IER
 ```
-docker tag cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023 $LOCAL_REGISTRY/cp/cp4a/icp4a-operator:21.0.3-IF023
 docker tag cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005 $LOCAL_REGISTRY/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 
@@ -809,7 +807,6 @@ docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
 
 If including IER
 ```
-docker push $LOCAL_REGISTRY/cp/cp4a/icp4a-operator:21.0.3-IF023
 docker push $LOCAL_REGISTRY/cp/cp4a/ier/ier:ga-5218-ier-if005
 ```
 
