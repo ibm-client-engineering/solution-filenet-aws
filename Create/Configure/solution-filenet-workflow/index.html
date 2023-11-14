@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Create/Configure/solution-filenet-workflow" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">Filenet Workflow | IBM Client Engineering</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://ibm-client-engineering.github.io/solution-filenet-aws/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://ibm-client-engineering.github.io/solution-filenet-aws/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Configure/solution-filenet-workflow"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Filenet Workflow | IBM Client Engineering"><meta data-rh="true" name="description" content="Workflows"><meta data-rh="true" property="og:description" content="Workflows"><link data-rh="true" rel="icon" href="/solution-filenet-aws/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Configure/solution-filenet-workflow"><link data-rh="true" rel="alternate" href="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Configure/solution-filenet-workflow" hreflang="en"><link data-rh="true" rel="alternate" href="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Configure/solution-filenet-workflow" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/solution-filenet-aws/blog/rss.xml" title="IBM Client Engineering RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/solution-filenet-aws/blog/atom.xml" title="IBM Client Engineering Atom Feed">
+
+
+
+
+
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB0XWXF3GE"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-GB0XWXF3GE",{anonymize_ip:!0})</script><link rel="stylesheet" href="/solution-filenet-aws/assets/css/styles.abb5c2b4.css">
+<script src="/solution-filenet-aws/assets/js/runtime~main.5abe47e1.js" defer="defer"></script>
+<script src="/solution-filenet-aws/assets/js/main.bf231d35.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard" data-theme="light">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/solution-filenet-aws/"><div class="navbar__logo"><img src="/solution-filenet-aws/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE" height="200" width="200"><img src="/solution-filenet-aws/img/logo-dark.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU" height="200" width="200"></div><b class="navbar__title text--truncate">| IBM FileNet on AWS EKS</b></a></div><div class="navbar__items navbar__items--right"><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/solution-filenet-aws/">Flight Path</a><a class="navbar__item navbar__link" href="/solution-filenet-aws/blog">Flight Logs</a><a href="https://github.com/ibm-client-engineering/solution-filenet-aws" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="dsla-search-wrapper"><div class="dsla-search-field" data-tags="default,docs-default-current"></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/solution-filenet-aws/">Flight Path</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="true" href="/solution-filenet-aws/category/innovate">Innovate</a><button aria-label="Collapse sidebar category &#x27;Innovate&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Innovate/define">Define</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Innovate/refine">Refine</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Innovate/architect">Architect</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="true" href="/solution-filenet-aws/category/prepare">Prepare</a><button aria-label="Collapse sidebar category &#x27;Prepare&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Prepare/learn">Learn</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Prepare/organize">Organize</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Prepare/stage">Stage</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/solution-filenet-aws/category/create">Create</a><button aria-label="Collapse sidebar category &#x27;Create&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="true" tabindex="0" href="/solution-filenet-aws/category/deploy">Deploy</a><button aria-label="Collapse sidebar category &#x27;Deploy&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Deploy/solution-deploy-openldap">OpenLDAP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Deploy/solution-deploy-postgres">Postgres</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Deploy/solution-deploy-operator">FileNet Operator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Deploy/solution-deploy-ier">IBM Enterprise Records</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/solution-filenet-aws/category/configure">Configure</a><button aria-label="Collapse sidebar category &#x27;Configure&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/solution-filenet-aws/Create/Configure/solution-filenet-workflow">Filenet Workflow</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Configure/solution-filenet-async-replication">Content Replication</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Configure/solution-filenet-event-actions">Event Actions</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="true" tabindex="0" href="/solution-filenet-aws/category/upgrade">Upgrade</a><button aria-label="Collapse sidebar category &#x27;Upgrade&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/Upgrade/">Upgrade</a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/solution-filenet-aws/Create/solution-automate">Automate</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/solution-filenet-aws/category/transition">Transition</a><button aria-label="Expand sidebar category &#x27;Transition&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/solution-filenet-aws/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/solution-filenet-aws/category/create"><span itemprop="name">Create</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/solution-filenet-aws/category/configure"><span itemprop="name">Configure</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Filenet Workflow</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Filenet Workflow</h1></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="workflows">Workflows<a href="#workflows" class="hash-link" aria-label="Direct link to Workflows" title="Direct link to Workflows">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="setup-components">Setup Components<a href="#setup-components" class="hash-link" aria-label="Direct link to Setup Components" title="Direct link to Setup Components">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="standalone-process-designer">Standalone Process Designer<a href="#standalone-process-designer" class="hash-link" aria-label="Direct link to Standalone Process Designer" title="Direct link to Standalone Process Designer">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="version-info">Version info<a href="#version-info" class="hash-link" aria-label="Direct link to Version info" title="Direct link to Version info">​</a></h5>
+<ul>
+<li>IBM Content Platform Engine - 5.5.11.0</li>
+<li>IBM Content Navigator 3.0.14</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites">​</a></h5>
+<ul>
+<li>A <a href="https://www.java.com/en/download/" target="_blank" rel="noopener noreferrer">Java Runtime Environment</a> (JRE 1.8 or newer)</li>
+<li><a href="https://www.ibm.com/docs/en/b2b-integrator/6.0.2?topic=installation-setting-java-variables" target="_blank" rel="noopener noreferrer">Add Java to PATH</a></li>
+<li>Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the part number <code>M0CTDML</code></li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="setup-steps">Setup Steps<a href="#setup-steps" class="hash-link" aria-label="Direct link to Setup Steps" title="Direct link to Setup Steps">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="creating-a-workflow-system-and-connection-point-within-filenet">Creating a Workflow System and Connection Point within Filenet<a href="#creating-a-workflow-system-and-connection-point-within-filenet" class="hash-link" aria-label="Direct link to Creating a Workflow System and Connection Point within Filenet" title="Direct link to Creating a Workflow System and Connection Point within Filenet">​</a></h6>
+<ol>
+<li>Open up and log into the acce console.</li>
+<li>Open the Object Store in which you want to store Workflow data.</li>
+<li>Click on <em>Administrative-&gt;Workflow</em> System.</li>
+<li>Click New.</li>
+<li>Under <em>Table Spaces -&gt; Data</em>, enter the tablespace where you want workflow files to be stored.    <em>Note: see <a href="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#create-databases" target="_blank" rel="noopener noreferrer">Create Databases</a> for the tablespaces configuration, including their names.</em></li>
+<li>Under <em>Workflow System Security Groups -&gt; Administration Group</em>, enter the admin group you want to assign to the Workflow System. These two can be found in your filenet configuration within the CR.    <em>Note: see <a href="https://ibm-client-engineering.github.io/solution-filenet-aws/Create/solution-deploy/#deploying-cr" target="_blank" rel="noopener noreferrer">Deploying CR</a>. The admin group is specified under</em> <code>initialize_configuration: ic_ldap_admins_groups_name</code> in the CR.</li>
+<li>Continue through the steps, adding Connection Point and Isolated Region names and enter the <em>Isolated Region Number</em> (1 if it’s your first in this object store, and so on).</li>
+<li>If you wish, you can <em>Specify Isolated Region Table Space (Optional)</em>.</li>
+<li>Review all the details and click <em>Finish</em>.</li>
+<li>Navigate to <em>Workflow System-&gt;Connection Points</em> to confirm that it was successfully created:</li>
+</ol>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/9fa61a24-ae0d-4cf1-8b49-ca529857c829" alt="" class="img_ev3q"></p>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="ssl-configuration-adding-the-site-certificate-into-the-jre-keystore">SSL Configuration (adding the site certificate into the jre keystore)<a href="#ssl-configuration-adding-the-site-certificate-into-the-jre-keystore" class="hash-link" aria-label="Direct link to SSL Configuration (adding the site certificate into the jre keystore)" title="Direct link to SSL Configuration (adding the site certificate into the jre keystore)">​</a></h6>
+<ol>
+<li>Launch <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+<li>Navigate to the ACCE console</li>
+<li>Click on the following-</li>
+</ol>
+<ul>
+<li>The <em>Lock Icon</em> on the left side of the url:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/dfb9f7d5-12b9-42ee-8ced-376e2772ac48" alt="" class="img_ev3q"></p>
+<ul>
+<li><em>Connection is secure</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/e0855502-5992-4a16-9e66-e061f298a4e6" alt="" class="img_ev3q"></p>
+<ul>
+<li><em>Certificate is valid</em>, <em>Details</em> and then <em>Export...</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/857a7863-5d60-4822-acea-b7d111065669" alt="" class="img_ev3q"></p>
+<ol start="4">
+<li>Export <strong>full certificate chain</strong> (usually the second option in Save as) and <strong>change extension to .crt</strong> instead of .cert:</li>
+</ol>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/0b848a56-7cd9-43bb-b44c-32dc49fe35b5" alt="" class="img_ev3q"></p>
+<ol start="5">
+<li>Run the appropriate command to import it into your JRE keystore (keystore tool is found in the JAVA HOME directory under the bin folder)</li>
+</ol>
+<ul>
+<li>Windows:
+<code>..\..\bin\keytool -import -keystore ..\..\lib\security\cacerts -file cpe_websphere_ssl_cert.crt</code></li>
+<li>Mac/Linux:
+<code>../../bin/keytool -import -keystore ../../lib/security/cacerts -file cpe_websphere_ssl_cert.crt</code></li>
+</ul>
+<ol start="6">
+<li>When prompted with <em>Trust this certificate? [no]</em>, respond with <em>yes</em></li>
+<li>You should see an <code>added to keystore</code> message</li>
+</ol>
+<p><em>Note:</em>
+If you are importing a key again, you may encounter the following error:                        
+<code>keytool error: java.lang.Exception: Certificate not imported, alias &lt;mykey&gt; already exists</code></p>
+<p>In which case you must delete the old key before importing the new one. Do so by running the following command with administrator priviledges (On Windows, run cmd as an Administrator. On Mac/Linux prepend <code>sudo</code> to the following command):</p>
+<p>keytool -delete -keystore ../lib/security/cacerts -alias mykey</p>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="configuring-and-launching-the-process-designer">Configuring and Launching the Process Designer<a href="#configuring-and-launching-the-process-designer" class="hash-link" aria-label="Direct link to Configuring and Launching the Process Designer" title="Direct link to Configuring and Launching the Process Designer">​</a></h6>
+<ol>
+<li>Unzip the Process Designer zip file and all zip files within it for your platform. Beware that on Windows, unzipping the folders leads to a slightly different folder structure by default- there will be two peclient folders, one inside another. This can be &#x27;fixed&#x27; by moving the one with the content into its parent.</li>
+<li>Navigate to: <code>&lt;unzipped_folder&gt;/cpetools-&lt;platform&gt;/peclient/</code></li>
+<li>Open this folder in any text editor or IDE (ex. code .).</li>
+<li>Open:</li>
+</ol>
+<ul>
+<li><code>shell/cpetoolenv.sh</code> (Linux/Mac)</li>
+<li><code>batch/cpetoolenv.bat</code> (Windows)</li>
+</ul>
+<ol start="4">
+<li>Set the <code>PE_CLIENT_INSTALL_DIR</code> to the full path of the <code>cpe_tools-&lt;platform&gt;</code> directory, i.e., <code>/Users/…/&lt;unzipped_folder&gt;/cpetools-linux</code>, beware of any spaces in the folder path.</li>
+<li>Open <code>config/WcmApiConfig.properties</code>.</li>
+<li>Set the <code>RemoteServerUrl</code></li>
+</ol>
+<ul>
+<li>If you access the acce console at <code>&lt;host_link&gt;/acce/</code>, then confirm you can access the ping page at <code>&lt;host_link&gt;/peengine/IOR/ping</code>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/b287ddce-8d76-44a8-a848-b01e06184755" alt="" class="img_ev3q"></p>
+<ul>
+<li>If you can get to this page, then your <code>RemoteServerUrl</code> is likely to be <code>&lt;host_link&gt;/wsi/FNCEWS40TOM</code>. Check that you can also reach this page. If successful, it should display an xml document like so:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/ff515d36-8ec7-4c9f-b7c9-0a3bcbf02907" alt="" class="img_ev3q"></li>
+</ul>
+<ol start="7">
+<li>Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).</li>
+<li>Navigate (cd) to:</li>
+</ol>
+<ul>
+<li>Windows: <code>&lt;unzipped_folder&gt;/cpetools-win/peclient/batch</code></li>
+<li>Mac/Linux: <code>&lt;unzipped_folder&gt;/cpetools-linux/peclient/shell</code></li>
+</ul>
+<ol start="9">
+<li>Run:</li>
+</ol>
+<ul>
+<li>Windows: <code>pedesigner.bat &lt;connection_point&gt;</code></li>
+<li>Mac/Linux: <code>sh ./pedesigner.sh &lt;connection_point&gt;</code></li>
+</ul>
+<ol start="10">
+<li>Enter credentials used to login to the ACCE console.</li>
+<li>Process Designer should open up!</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="enabling-workflow-tab-on-content-navigator">Enabling Workflow Tab on Content Navigator<a href="#enabling-workflow-tab-on-content-navigator" class="hash-link" aria-label="Direct link to Enabling Workflow Tab on Content Navigator" title="Direct link to Enabling Workflow Tab on Content Navigator">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites-1">Prerequisites<a href="#prerequisites-1" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites">​</a></h5>
+<ul>
+<li>Workflow system and connection point have been created via the acce console in Object Store X (OSX)</li>
+<li>A repository has been setup within the Navigator</li>
+</ul>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="configuration-steps">Configuration Steps<a href="#configuration-steps" class="hash-link" aria-label="Direct link to Configuration Steps" title="Direct link to Configuration Steps">​</a></h5>
+<ol>
+<li>Open the Navigator</li>
+<li>Navigate to <em>Administration-&gt;Repositories-&gt;OSX</em> (double click)</li>
+<li>Click <em>Connect</em>
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/7ed9e621-9c62-44b4-a3cb-38db5f11db1e" alt="" class="img_ev3q"></li>
+<li>Navigate to <em>Configuration Parameters -&gt; Workflow Connection Point -&gt; WF_CON_POINT_NAME</em> (for this repo we want to use this connection point):
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/fb8d266a-371d-4fa4-acc8-938aaf006a46" alt="" class="img_ev3q"></li>
+<li>Click <em>Save and Close</em></li>
+<li>Navigate to <em>Administration-&gt;Desktops-&gt;icn_desktop</em> (default one)</li>
+<li>Double check that the default repo matches OSX:
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/4f2616a6-7c3c-4c5b-aae6-6ec358a484c9" alt="" class="img_ev3q"></li>
+<li>Navigate to <em>Layout-&gt;Check Work</em>:
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/2376c113-0a9c-4f91-8380-5c0e2180e6de" alt="" class="img_ev3q"></li>
+<li>Navigate to <em>Workflows-&gt;Select OSX repo under Repository</em>:
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/b6de3c23-f814-44a1-88c5-dcee6bc45e5f" alt="" class="img_ev3q"></li>
+<li>Select ApplicationSpace DefaultApplication and add it to the Selected Application Spaces:
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/01bdc0b2-7d6e-4a2c-a75c-8ab6f4dd272d" alt="" class="img_ev3q">
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/3cf30464-de1e-4be5-9f14-c3542e2eaee5" alt="" class="img_ev3q"></li>
+<li>Click <em>Save and Close</em> and <em>Refresh</em></li>
+<li>You should see the Work tab (with in-baskets, if you have created and committed them via the Process Designer):</li>
+</ol>
+<p>     
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/6fc830ea-081b-4442-ad41-4c0a3e311ddc" alt="" class="img_ev3q">
+          
+<img loading="lazy" src="https://zenhub.ibm.com/images/649c3ae08710884b790df62c/222bbe90-5145-40dd-8ddb-1062f8d78305" alt="" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="creating-workflows">Creating Workflows<a href="#creating-workflows" class="hash-link" aria-label="Direct link to Creating Workflows" title="Direct link to Creating Workflows">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="claim-filing--processing">Claim Filing &amp; Processing<a href="#claim-filing--processing" class="hash-link" aria-label="Direct link to Claim Filing &amp; Processing" title="Direct link to Claim Filing &amp; Processing">​</a></h4>
+<p>The following workflow was demonstrated and then subsequently recreated and tested in Traveler&#x27;s environment. It is a sample workflow for processing a claim application. We expanded on this by triggering it via a document upload using a subscription created in the acce console, which we will also mark as an initiating attachment to automatically include it in the triggered workflow (see below).</p>
+<p>Workflow preview:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/4465abd7-143d-4385-8050-ee2a57a91bb7" alt="" class="img_ev3q"></p>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/0e65b54f-53bf-4f68-861b-18682b2608a7" alt="" class="img_ev3q"></p>
+<p>Workflow download:</p>
+<p><a href="https://github.ibm.com/ibm-client-engineering/solution-filenet-aws/files/1242809/ClaimApplication.pep.zip" target="_blank" rel="noopener noreferrer">ClaimApplication.pep.zip</a></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="using-web-services">Using Web Services<a href="#using-web-services" class="hash-link" aria-label="Direct link to Using Web Services" title="Direct link to Using Web Services">​</a></h4>
+<ul>
+<li>In order to enable pasting wsdl partner links, navigate to <em>View -&gt; Configuration</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/db04cbaf-6cdd-439e-9310-38b6e2d594b6" alt="" class="img_ev3q"></p>
+<ul>
+<li>Right click on the connection point and click <em>Properties...</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/bb20e3ed-ad22-4927-9bac-531eec0f55e1" alt="" class="img_ev3q"></p>
+<ul>
+<li>Under <em>Web Services</em>, check <em>Enable Process Designer to enter WSDL links without browsing for Web services</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/95c4e89d-fabc-41d0-85ec-a51fe141a1b5" alt="" class="img_ev3q"></p>
+<ul>
+<li>Now you can paste links in <em>Workflow Properties</em> under <em>Web Services</em> in the <em>Partner Links</em> section:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/29c67c90-2903-4f98-92cb-8a3d0ad3dd26" alt="" class="img_ev3q"></p>
+<ul>
+<li>Next, open up the Palette Menu and check <em>Web Services Palette</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/7a174e99-650e-4a98-8860-f368ba4eb496" alt="" class="img_ev3q"></p>
+<ul>
+<li>Now you can drag in <em>Invoke</em> and select the created <em>Partner Link</em> as well as the desired <em>Operation</em>:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/719a4799-369b-4e6b-b09a-ec76c3e24a78" alt="" class="img_ev3q"></p>
+<p>Note that for web services that require SSL (ex. <em>https://...</em>), you must add a secret containing the certificate to the trusted_certificate_list in the CR.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="initiating-attachments">Initiating Attachments<a href="#initiating-attachments" class="hash-link" aria-label="Direct link to Initiating Attachments" title="Direct link to Initiating Attachments">​</a></h4>
+<p>Initiating attachments are attachments to Workflows that automatically get incorporated into them on upload, via a Subscription that triggers a workflow on Document Creation.</p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="creating-a-subclass-optional">Creating a Subclass (optional)<a href="#creating-a-subclass-optional" class="hash-link" aria-label="Direct link to Creating a Subclass (optional)" title="Direct link to Creating a Subclass (optional)">​</a></h5>
+<p>If desired, you can create a subclass of an exisitng one to use as a more specific type. This can provide finer granularity when, for example, triggering workflows.</p>
+<ul>
+<li>
+<p>Within the acce console, navigte to your choice of object store, go to <em>Classes</em> under <em>Data Design</em> and double click on a class you would like to form a subclass for. Next, click on <em>Actions</em> and <em>New Class</em>:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/6374e1f9-7a2e-46ec-9ca0-5250ffdcd8ea" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Enter a name and description:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/6a4aad75-72ae-46c0-8d5c-04c90fb04096" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Click <em>Finish</em>:</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/cc0ab9b9-380f-4701-91ec-387615d123f2" alt="" class="img_ev3q"></p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="creating-the-subscription">Creating the Subscription<a href="#creating-the-subscription" class="hash-link" aria-label="Direct link to Creating the Subscription" title="Direct link to Creating the Subscription">​</a></h5>
+<ul>
+<li>
+<p>In the acce console under your choice of object store, navigate to <em>Events, Actions, Processes</em> and then to <em>Subscriptions</em>:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/a8d51fa1-55e2-4640-a5ef-68bbf59a4d1f" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Click <em>New</em> and enter a name and description:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/298624d4-42a4-4a91-a864-d9c9e89dc50f" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Specify the class (and optionally subclass) you would like to subscribe to:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/714ebd0f-246e-4d54-a576-56e4bcbd45c0" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Check <em>Create a workflow subscription</em> to allow this subscription to trigger a workflow:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/e51cc792-63ef-489e-9eba-ebcdc5f723a0" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Select the events you would like to trigger the workflow. <em>Creation</em> of a document signifies a document upload:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/e3158b7a-0eeb-43a4-b50a-76f0a48d1883" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Specify which Workflow you would like this subscription to trigger:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/e1b73b54-2bcf-48b8-b992-94dc940f5907" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Optionally map properties from the uploaded document (<em>Property name</em>) to the Workflow (<em>Data field name</em>):
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/1c47382e-f8b2-4f32-b001-03af611448b2" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Ensure the subscription is enabled and if you would like, include subclasses:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/72fdeb48-fbf6-40d8-935f-1c4fdae3ae7c" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>Review the details and click <em>Finish</em>:</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/73330507-6e63-4524-a224-45e5cfb928ec" alt="" class="img_ev3q">
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/bb803613-3dd6-4134-8272-c40790343a2d" alt="" class="img_ev3q"></p>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="workflow-init-attachment">Workflow Init Attachment<a href="#workflow-init-attachment" class="hash-link" aria-label="Direct link to Workflow Init Attachment" title="Direct link to Workflow Init Attachment">​</a></h5>
+<ul>
+<li>
+<p>Under <em>Workflow Properties</em> in the <em>Attachments</em> tab, create an attachment by double clicking under the <em>Name</em> field, typing a name and pressing Enter:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/75ca2f4b-f3f5-4aec-ab24-f5c05553aed1" alt="" class="img_ev3q"></p>
+</li>
+<li>
+<p>On the right sidebar, mark this as the <em>Initiating attachment</em> by clicking the following icon, which should then appear left of the attachment name:</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/c9a35503-02b8-44c1-bec0-7da6611ba876" alt="" class="img_ev3q">
+           
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/33d603f9-6313-4a6f-9036-10d4ad9e82e2" alt="" class="img_ev3q"></p>
+<ul>
+<li>From the palette menu, drag in a component node:</li>
+</ul>
+<p><img loading="lazy" src="https://media.github.ibm.com/user/436100/files/83dabcd3-90e6-4dbb-b881-cbce049fb45f" alt="" class="img_ev3q"></p>
+<ul>
+<li>Configure this component by selecting an operation to extract information from the uploaded attachment, such as its given title, for example, which corresponds to symbolicPropName:
+<img loading="lazy" src="https://media.github.ibm.com/user/436100/files/320f420c-2c6d-454a-8203-4a55799f3edf" alt="" class="img_ev3q"></li>
+</ul>
+<p>This then populates the return value, which can be used elsewhere in the Workflow as desired</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/ibm-client-engineering/solution-filenet-aws/tree/main/packages/create-docusaurus/templates/shared/docs/3-Create/Configure/filenet_workflow.mdx" target="_blank" rel="noreferrer noopener" class="ThemeClassNames.common.editThisPage editThisPage_U9Uk">Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/solution-filenet-aws/category/configure"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Configure</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/solution-filenet-aws/Create/Configure/solution-filenet-async-replication"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Content Replication</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#workflows" class="table-of-contents__link toc-highlight">Workflows</a><ul><li><a href="#setup-components" class="table-of-contents__link toc-highlight">Setup Components</a><ul><li><a href="#standalone-process-designer" class="table-of-contents__link toc-highlight">Standalone Process Designer</a><ul><li><a href="#version-info" class="table-of-contents__link toc-highlight">Version info</a></li><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#setup-steps" class="table-of-contents__link toc-highlight">Setup Steps</a></li></ul></li><li><a href="#enabling-workflow-tab-on-content-navigator" class="table-of-contents__link toc-highlight">Enabling Workflow Tab on Content Navigator</a><ul><li><a href="#prerequisites-1" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#configuration-steps" class="table-of-contents__link toc-highlight">Configuration Steps</a></li></ul></li></ul></li><li><a href="#creating-workflows" class="table-of-contents__link toc-highlight">Creating Workflows</a><ul><li><a href="#claim-filing--processing" class="table-of-contents__link toc-highlight">Claim Filing &amp; Processing</a></li><li><a href="#using-web-services" class="table-of-contents__link toc-highlight">Using Web Services</a></li><li><a href="#initiating-attachments" class="table-of-contents__link toc-highlight">Initiating Attachments</a><ul><li><a href="#creating-a-subclass-optional" class="table-of-contents__link toc-highlight">Creating a Subclass (optional)</a></li><li><a href="#creating-the-subscription" class="table-of-contents__link toc-highlight">Creating the Subscription</a></li><li><a href="#workflow-init-attachment" class="table-of-contents__link toc-highlight">Workflow Init Attachment</a></li></ul></li></ul></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Explore</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.ibm.com/" target="_blank" rel="noopener noreferrer" class="footer__link-item">IBM</a></li><li class="footer__item"><a href="https://www.ibm.com/client-engineering" target="_blank" rel="noopener noreferrer" class="footer__link-item">IBM Client Engineering - Open Solutions Library</a></li></ul></div></div><div class="footer__bottom text--center"><div class="margin-bottom--sm"><a href="https://ibm.com" rel="noopener noreferrer" class="footerLogoLink_BH7S"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE" width="150" height="150"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU" width="150" height="150"></a></div></div></div></footer></div>
+</body>
+</html>
