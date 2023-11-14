@@ -258,6 +258,8 @@ spec:
             capabilities:
               drop:
                 - ALL
+              add:
+                - NET_BIND_SERVICE
             runAsNonRoot: true
             allowPrivilegeEscalation: false
             seccompProfile:
@@ -446,7 +448,7 @@ spec:
                 name: postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-data
             - mountPath: /pgsqldata
               name: postgres-tablespaces
       volumes:
@@ -561,16 +563,16 @@ GRANT CREATE ON TABLESPACE icndb_tbs TO ceuser;
 
 ## Deploy Operator
 
-Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.6.2**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.7.1**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
-```
-wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.6.2/ibm-cp-fncm-case-1.6.2.tgz
+```tsx
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
 ```
 
 Extract the case file
 
 ```
-tar zxvf ibm-cp-fncm-case-1.6.2.tgz
+tar zxvf ibm-cp-fncm-case-1.7.1.tgz
 ```
 
 Change into the operator directory and extract the container samples file
@@ -578,7 +580,7 @@ Change into the operator directory and extract the container samples file
 ```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
 
-tar xvf container-samples-5.5.10.tar
+tar xvf container-samples-5.5.11.tar
 ```
 
 ### Scripted Operator deployment
@@ -623,6 +625,36 @@ source ./filenetvars.sh
 ### Manual Operator deployment
 
 If you cannot run the deployment script, follow these steps to deploy the operator manually.
+
+:::info
+
+Available as of 22.0.2-IF004 and greater
+
+If your cluster has resource limits required via cluster policy, you will need to update the `operator.yaml` to set those limits for the operator's init containers.
+
+```yaml
+      initContainers:
+        - name: folder-prepare-container
+          image: "docker-cotsimage-gts-dev.gslb.thc.travp.net/cpopen/icp4a-content-operator:23.0.1-IF003"
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+              - ALL
+        // highlight-start
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+        // highlight-end
+
+```
+:::
 
 From the `container-samples` directory:
 
@@ -1406,16 +1438,31 @@ Wait for the operator to come back online after upgrading and completes its reco
 
 Once the operator has been upgraded, update your CR file to the latest image tags. You can also grab the latest CR from the case directory you extracted above:
 
-```
+```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/container-samples/descriptors/ibm_fncm_cr_production_FC_content.yaml
 
 ```
 
 Now apply your updated CR to the cluster:
 
-```
+```tsx
 kubectl apply -f ibm_fncm_cr_production.yaml
 ```
+
+:::infowarning
+
+As of 5.5.11, the `add_repo_ce_wsi_url` was updated in the default CR shipped with that case. It no longer uses `http` for access and now uses `https`. So this must be taken into account if you are using an older CR that you've updated:
+
+`navigator_configuration.initialize_configuration.ic_icn_init_info.icn_repos`
+```tsx
+ add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"
+```
+Would now be
+```tsx
+add_repo_ce_wsi_url: "https://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9443/wsi/FNCEWS40MTOM/"
+```
+
+:::
 
 ### Secret menu items
 
@@ -1428,9 +1475,9 @@ shared_configuration:
 This helps when you have agents like Dynatrace that inject certain configs into each container rootfs as they come up.
 :::
 
-## Deploy IER Operator
+## Deploy IER
 
-If IBM Enterprise Records is required, you should have already staged the operator per the previous instructions in Staging.
+If IBM Enterprise Records is required, you should have already staged the image per the previous instructions in Staging.
 
 Clone the ier-samples github repo https://github.com/ibm-ecm/ier-samples
 
@@ -1438,254 +1485,75 @@ Clone the ier-samples github repo https://github.com/ibm-ecm/ier-samples
 git clone git@github.com:ibm-ecm/ier-samples.git
 ```
 
-### Preparing our env for IER operator
-
-:::note
-
-The following step is only required if you did not install the FileNet operator.
-
-:::
-
-Create a shared PVC
-
-This PVC is needed for jdbc drivers.
-
+### Create the `ibm-ier-secret`
+If deploying IER, create the following
+ ```tsx
+kubectl create secret generic ibm-ier-secret \
+--from-literal=appLoginUsername="cpadmin" \
+--from-literal=appLoginPassword="Password" \
+--from-literal=keystorePassword="p@ssw0rd" \
+--from-literal=ltpaPassword="p@ssw0rd"
 ```
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: operator-shared-pvc
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 21.0.3
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: efs-sc
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: cp4a-shared-log-pvc
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 21.0.3
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: efs-sc
-  resources:
-    requests:
-      storage: 100Gi
-```
-
-Apply to the cluster
-
-```
-kubectl create -f descriptors/operator-shared-pvc.yaml
-```
-
-### Create Docker Registry Secret
-
-If your cluster does not already have this secret `admin.registrykey` this needs to be created.
-
-Typically this would point to the IBM Cloud Registry, but can be modified to point to private registries instead.
-
-```
-imagePullSecrets:
-   name: "admin.registrykey"
-
-```
-
-:::note
-The secret_name must match the imagePullSecrets.name parameter in the operator custom resource definition (.yaml) file, for example, admin.registrykey.
-:::
-
-For an external Docker registry.
-
-```
-kubectl create secret docker-registry admin.registrykey \
---docker-server=<registry_url> \
---docker-username=<your_account> \
---docker-password=<your_password> \
---docker-email=iertest@ibm.com
-```
-
-### Deploying the IER operator manually
-
-Under the `ier-samples` repo, the following files need to be updated
-
-`ier-samples/operator/descripters/operator.yaml`
-
-Modify the `image` parameter for containers (ansible and operator) and the `imagePullSecrets` name in `descriptors/operator.yaml` to a valid image registry URL. The value for `imagePullSecrets` should be the IBM Pull secret or the registry secret set for your private registry.
-
-Also update the tag to the latest ifix level for the operator.
-```
-      containers:
-        - name: operator
-          # Replace this with the built image name
-#          image: cp.icr.io/cp/cp4a/icp4a-operator@sha256:8c88f9268d06d1f8f86b572cfd0a481758f13ea2fb67011a473a1cc4a99523ac
-          image: cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
-  -    
-  -   
-  - name: operator
-       # Replace this with the built image name
-       image: "cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023"      
- 
- imagePullSecrets:
-   - name: "admin.registrykey"
-```
-
-Edit the namespace spec in the `service_account.yaml` and `operator.yaml` files to point to your namespace.
-
-```
-metadata:
-   name: ibm-cp4a-operator
-   namespace: <my-project>
-```
-
-Accept the IER license by setting value as "accept" for ier_license parameter in operator.yaml
-
-To deploy each file on certified Kubernetes:
-
-```plaintext-ibm
-kubectl apply -f ./descriptors/ibm_cp4a_crd.yaml
-kubectl apply -f ./descriptors/service_account.yaml
-kubectl apply -f ./descriptors/role.yaml
-kubectl apply -f ./descriptors/role_binding.yaml
-kubectl apply -f ./descriptors/operator.yaml
-```
-
-## Deploying IER CR
+### Updating CR for IER deployment
 
 The following is an example CR for the IER operator.
 
 Make sure to set the following secret name in the CR:
+ ```tsx
+    ier_secret_name: ibm-ier-secret
+ ```
+
+Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry. Also make sure the correct image tag is set. As of this writing it is `ga-5218-if004-ier-2301-if003`.
+
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
+```tsx
+  content_optional_components:
+    cpe: true
+    graphql: true
+    cmis: false
+    css: false
+    es: false
+    tm: false
+    ban: true
+    // highlight-start
+    ier: true
+    // highlight-end
 ```
-     ier_secret_name: ibm-fncm-secret
-```
-This is important if you've already installed the FileNet operator in the cluster.
-
-Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry.
-
-`ier_cr_full.yaml`
-```
-###############################################################################
-#
-# Licensed Materials - Property of IBM
-#
-# (C) Copyright IBM Corp. 2019. All Rights Reserved.
-#
-# US Government Users Restricted Rights - Use, duplication or
-# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-#
-###############################################################################
-apiVersion: icp4a.ibm.com/v1
-kind: ICP4ACluster
-metadata:
-  name: ier
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 5.2.1.8
-spec:
-  ## TIPS: The names of all variables in the spec field are converted to snake_case by the operator before running ansible
-  ## For example, serviceAccount in the spec becomes service_account in ansible.
-  ## It is recommended that you perform some type validation in Ansible on the variables to ensure that
-  ## your application is receiving expected input.
-  appVersion: 5.2.1.8
-  ## MUST exist, used to accept ibm license, valid value only can be "accept"
-  ibm_license: "accept"
-  ## shared configuration among all tribe
-  shared_configuration:
-    no_log: false
-    ## This is the deployment context is ier. No update it required.
-    sc_deployment_context: ier
-    sc_image_repository: cp.icr.io
-    root_ca_secret: icp4a-root-ca
-    sc_optional_components: ier
-    ## Specify the RunAsUser for the security context of the pod.  This is usually a numeric value that corresponds to a user ID.
-    sc_run_as_user:
-    ## Shared custom TLS secret which will be used to sign all external routes if defined.
-    ## If this is not defined, all external routes will be signed with `root_ca_secret`
-    external_tls_certificate_secret: "letsencrypt-filenet-east-prod-cluster-cert"
-    ## For ROKS, this is used to enable the creation of ingresses. The default value is "false", which routes will be created.
-    sc_ingress_enable: true
-    ## For ROKS Ingress, provide TLS secret name for Ingress controller.
-    sc_ingress_tls_secret_name: "letsencrypt-filenet-east-prod-cluster-cert"
-    sc_deployment_hostname_suffix: "filenet.filenet-east.frwd-labs.link"
-    storage_configuration:
-      sc_slow_file_storage_classname: "efs-sc"
-      sc_medium_file_storage_classname: "efs-sc"
-      sc_fast_file_storage_classname: "efs-sc"
-    image_pull_secrets:
-    - "admin.registrykey"
-    ## This is the deployment type and the possible values are: user, non-production, and production.
-    sc_deployment_license: User
-    ## The deployment type as selected by the user.  Possible values are: Starter and Production
-    sc_deployment_type: Production
-    ## The platform to be deployed specified by the user.  Possible values are: OCP, ROKS, and other.  This is normally populated by the User script
-    ## based on input from the user.
-    sc_deployment_platform: "other"
-   
-
-  ########################################################################
-
-  ########   IBM Enterprise Records configuration      ########
-
-  ########################################################################
+After the `navigator_configuration` entry in the CR, add the following section
+```yaml
   ier_configuration:
-      arch:
-        amd64: "3 - Most preferred"
-      replica_count: 2
-     # Optional: Use an existing certificate for automatic creation of OpenShift routes.
-     # Set this key if you have an external TLS certificate. Leave this empty if you don't have an external TLS certificate, operator will generate one for you.
+    arch:
+      amd64: "3 - Most preferred"
+      replica_count: 1
       ier_ext_tls_secret_name:
-     ## Optional. The Certificate Authority (CA) used to sign the external TLS secret for automatic creation of OpenShift routes.
-     ## Set this key if you have a CA to sign the external TLS certificate, leave this parameter empty if you don't have the CA of your external TLS certificate.
       ier_auth_ca_secret_name:
-      
       image:
+      // highlight-start
+      # This should point to whatever repo you staged the image in. Leave this as default if using IBM's registry
         repository: cp.icr.io/cp/cp4a/ier/ier
+      // highlight-end
         tag: ga-5218-ier-if005
-#        tag: ga-5217-ier-if012
         pull_policy: IfNotPresent
-      ier_secret_name: ibm-fncm-secret
-     # Logging for workloads
+      ier_secret_name: ibm-ier-secret
       log:
         format: json
-     # resource and autoscaling setting
       resources:
         requests:
           cpu: 500m
-          memory: 512Mi
         limits:
           cpu: 1
           memory: 1536Mi
-     # Horizontal Pod Autoscaler
       auto_scaling:
         enabled: false
         max_replicas: 3
         min_replicas: 1
         target_cpu_utilization_percentage: 80
-     # IER Production setting
       ier_production_setting:
         license: accept
       collectd_enable_plugin_write_graphite: false
       run_as_user: 
-     # Specify the names of existing persistent volume claims to be used by your application.
-     # Specify an empty string if you don't have existing persistent volume claim.
       datavolume:
         existing_pvc_for_ier_instance: ""
-        
       probe:
         readiness:
           initial_delay_seconds: 120
@@ -1699,5 +1567,27 @@ spec:
           failure_threshold: 6
 ```
 
+Apply the CR after making these updates
+ 
+```bash
+kubectl apply -f ibm_fncm_cr_production.yaml
+```
 
-
+Wait for about five minutes or so and then check to see if the pod has spun up.
+ 
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          3d9h
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          6d7h
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          6d6h
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          6d6h
+// highlight-start
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          7h55m
+// highlight-end
+fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
+postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
+```
