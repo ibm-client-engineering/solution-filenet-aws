@@ -1493,7 +1493,7 @@ This is important if you've already installed the FileNet operator in the cluste
 Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry. Also make sure the correct image tag is set. As of this writing it is `ga-5218-if004-ier-2301-if003`.
 
 In the filenet CR you used to deploy the cluster, make the following changes and additions:
-```yaml
+```tsx
   content_optional_components:
     cpe: true
     graphql: true
@@ -1566,7 +1566,7 @@ kubectl apply -f ibm_fncm_cr_production.yaml
 
 Wait for about five minutes or so and then check to see if the pod has spun up.
 
-```
+```tsx
 kubectl get pods
 NAME                                          READY   STATUS    RESTARTS   AGE
 fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
