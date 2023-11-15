@@ -1,27 +1,27 @@
 ---
 id: solution-filenet-workflow
 sidebar_position: 1
-title: Filenet Workflow
+title: Workflows
 ---
 
-## Workflows
+## FileNet Workflows
 
-### Setup Components
+## Setup Components
 
-#### Standalone Process Designer
+### Standalone Process Designer
 
-##### Version info
+#### Version info
 - IBM Content Platform Engine - 5.5.11.0
 - IBM Content Navigator 3.0.14
 
-##### Prerequisites
+#### Prerequisites
 - A [Java Runtime Environment](https://www.java.com/en/download/) (JRE 1.8 or newer)
 - [Add Java to PATH](https://www.ibm.com/docs/en/b2b-integrator/6.0.2?topic=installation-setting-java-variables)
 - Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the part number `M0CTDML`
 
-##### Setup Steps
+#### Setup Steps
 
-###### Creating a Workflow System and Connection Point within Filenet
+##### Creating a Workflow System and Connection Point within Filenet
 1. Open up and log into the acce console.
 2. Open the Object Store in which you want to store Workflow data.
 3. Click on _Administrative->Workflow_ System.
@@ -35,7 +35,7 @@ title: Filenet Workflow
 
 ![](https://media.github.ibm.com/user/436100/files/9fa61a24-ae0d-4cf1-8b49-ca529857c829)
 
-###### SSL Configuration (adding the site certificate into the jre keystore)
+##### SSL Configuration (adding the site certificate into the jre keystore)
 1. Launch [Google Chrome](https://www.google.com/chrome/)
 2. Navigate to the ACCE console
 3. Click on the following- 
@@ -72,7 +72,7 @@ In which case you must delete the old key before importing the new one. Do so by
 
     keytool -delete -keystore ../lib/security/cacerts -alias mykey
 
-###### Configuring and Launching the Process Designer
+##### Configuring and Launching the Process Designer
 1. Unzip the Process Designer zip file and all zip files within it for your platform. Beware that on Windows, unzipping the folders leads to a slightly different folder structure by default- there will be two peclient folders, one inside another. This can be 'fixed' by moving the one with the content into its parent.
 2. Navigate to: `<unzipped_folder>/cpetools-<platform>/peclient/`
 3. Open this folder in any text editor or IDE (ex. code .).
@@ -82,13 +82,13 @@ In which case you must delete the old key before importing the new one. Do so by
 4. Set the `PE_CLIENT_INSTALL_DIR` to the full path of the `cpe_tools-<platform>` directory, i.e., `/Users/…/<unzipped_folder>/cpetools-linux`, beware of any spaces in the folder path.
 5. Open `config/WcmApiConfig.properties`.
 6. Set the `RemoteServerUrl`
-  - If you access the acce console at `<host_link>/acce/`, then confirm you can access the ping page at `<host_link>/peengine/IOR/ping`:
-    
+  - If you access the acce console at `<host_link>/acce/`, then confirm you can access the ping page at `<host_link>/peengine/IOR/ping`
+
   ![](https://media.github.ibm.com/user/436100/files/b287ddce-8d76-44a8-a848-b01e06184755)
 
   - If you can get to this page, then your `RemoteServerUrl` is likely to be `<host_link>/wsi/FNCEWS40TOM`. Check that you can also reach this page. If successful, it should display an xml document like so:
   ![](https://media.github.ibm.com/user/436100/files/ff515d36-8ec7-4c9f-b7c9-0a3bcbf02907)
-  
+
 
 7. Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).
 8. Navigate (cd) to:
@@ -100,13 +100,13 @@ In which case you must delete the old key before importing the new one. Do so by
 10. Enter credentials used to login to the ACCE console.
 11. Process Designer should open up!
 
-#### Enabling Workflow Tab on Content Navigator
+### Enabling Workflow Tab on Content Navigator
 
-##### Prerequisites
+#### Prerequisites
 - Workflow system and connection point have been created via the acce console in Object Store X (OSX)
 - A repository has been setup within the Navigator
 
-##### Configuration Steps
+#### Configuration Steps
 1. Open the Navigator
 2. Navigate to *Administration->Repositories->OSX* (double click)
 3. Click *Connect*
@@ -133,9 +133,9 @@ In which case you must delete the old key before importing the new one. Do so by
 ![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/222bbe90-5145-40dd-8ddb-1062f8d78305)
 
 
-### Creating Workflows
+## Creating Workflows
 
-#### Claim Filing & Processing
+### Claim Filing & Processing
 
 The following workflow was demonstrated and then subsequently recreated and tested in Traveler's environment. It is a sample workflow for processing a claim application. We expanded on this by triggering it via a document upload using a subscription created in the acce console, which we will also mark as an initiating attachment to automatically include it in the triggered workflow (see below).
 
@@ -148,39 +148,39 @@ Workflow download:
 
 [ClaimApplication.pep.zip](https://github.ibm.com/ibm-client-engineering/solution-filenet-aws/files/1242809/ClaimApplication.pep.zip)
 
-#### Using Web Services
+### Using Web Services
 
 - In order to enable pasting wsdl partner links, navigate to _View -> Configuration_:
 
 ![](https://media.github.ibm.com/user/436100/files/db04cbaf-6cdd-439e-9310-38b6e2d594b6)
 
 - Right click on the connection point and click _Properties..._:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/bb20e3ed-ad22-4927-9bac-531eec0f55e1)
 
 - Under _Web Services_, check _Enable Process Designer to enter WSDL links without browsing for Web services_:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/95c4e89d-fabc-41d0-85ec-a51fe141a1b5)
 
 - Now you can paste links in _Workflow Properties_ under _Web Services_ in the _Partner Links_ section:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/29c67c90-2903-4f98-92cb-8a3d0ad3dd26)
 
 - Next, open up the Palette Menu and check _Web Services Palette_:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/7a174e99-650e-4a98-8860-f368ba4eb496)
 
 - Now you can drag in _Invoke_ and select the created _Partner Link_ as well as the desired _Operation_:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/719a4799-369b-4e6b-b09a-ec76c3e24a78)
 
 Note that for web services that require SSL (ex. _https://..._), you must add a secret containing the certificate to the trusted_certificate_list in the CR.
 
-#### Initiating Attachments
+### Initiating Attachments
 
 Initiating attachments are attachments to Workflows that automatically get incorporated into them on upload, via a Subscription that triggers a workflow on Document Creation.
 
-##### Creating a Subclass (optional)
+#### Creating a Subclass (optional)
 
 If desired, you can create a subclass of an exisitng one to use as a more specific type. This can provide finer granularity when, for example, triggering workflows.
 
@@ -192,10 +192,10 @@ If desired, you can create a subclass of an exisitng one to use as a more specif
 ![](https://media.github.ibm.com/user/436100/files/6a4aad75-72ae-46c0-8d5c-04c90fb04096)
 
 - Click _Finish_:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/cc0ab9b9-380f-4701-91ec-387615d123f2)
 
-##### Creating the Subscription
+#### Creating the Subscription
 - In the acce console under your choice of object store, navigate to _Events, Actions, Processes_ and then to _Subscriptions_:
 ![](https://media.github.ibm.com/user/436100/files/a8d51fa1-55e2-4640-a5ef-68bbf59a4d1f)
 
@@ -221,23 +221,23 @@ If desired, you can create a subclass of an exisitng one to use as a more specif
 ![](https://media.github.ibm.com/user/436100/files/72fdeb48-fbf6-40d8-935f-1c4fdae3ae7c)
 
 - Review the details and click _Finish_:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/73330507-6e63-4524-a224-45e5cfb928ec)
 ![](https://media.github.ibm.com/user/436100/files/bb803613-3dd6-4134-8272-c40790343a2d)
 
-##### Workflow Init Attachment
+#### Workflow Init Attachment
 
 - Under _Workflow Properties_ in the _Attachments_ tab, create an attachment by double clicking under the _Name_ field, typing a name and pressing Enter:
 ![](https://media.github.ibm.com/user/436100/files/75ca2f4b-f3f5-4aec-ab24-f5c05553aed1)
 
 - On the right sidebar, mark this as the _Initiating attachment_ by clicking the following icon, which should then appear left of the attachment name:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/c9a35503-02b8-44c1-bec0-7da6611ba876)
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 ![](https://media.github.ibm.com/user/436100/files/33d603f9-6313-4a6f-9036-10d4ad9e82e2)
 
 - From the palette menu, drag in a component node:
-  
+
 ![](https://media.github.ibm.com/user/436100/files/83dabcd3-90e6-4dbb-b881-cbce049fb45f)
 
 - Configure this component by selecting an operation to extract information from the uploaded attachment, such as its given title, for example, which corresponds to symbolicPropName:
