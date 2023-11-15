@@ -1,0 +1,9 @@
+{
+  "label": "Appendices",
+  "position": 5,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "The caveats of our work"
+  }
+}
