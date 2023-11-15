@@ -6,9 +6,9 @@ title: Lessons Learned
 
 Throughout our journey on this project, the team encountered many obstacles. This section will outline any errors, blockers, and setbacks the team faced. We will discuss how these blockers were identified and resolved. 
 
-### **DynaTrace and FileNet**
+### DynaTrace and FileNet
 
-#### **The Problem**
+#### The Problem
 
 While setting up FileNet on EKS, one of the elements the team had to take into account was the client's use of DynaTrace. Dynatrace is a performance monitoring and application performance management (APM) solution that can be used to monitor and analyze the performance of applications and services. When Dynatrace is used in a Kubernetes environment, it typically involves deploying Dynatrace agents or components as sidecar containers or as part of your application's deployment. These agents collect data about the performance of your applications, containers, and Kubernetes infrastructure and send that data to the Dynatrace platform for analysis.
 
@@ -38,7 +38,7 @@ We can now view the logs using the following command:
 kubectl logs <NameOfFailingPod> -c <NameOfInitContainer>
 ```
 
-####  **The Solution**
+#### The Solution
 
 Dynatrace requires write access to the filesystem of the host or container where it is running to function correctly. Dynatrace agents and components need to store data, logs, and configuration information, which typically requires write access to the filesystem. In our case, FileNet filesystem is set to read-only. The team could request the client make modifications to DynaTrace. However, these accommodations were made previously and there are no guarantees that future updates to the cluster wouldn't re-enable DynaTrace in the namespace. The easiest solution would be to allow DynaTrace read/write access to FileNet's filesystem. This would eliminate any future errors and allow the client to continue to monitor with DynaTrace.
 
@@ -54,13 +54,13 @@ shared_configuration:
 
 Now that the filesystem has been set to read/write, DynaTrace will no longer crash the pods.
 
-#### **Summary**
+#### Summary
 
 DynaTrace requires a read/wite filesystem to operate correctly. FileNet has a read-only filesystem by default. The team upgraded to FileNet version 5.5.11 that has an option to disable read-only filesystem. This fixed the crashing pods.
 
-### **Creating A Document With Content Fails and Displays A Network Error Message**
+### Creating A Document With Content Fails and Displays A Network Error Message
 
-#### **The Problem**
+#### The Problem
 
 While the team was working on use cases with the client, we ran into a blocker when trying to upload a document. When uploading a document the team was receiving the following error message:
 
@@ -113,7 +113,7 @@ Optionally we could select the export button. This will export the logs to a fil
 
 So in this situation, the NGINX server was rejecting the request due to the body size exceeding the limit.
 
-#### **The Solution**
+#### The Solution
 
 The way the team resolved this was pretty straight forward. We needed to add an annotation to the FileNet CR within EKS. We added this `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the `shared_configuration` section of the CR. 
 
@@ -141,6 +141,6 @@ shared_configuration:
 
 When `nginx.ingress.kubernetes.io/proxy-body-size` is set to 0, this removes they payload limit size. With this change to the CR, we were able to create documents with content successfully. 
 
-#### **Summary**
+#### Summary
 
 The NGINX server was rejecting the payload with an error "413 Payload Too Large". This caused the failure when creating a document with content. The team resolved this by removing the payload limitation by adding `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the CR. 
