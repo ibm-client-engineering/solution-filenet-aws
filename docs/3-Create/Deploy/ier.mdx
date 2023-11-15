@@ -40,50 +40,51 @@ After the `navigator_configuration` entry in the CR, add the following section
   ier_configuration:
     arch:
       amd64: "3 - Most preferred"
-      replica_count: 1
-      ier_ext_tls_secret_name:
-      ier_auth_ca_secret_name:
-      image:
+    replica_count: 2
+    ier_ext_tls_secret_name:
+    ier_auth_ca_secret_name:
+    image:
       // highlight-start
       # This should point to whatever repo you staged the image in. Leave this as default if using IBM's registry
-        repository: cp.icr.io/cp/cp4a/ier/ier
+      repository: cp.icr.io/cp/cp4a/ier/ier
       // highlight-end
-        tag: ga-5218-ier-if005
-        pull_policy: IfNotPresent
+      tag: ga-5218-ier-if005
+      pull_policy: IfNotPresent
       // highlight-start
       # This NEEDS to be set to the correct secret name. Make sure it's the one you created above.
-      ier_secret_name: ibm-ier-secret
+    ier_secret_name: ibm-ier-secret
       // highlight-end
-      log:
-        format: json
-      resources:
-        requests:
-          cpu: 500m
-        limits:
-          cpu: 1
-          memory: 1536Mi
-      auto_scaling:
-        enabled: false
-        max_replicas: 3
-        min_replicas: 1
-        target_cpu_utilization_percentage: 80
-      ier_production_setting:
-        license: accept
-      collectd_enable_plugin_write_graphite: false
-      run_as_user: 
-      datavolume:
-        existing_pvc_for_ier_instance: ""
-      probe:
-        readiness:
-          initial_delay_seconds: 120
-          period_seconds: 5
-          timeout_seconds: 10
-          failure_threshold: 6
-        liveness:
-          initial_delay_seconds: 600
-          period_seconds: 5
-          timeout_seconds: 5
-          failure_threshold: 6
+    log:
+      format: json
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: 1
+        memory: 1024Mi
+    auto_scaling:
+      enabled: false
+      max_replicas: 3
+      min_replicas: 1
+      target_cpu_utilization_percentage: 80
+    ier_production_setting:
+      license: accept
+    collectd_enable_plugin_write_graphite: false
+    run_as_user: 
+    datavolume:
+      existing_pvc_for_ier_instance: ""
+    probe:
+      readiness:
+        initial_delay_seconds: 120
+        period_seconds: 5
+        timeout_seconds: 10
+        failure_threshold: 6
+      liveness:
+        initial_delay_seconds: 600
+        period_seconds: 5
+        timeout_seconds: 5
+        failure_threshold: 6
 ```
 
 ### Apply the CR

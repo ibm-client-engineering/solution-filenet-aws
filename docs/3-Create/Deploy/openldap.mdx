@@ -18,8 +18,22 @@ Set our context to the new namespace (only if you created a separate namespace t
 kubectl config set-context --current --namespace=filenet-openldap
 ```
 
+:::note
+The files we're creating below can be grabbed from these links. These are purely reference and may still need to be edited to suit your environment.
+
+- [openldap-schemas-configmap.yaml](/deployment_files/OpenLDAP/openldap-schemas-configmap.yaml)
+- [openldap-ldif-configmap.yaml](/deployment_files/OpenLDAP/openldap-ldif-configmap.yaml)
+- [openldap-env-configmap.yaml](/deployment_files/OpenLDAP/openldap-env-configmap.yaml)
+- [openldap-admin-secret.yaml](/deployment_files/OpenLDAP/openldap-admin-secret.yaml)
+- [openldap-secrets.yaml](/deployment_files/OpenLDAP/openldap-secrets.yaml)
+- [openldap-deploy.yaml](/deployment_files/OpenLDAP/openldap-deploy.yaml)
+- [openldap-service.yaml](/deployment_files/OpenLDAP/openldap-service.yaml)
+:::
+
 ### Create the config maps
 Let's create some configmaps for the ldap service
+
+[Example here](/deployment_files/OpenLDAP/openldap-schemas-configmap.yaml)
 
 `openldap-schemas-configmap.yaml`
 
@@ -43,6 +57,8 @@ data:
 ```tsx
 kubectl apply -f openldap-schemas-configmap.yaml
 ```
+
+[Example here](/deployment_files/OpenLDAP/openldap-ldif-configmap.yaml)
 
 `openldap-ldif-configmap.yaml`
 
@@ -164,7 +180,7 @@ stringData:
 kubectl apply -f openldap-admin-secret.yaml
 ```
 
-`ldap_secrets.yaml`
+`openldap-secrets.yaml`
 
 ```yaml showLineNumbers
 kind: Secret
@@ -184,7 +200,7 @@ stringData:
 Apply it to the cluster
 
 ```tsx
-kubectl apply -f ldap_secrets.yaml
+kubectl apply -f openldap-secrets.yaml
 ```
 
 ### Create the deployment
