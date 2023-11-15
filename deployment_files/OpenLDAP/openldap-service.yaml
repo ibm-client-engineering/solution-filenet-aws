@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: openldap
+  labels:
+    app: filenet-openldap
+spec:
+  ports:
+    - name: ldap-port
+      protocol: TCP
+      port: 389
+      targetPort: ldap-port
+  type: NodePort
+  selector:
+    app: filenet-openldap
