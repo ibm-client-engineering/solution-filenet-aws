@@ -1,0 +1,5 @@
+<server>
+  <library id="FileNetLib">
+    <fileset dir="${server.config.dir}/configDropins/overrides/ier-jars" includes="*.jar" scanInterval="5s" />
+  </library>
+</server>
