@@ -63,7 +63,7 @@ Now apply your updated CR to the cluster:
 kubectl apply -f ibm_fncm_cr_production.yaml
 ```
 
-:::infowarning
+:::info
 
 As of 5.5.11, the `add_repo_ce_wsi_url` was updated in the default CR shipped with that case. It no longer uses `http` for access and now uses `https`. So this must be taken into account if you are using an older CR that you've updated:
 
