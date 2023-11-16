@@ -1,0 +1,88 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: openldap-customldif
+  labels:
+    app: filenet-openldap
+data:
+  01-default-users.ldif: |-
+    # cp.internal
+    dn: dc=filenet,dc=internal
+    objectClass: top
+    objectClass: dcObject
+    objectClass: organization
+    o: filenet.internal
+    dc: filenet
+
+    # Units
+    dn: ou=Users,dc=filenet,dc=internal
+    objectClass: organizationalUnit
+    ou: Users
+
+    dn: ou=Groups,dc=filenet,dc=internal
+    objectClass: organizationalUnit
+    ou: Groups
+
+    # Users
+    dn: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    objectClass: sds
+    cn: cpadmin
+    sn: cpadmin
+    uid: cpadmin
+    mail: cpadmin@cp.internal
+    userpassword: Password
+    employeeType: admin
+    ibm-entryuuid: e6c41859-ced3-4772-bfa3-6ebbc58ec78a
+
+    dn: uid=cpuser,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    objectClass: sds
+    cn: cpuser
+    sn: cpuser
+    uid: cpuser
+    mail: cpuser@cp.internal
+    userpassword: Password
+    ibm-entryuuid: 30183bb0-1012-4d23-8ae2-f94816b91a75
+
+    dn: uid=user1,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    objectClass: sds
+    cn: user1
+    sn: user1
+    uid: user1
+    mail: user1@cp.internal
+    userpassword: Password
+    ibm-entryuuid: 30183bb1-1013-5d23-9ae2-f94816bou812
+
+    dn: uid=user2,ou=Users,dc=filenet,dc=internal
+    objectClass: inetOrgPerson
+    objectClass: top
+    objectClass: sds
+    cn: user2
+    sn: user2
+    uid: user2
+    mail: user2@cp.internal
+    userpassword: Password
+    ibm-entryuuid: 30184bb1-1014-6d23-9ae2-f94816bou813
+
+    # Groups
+    dn: cn=cpadmins,ou=Groups,dc=filenet,dc=internal
+    objectClass: groupOfNames
+    objectClass: top
+    objectClass: sds
+    cn: cpadmins
+    ibm-entryuuid: 4196cb9e-1ed7-4c02-bb0d-792cb7bfa768
+    member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+
+    dn: cn=cpusers,ou=Groups,dc=filenet,dc=internal
+    objectClass: groupOfNames
+    objectClass: top
+    objectClass: sds
+    cn: cpusers
+    ibm-entryuuid: fc4ded27-8c6a-4a8c-ad9e-7be65369758c
+    member: uid=cpadmin,ou=Users,dc=filenet,dc=internal
+    member: uid=cpuser,ou=Users,dc=filenet,dc=internal
