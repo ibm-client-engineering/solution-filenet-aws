@@ -7,6 +7,13 @@ title: Postgresql
 ## Deploy Postgres
 
 ### Creating configmaps
+
+:::note
+The files we are creating below can be found combined here. This yaml is purely for reference as are the examples below and may need to be edited to suit your environment.
+
+- [postgres.yaml](/deployment_files/Postgres/postgres.yaml)
+:::
+
 Let's create a configmap for the PGSQL database to use:
 
 `postgres_configmap.yaml`
@@ -166,7 +173,7 @@ Verify the postgres default database we configured above is up. You can get the 
 kubectl exec -it postgres-POD-ID -- psql -h localhost -U admin --password -p 5432 defaultdb
 ```
 
-### Create initial databases and object store
+### Prepare database table spaces and ceuser
 
 Retrieve the postgres pod id with this command:
 ```tsx
@@ -176,7 +183,6 @@ kubectl get pods | grep postgres
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d10h
 ```
 
-#### Prepare database table spaces and ceuser
 Connect to the postgres pod and create the tablespace directories for all databases you plan to create. 
 
 ```tsx
@@ -196,7 +202,7 @@ Create the `ceuser`
 create role ceuser login password 'p@ssw0rd';
 ```
 
-#### Create the databases
+### Create the databases
 
 For this deployment, we will be creating the following databases:
 - `gcddb`
@@ -246,5 +252,90 @@ CREATE TABLESPACE osdb_tbs OWNER ceuser LOCATION '/pgsqldata/osdb';
 GRANT CREATE ON TABLESPACE osdb_tbs TO ceuser;
 ```
 
-## Extra Tasks
-[Adding Object Stores](/5-Appendices/postgres-extratasks.mdx)
+## Appendix
+
+### Adding Object Store Databases
+
+:::note
+This presumes you already have completed the above steps 
+:::
+
+Determine how many databases we need to create. In our example below we will create the following:
+
+Extra object stores
+- `os2db`
+- `os3db`
+
+FilePlan Object Store and Record Object Store for IER
+- `fposdb`
+- `rosb`
+
+#### Creating the tablespace directories in postgres pod
+
+Determine the name of your postgres pod by first making sure we're in the right namespace:
+```tsx
+kubectl config set-context --current --namespace=filenet
+```
+And then pulling a list of pods
+```tsx
+kubectl get pods | grep postgres
+// highlight-next-line
+postgres-759fd876ff-d5fxd                     1/1     Running   0          7d22h
+```
+
+Now create the tablespace folders on the pod. These will be living in the PVC storage:
+```tsx
+kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db
+kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db
+```
+
+#### Create the databases
+
+Connect to `defaultdb`. Our password will be `p@ssw0rd`.
+
+```tsx
+kubectl exec -it postgres-759fd876ff-d5fxd -- psql -h localhost -U admin --password -p 5432 defaultdb
+```
+
+Create each database listed above. When you run the `\connect` command, it will query you for the password. It will still be `p@ssw0rd`.
+
+With these commands, we will be creating each database, setting the owner to `ceuser`, locking it down from public and then creating the tablespace for that database to use the directories we created above. These tablespaces will live on a separate PVC.
+
+```tsx
+CREATE DATABASE os2db OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE os2db TO ceuser;
+REVOKE CONNECT ON DATABASE os2db FROM public;
+
+// highlight-next-line
+\connect os2db
+CREATE TABLESPACE os2db_tbs OWNER ceuser LOCATION '/pgsqldata/os2db';
+GRANT CREATE ON TABLESPACE os2db_tbs TO ceuser;
+
+CREATE DATABASE os3db OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE os3db TO ceuser;
+REVOKE CONNECT ON DATABASE os3db FROM public;
+
+// highlight-next-line
+\connect os3db
+CREATE TABLESPACE os3db_tbs OWNER ceuser LOCATION '/pgsqldata/os3db';
+GRANT CREATE ON TABLESPACE os3db_tbs TO ceuser;
+
+CREATE DATABASE fposdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE fposdb TO ceuser;
+REVOKE CONNECT ON DATABASE fposdb FROM public;
+
+// highlight-next-line
+\connect fposdb
+CREATE TABLESPACE fposdb_tbs OWNER ceuser LOCATION '/pgsqldata/fposdb';
+GRANT CREATE ON TABLESPACE fposdb_tbs TO ceuser;
+
+CREATE DATABASE rosdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE rosdb TO ceuser;
+REVOKE CONNECT ON DATABASE rosdb FROM public;
+
+// highlight-next-line
+\connect rosdb
+CREATE TABLESPACE rosdb_tbs OWNER ceuser LOCATION '/pgsqldata/rosdb';
+GRANT CREATE ON TABLESPACE rosdb_tbs TO ceuser;
+
+```
