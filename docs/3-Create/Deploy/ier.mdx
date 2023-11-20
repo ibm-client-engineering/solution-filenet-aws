@@ -112,3 +112,63 @@ ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
 
 ```
+
+## Appendix
+
+### Applying fix for IER
+:::info
+As of 23.0.x release of CP4BA, the following bug was introduced into IBM FileNet Content Manager:
+
+When trying to access the IBM Enterprise Records desktop, an error message says that you cannot connect to the web client.
+The log also shows that an exception was thrown "java.lang.NoClassDefFoundError: org.apache.xerces.xni.parser.XMLEntityResolver".
+
+Cause:
+After moving to Java 11, IERApplicationPlugin.jar is unable to resolve the path to XercesImpl.jar in the ICN container.
+
+Tracked in this [link](https://www.ibm.com/support/pages/ibm-cloud-pak-business-automation-230x-known-limitations#I42202)
+
+The following instructions handle addressing this missing jar file.
+:::
+
+We have included the required files here.
+- [ier-library.xml](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/ier-library.xml)
+- [xercesImpl-2.12.2.jar](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/xercesImpl-2.12.2.jar)
+
+Keep in mind that future releases of CP4BA and FileNet may not require this fix to be applied. This is currently only applicable to 23.0.1.
+
+Determine the navigator pod with the following command:
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          12d
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          9d
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          12d
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          12d
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          12d
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          6d8h
+// highlight-next-line
+fncmdeploy-navigator-deploy-58b9c95c4-kt6jc   1/1     Running   0          3d9h
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          12d
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          10d
+postgres-759fd876ff-d5fxd                     1/1     Running   0          12d
+```
+
+Create the `ier-jars` subdirectory on the navigator pod:
+
+```tsx
+kubectl exec -it fncmdeploy-navigator-deploy-58b9c95c4-kt6jc -- mkdir configDropins/overrides/ier-jars
+```
+
+Upload the `ier-library.xml` and the `xercesImpl-2.12.2.jar` to that subdirectory on the navigator pod.
+
+```tsx
+kubectl cp ier-library.xml fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/
+kubectl cp xercesImpl-2.12.2.jar fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/ier-jars/xercesImpl.jar
+```
+
+Scale the navigator deployment down and up. If your replicas are more that 1, scale appropriately.
+
+```tsx
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=0
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=1
+```
