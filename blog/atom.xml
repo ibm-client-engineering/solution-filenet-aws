@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://filenet-eks.thinkforward.work/blog</id>
+    <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</id>
     <title>IBM Client Engineering Blog</title>
     <updated>2023-11-09T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://filenet-eks.thinkforward.work/blog"/>
+    <link rel="alternate" href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog"/>
     <subtitle>IBM Client Engineering Blog</subtitle>
-    <icon>https://filenet-eks.thinkforward.work/img/favicon.ico</icon>
+    <icon>https://ibm-client-engineering.github.io/solution-filenet-aws/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 34 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-34</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-34"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34"/>
         <updated>2023-11-09T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-34#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>With the help of IBM support the team continued to troubleshoot the FileNet Navigator issue.</li>
 <li>The team discovered that Navigator was trying to connect using the wrong port. The team adjusted the port within CR and was able to access Navigator.</li>
 <li>The team walked through using workflows within Process Designer.</li>
 <li>The team discussed upcoming use cases now that the major errors have been addressed.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-34#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team will be prepping for upcoming use cases and will be preparing documentation on GitHub.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-34#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will move to resume use cases and demos.</p>
@@ -34,7 +34,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-34#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 0</strong></p>
 <p><strong>Cases closed: 2</strong></p>
 <ul>
@@ -47,21 +47,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 33 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-33</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-33"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33"/>
         <updated>2023-11-08T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-33#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team brainstormed and discussed possible solutions for the Navigator Error.</li>
 <li>The team walked through the whiteboard and discussed remaining tasks on the FileNet project.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-33#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team is continuing to work closely with IBM support on this issue.</li>
 <li>The team is actively working with IBM support to get an expert from the Navigator team to join a future session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-33#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet Navigator issue and move to resume use cases and demos.</p>
@@ -71,7 +71,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-33#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-33#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -86,22 +86,22 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 32 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-32</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-32"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32"/>
         <updated>2023-11-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-32#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>While examining the logs, the team noticed an error 413 “payload too large” associated with NGINX.</li>
 <li>So, during this session, the team added a NGINX annotation within the CR to fix this error.</li>
 <li>After some testing, the team was successfully able to add content to a document and no longer encountered the web client error.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-32#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team started troubleshooting FileNet Navigator. Navigator wont launch after login. This seems to be tied to a ingress error.</li>
 <li>The team is gathering logs from this session and will work closely with IBM support on this issue.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-32#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet Navigator issue and move to resume use cases and demos.</p>
@@ -111,7 +111,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-32#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-32#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -126,21 +126,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 31 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-31</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-31"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31"/>
         <updated>2023-11-02T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-31#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team verified the java certs that were associated with Process Designer.</li>
 <li>After the java certs were updated, the team was able to launch Process Designer.</li>
 <li>The team then walked the client through WSDL setup and configuration in FileNet.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-31#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>While the team was able to get Process Designer working, the main error of FileNet being unable to connect to the web client persisted. The web client error appears to be a separate error and we are continuing to work with IBM support on this issue.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-31#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet issue and move to resume use cases and demos.</p>
@@ -150,7 +150,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-31#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-31#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -165,21 +165,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 30 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-30</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-30"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30"/>
         <updated>2023-11-01T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-30#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>With the help of IBM support, the team checked the settings of the Advanced Storage Area and devices.</li>
 <li>The team noticed FileNet had 3 virtual servers listed but there were only 2 replicas. The team tried scaling to 3 replicas, however the error persisted.</li>
 <li>The team then gathered logs from process designer for further investigation.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-30#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-30#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet issue and move to resume use cases and demos.</p>
@@ -189,7 +189,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-30#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-30#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -204,22 +204,22 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 29 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-29</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-29"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29"/>
         <updated>2023-10-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-29#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>With the help of IBM support, the team investigated network tracing using various browsers.</li>
 <li>The team noticed that creating a document with content resulted in an error, while an empty document did not.</li>
 <li>The team also verified the network policies within the cluster.</li>
 <li>The team then collected more logs for further troubleshooting.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-29#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-29#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet issue and move to resume use cases and demos.</p>
@@ -229,7 +229,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-29#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-29#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -244,21 +244,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 28 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-28</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-28"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28"/>
         <updated>2023-10-26T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-28#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>After upgrading the client's environment to version 5.5.11, the team verified the upgrade, and the pods are now in a healthy state.</li>
 <li>With IBM support on today’s session, the team recreated the FileNet error that we were previously encountering.</li>
 <li>The team gathered logs from the client's environment and will be working closely with support to evaluate the errors and logs.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-28#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-28#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to resolve the FileNet issue and move to resume use cases and demos.</p>
@@ -268,7 +268,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-28#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-28#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -283,22 +283,22 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 27 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-27</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-27"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27"/>
         <updated>2023-10-25T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-27#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to upgrade the client’s FileNet environment to version 5.5.11.</li>
 <li>During the session, the team was able to successfully update the operator.</li>
 <li>The team then updated the CR to reflect the new image tags and added the ‘sc_disable_read_only_root_filesystem’ variable.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-27#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The client is watching to see if the rolling update of the running pods is successful.</li>
 <li>We will continue to work closely with IBM support.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-27#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will assess the state of the cluster and move to resolve any remaining errors.</p>
@@ -308,7 +308,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-27#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-27#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -323,22 +323,22 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 26 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-26</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-26"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26"/>
         <updated>2023-10-24T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-26#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team began to upgrade the client’s FileNet environment to version 5.5.11.</li>
 <li>There were some errors while applying the update and the team spent time troubleshooting.
 -The team encountered a resource error that appears to be the same error the team faced during initial setup.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-26#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team will investigate how the resource error was previously resolved and will attempt to implement the solution in the next session.</li>
 <li>We will continue to work closely with IBM support on these errors.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-26#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to upgrade the cluster in the next session.</p>
@@ -348,7 +348,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-26#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-26#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014370797</li>
@@ -363,23 +363,23 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 25 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-25</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-25"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25"/>
         <updated>2023-10-18T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-25#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to troubleshoot the cluster issues.</li>
 <li>The team tried adding custom annotations to disable Dynatrace injections.</li>
 <li>The team deleted the non-postgreSQL driver related jars (from cpe pods).</li>
 <li>The team discussed features included in the new version of FileNet. The team thinks upgrading will help resolve these errors.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-25#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team will work with the client to upgrade their environment to FileNet 5.5.11</li>
 <li>We will continue to work closely with IBM support.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-25#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the cluster issues in the next session.</p>
@@ -389,7 +389,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-25#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -404,23 +404,23 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 24 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-24</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-24"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24"/>
         <updated>2023-10-17T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-24#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to troubleshoot the cluster issues.</li>
 <li>The team tried adding the oneagent annotation to the CR and that (potentially) caused errors in the operator, stating a syntax error.</li>
 <li>Despite taking out the entry, the operator began to recreate the pods. The deployments had the annotation, but the init containers were still getting stuck on trying to copy DynaTrace folders, which means the agent was still getting injected.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-24#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team will continue to investigate Dynatrace to determine if it is involved with the errors in the cluster.</li>
 <li>The client's team is working on an alternative way of sending logs. Email is blocking the files.</li>
 <li>We will continue to work closely with IBM support.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-24#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the cluster issues in the next session.</p>
@@ -430,7 +430,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-24#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-24#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -445,23 +445,23 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 23 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-23</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-23"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23"/>
         <updated>2023-10-12T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-23#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to troubleshoot the cluster issues.</li>
 <li>The team increased the max connections for Postgres. However, the errors persisted.</li>
 <li>The team collected more logs from today’s session.</li>
 <li>There was a discussion around Dynatrace. The team sees a <code>permission denied</code> error in the pods involving Dynatrace. We encountered issues with Dynatrace in previous sessions and it looks like it may have been reenabled. The team speculated that this could be causing issues.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-23#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team will continue to investigate Dynatrace to determine if it is involved with the errors in the cluster.</li>
 <li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-23#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the cluster issues in the next session.</p>
@@ -471,7 +471,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-23#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-23#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -486,21 +486,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 22 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-22</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-22"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22"/>
         <updated>2023-10-10T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-22#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to troubleshoot the cluster issues.</li>
 <li>We had IBM support join this session to assist with the troubleshooting.</li>
 <li>The team recreated the errors and gathered logs for further evaluation.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-22#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team is continuing to work with IBM support and examining the logs.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-22#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the cluster issues in the next session.</p>
@@ -510,7 +510,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-22#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-22#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -525,11 +525,11 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 21 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-21</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-21"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21"/>
         <updated>2023-10-05T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-21#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued to troubleshoot the cluster issues.</li>
 <li>The team tried several troubleshooting steps including:<!-- -->
@@ -542,13 +542,13 @@
 <li>While the CPE pods did come back, they began to experience issues later in the session.</li>
 <li>The errors persisted and the team grabbed multiple logs from today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-21#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team thinks that there are underlying issues with the cluster that are unrelated to FileNet.</li>
 <li>The client's team noted they have a team member who they could work with to assist with troubleshooting the cluster and possibly join a future session.</li>
 <li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-21#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the cluster issues in the next session.</p>
@@ -558,7 +558,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-21#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-21#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -573,21 +573,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 20 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-20</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-20"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20"/>
         <updated>2023-10-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-20#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>While troubleshooting yesterday’s Postgres issue, the team noticed some failing pods in the client's environment.</li>
 <li>The team tried several troubleshooting steps, but the pod errors persisted.</li>
 <li>While troubleshooting, the team was able to validate cluster admin access.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-20#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team took logs and screenshots from this session and will be opening a case with IBM support.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-20#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve the pod issue in the next session.</p>
@@ -597,7 +597,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-20#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-20#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 2</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -612,21 +612,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 19 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-19</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-19"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19"/>
         <updated>2023-10-03T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-19#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team encountered a Postgres issue and the team spent time troubleshooting the error.</li>
 <li>We pulled the logs from the pod and are currently working with support on the issue.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-19#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team is reviewing the most effective way to validate cluster admin access.</li>
 <li>The team is continuing to work with support to address the error encountered in today’s session</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-19#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue working to resolve these matters and will prep for our next session.</p>
@@ -636,7 +636,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-19#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-19#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS014348824</li>
@@ -650,19 +650,19 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 18 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-18</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-18"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18"/>
         <updated>2023-09-27T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-18#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team continued the walk-through of some of the functionality of Process Designer.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-18#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team is working closely with the support team to address the questions raised in today’s session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-18#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will work to answer the questions from today’s session and prep for Event Actions in our next session.</p>
@@ -672,7 +672,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-18#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 0</strong></p>
 <p><strong>Cases closed: 1</strong></p>
 <ul>
@@ -683,22 +683,22 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 17 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-17</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-17"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17"/>
         <updated>2023-09-26T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-17#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>The team continued with the installation of Process Designer in the customer's environment.</li>
 <li>In the previous session the team was encountering a authentication issue with Process Designer in the customer's environment. The team didn't make any changes to the customer's environment, but the authentication issue was no longer present. We took the logs back to the support team and await their feedback on the situation.</li>
 <li>The team then began a walk-through of some of the functionality of Process Designer.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-17#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team plans to continue the Process Designer walk-through in the next session.</li>
 <li>The team received the logs from today’s session. We will work with support and get their feedback.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-17#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue the walk-through of Process Designer then move to other use cases and demos.</p>
@@ -708,7 +708,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-17#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 0</strong></p>
 <p><strong>Cases closed: 1</strong></p>
 <ul>
@@ -719,20 +719,20 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 16 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-16</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-16"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16"/>
         <updated>2023-09-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-16#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>The team continued to walk through the installation of Process Designer in the client's environment.</li>
 <li>The team was able to resolve the previous session’s startup error. When unpacking Process Designer, Windows added an additional folder that altered and made the file path incorrect. However, the team encountered a new authentication error while attempting to login.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-16#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>The team updated the open ticket with this new issue and the team is working with support to troubleshoot this error.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-16#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue to work on the installation of Process Designer in our next session.</p>
@@ -742,7 +742,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-16#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 0</strong></p>
 <p><strong>Cases closed: 1</strong></p>
 <ul>
@@ -753,21 +753,21 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 15 🛫]]></title>
-        <id>https://filenet-eks.thinkforward.work/blog/flight-log-15</id>
-        <link href="https://filenet-eks.thinkforward.work/blog/flight-log-15"/>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15"/>
         <updated>2023-09-20T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://filenet-eks.thinkforward.work/blog/flight-log-15#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
 <ul>
 <li>Today the team began to walk through an installation of Process Designer in the client's environment.</li>
 <li>The team ran into an error while trying to setup Process Designer in the Windows VM.</li>
 <li>There were some differences in the java versions. We were using the JDK and the client had the JRE. But after setting the JAVA_HOME, it looks like Process Designer was able to locate Java. However, Process Designer gave an error that it was unable to load "main class".</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-15#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
 <ul>
 <li>We opened a ticket and the team is working with support to troubleshoot this error.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://filenet-eks.thinkforward.work/blog/flight-log-15#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>
 <p>The team will continue to work on the installation of Process Designer in our next session.</p>
@@ -777,7 +777,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://filenet-eks.thinkforward.work/blog/flight-log-15#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <ul>
 <li><strong>Cases open: 1</strong>
 <ul>
