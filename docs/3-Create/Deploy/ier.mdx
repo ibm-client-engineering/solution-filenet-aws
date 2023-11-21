@@ -112,6 +112,39 @@ ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
 
 ```
+## IER CONFIGURATIONS ON ICN 
+
+Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
+
+![ICNPLUGIN](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d8288174-bfd7-4c9b-ac78-67faa6dd7b4f)
+
+Save and Close . Edit the added plugin and scroll down . You will see the file plan repository like this and select Connect and then Click on the FPOS 
+
+![ICNFILEPLANREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/1b23d73e-ba89-4daa-8ca2-0ec7839c77a8)
+
+Create a desktop "IER" and select repository FPOS. General > Authentication > Repository 
+Navigate to Repository Tab and add FPOS and ROS like it is shown below
+![ICNREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/f2126b91-d000-45d2-80c6-202d64ab9232)
+
+log in to IER desk top . Navigate to administration . IER desk top will be visible under desktops and FPOS repository would be visible under Repositories
+ IER desk top will have the options shown below
+
+ ![IERDESKTOP](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/252b6535-f740-4b63-b4c1-551afc79d0bd)
+
+Create a custom menu - Copy Document Context Menu and add the IER option as shown below 
+![CUSTOMMENU](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/3460c13e-e64e-46db-b669-e5239c8f9763)
+Add the menu to the desktop where IER functionality is exceted .Below is the image where you can add the custom menu created on above step
+![CUSTOMMENU1](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/c793b329-9e98-4d55-a3ac-80b7c7fe4055)
+
+## Validate IER Functionality 
+Create a file plan in FPOS and declare a record using the file plan . The document will look like this as a record (electronic/physical etc )
+
+![RECORD](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/0ed9d858-3407-4194-b8b8-f4d80cd1363b)
+
+
+
+
+
 
 ## Appendix
 
