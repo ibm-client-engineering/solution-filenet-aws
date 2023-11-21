@@ -269,12 +269,14 @@ kubectl get pods | grep postgres
 // highlight-next-line
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d10h
 ```
-Connect to the postgres pod and create the tablespace directories for `fposdb` and `rosdb` 
+Connect to the postgres pod and create the tablespace directories for `fposdb` and `rosdb`. This will also include the paths for the indexarea and workflows for `rosdb`. 
 
 ```tsx
-kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbindex 
-kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbindex 
+kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbidx 
+kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbidx 
 ```
+
+### Create the IER object store databases
 
 Connect to `defaultdb`. Our password will be `p@ssw0rd`.
 
@@ -282,9 +284,43 @@ Connect to `defaultdb`. Our password will be `p@ssw0rd`.
 kubectl exec -it postgres-759fd876ff-d5fxd -- psql -h localhost -U admin --password -p 5432 defaultdb
 ```
 
+Create the databases. Each `\connect` statement will require the `p@ssw0rd` password.
+
+```tsx
+CREATE DATABASE fposdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE fposdb TO ceuser;
+REVOKE CONNECT ON DATABASE fposdb FROM public;
+
+// highlight-next-line
+\connect fposdb
+CREATE TABLESPACE fposdb_tbs OWNER ceuser LOCATION '/pgsqldata/fposdb';
+GRANT CREATE ON TABLESPACE fposdb_tbs TO ceuser;
+
+CREATE DATABASE rosdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
+GRANT ALL ON DATABASE rosdb TO ceuser;
+REVOKE CONNECT ON DATABASE rosdb FROM public;
+
+// highlight-next-line
+\connect rosdb
+CREATE TABLESPACE rosdb_tbs OWNER ceuser LOCATION '/pgsqldata/rosdb';
+GRANT CREATE ON TABLESPACE rosdb_tbs TO ceuser;
+```
+
+We will also now create the tablespaces in `rosdb` for the index area and workflows 
+
+```tsx
+// highlight-start
+CREATE TABLESPACE rosdbwf_tbs OWNER ceuser LOCATION '/pgsqldata/rosdbwf';
+CREATE TABLESPACE rosdbidx_tbs OWNER ceuser LOCATION '/pgsqldata/rosdbidx';
+GRANT CREATE ON TABLESPACE rosdbwf_tbs TO ceuser;
+GRANT CREATE ON TABLESPACE rosdbidx_tbs TO ceuser;
+// highlight-end
+
+```
+
 ## Appendix
 
-### Adding Object Store Databases
+### Adding Other Object Store Databases
 
 :::note
 This presumes you already have completed the above steps 
@@ -295,12 +331,6 @@ Determine how many databases we need to create. In our example below we will cre
 Extra object stores
 - `os2db`
 - `os3db`
-
-FilePlan Object Store and Record Object Store for IER
-- `fposdb`
-- `rosdb`
-
-We're also going to create an extra tablespace for `rosdb` called `roswf_tbs`. This extra tablespace will be for workflows.
 
 #### Creating the tablespace directories in postgres pod
 
@@ -317,8 +347,8 @@ postgres-759fd876ff-d5fxd                     1/1     Running   0          7d22h
 
 Now create the tablespace folders on the pod. These will be living in the PVC storage:
 ```tsx
-kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db /pgsqldata/rosfw
-kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db /pgsqldata/rosfw
+kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/os2db /pgsqldata/os3db
+kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/os2db /pgsqldata/os3db
 ```
 
 #### Create the databases
@@ -328,6 +358,7 @@ Connect to `defaultdb`. Our password will be `p@ssw0rd`.
 ```tsx
 kubectl exec -it postgres-759fd876ff-d5fxd -- psql -h localhost -U admin --password -p 5432 defaultdb
 ```
+Now create the databases
 
 Create each database listed above. When you run the `\connect` command, it will query you for the password. It will still be `p@ssw0rd`.
 
@@ -351,34 +382,4 @@ REVOKE CONNECT ON DATABASE os3db FROM public;
 \connect os3db
 CREATE TABLESPACE os3db_tbs OWNER ceuser LOCATION '/pgsqldata/os3db';
 GRANT CREATE ON TABLESPACE os3db_tbs TO ceuser;
-
-CREATE DATABASE fposdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
-GRANT ALL ON DATABASE fposdb TO ceuser;
-REVOKE CONNECT ON DATABASE fposdb FROM public;
-
-// highlight-next-line
-\connect fposdb
-CREATE TABLESPACE fposdb_tbs OWNER ceuser LOCATION '/pgsqldata/fposdb';
-GRANT CREATE ON TABLESPACE fposdb_tbs TO ceuser;
-
-CREATE DATABASE rosdb OWNER ceuser TEMPLATE template0 ENCODING UTF8;
-GRANT ALL ON DATABASE rosdb TO ceuser;
-REVOKE CONNECT ON DATABASE rosdb FROM public;
-
-// highlight-next-line
-\connect rosdb
-CREATE TABLESPACE rosdb_tbs OWNER ceuser LOCATION '/pgsqldata/rosdb';
-GRANT CREATE ON TABLESPACE rosdb_tbs TO ceuser;
-
 ```
-Now we create the workflow tablespace in ROSDB.
-
-```tsx
-// highlight-start
-CREATE TABLESPACE roswf_tbs OWNER ceuser LOCATION '/pgsqldata/roswf';
-GRANT CREATE ON TABLESPACE roswf_tbs TO ceuser;
-// highlight-end
-
-```
-
-So the ROSDB winds up with a table space for the object storage as well as one for workflows.
