@@ -44,7 +44,7 @@ Dynatrace requires write access to the filesystem of the host or container where
 
 Earlier versions of FileNet have the filesystem set to read only by default. However, with the release of FileNet Version 5.5.11, FileNet deployments now have the option to set the filesystem to read/write. 
 
-To accomplish this, we needed to update FileNet version 5.5.11 and then set the filesystem to read/write. For instructions on updating, please reference the upgrade section.
+To accomplish this, we needed to update FileNet version 5.5.11 and then set the filesystem to read/write. For instructions on updating, please reference the [upgrade](/docs/3-Create/Upgrade/upgrade.mdx) section.
 
 Once FileNet is upgraded to 5.5.11, we can enable the read/write file system in the CR with the following line:
 ```yaml
@@ -61,10 +61,10 @@ The team continued to experience issues with DynaTrace and FileNet IER deploymen
 The team had to use an alternative solution for IER. This included modifying a DaemonSet. A DaemonSet ensures that all (or some) nodes in a Kubernetes cluster run a copy of a specific pod. Unlike typical deployments where you specify the desired number of replicas, a DaemonSet ensures one pod instance per node. These pods are typically used for tasks like monitoring, logging, or other system-level services that should run on every node. We used the following command:
 
 ```
-kubectl -n YOUR_NAMESPACE patch daemonset YOUR_DAEMONSET_NAME -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
+kubectl -n DYNATRACE_AGENT_NAMESPACE patch daemonset YOUR_DAEMONSET_NAME -p '{"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}}'
 ```
 :::note
-The previous command is a template. You need to modify `YOUR_NAMESPACE` and `YOUR_DAEMONSET_NAME` with your DynaTrace Namespace and DaemonSet name. 
+The previous command is a template. You need to modify `DYNATRACE_AGENT_NAMESPACE` to the namespace where the DynaTrace agent is deployed. Additionally, change `YOUR_DAEMONSET_NAME` with the DynaTrace DaemonSet name. 
 :::
 
 The key part of the command was modifying the `nodeSelector` to include a label called `non-existing` with the value `true`. Essentially, this label doesn't exist on any nodes. When you update the DaemonSet's template with a non-existent node selector, it effectively makes the DaemonSet unable to schedule pods on any nodes. By applying this patch, the DynaTrace DeamonSet will not have any nodes to run the pods on and the existing DynaTrace pods are deleted. 
@@ -192,7 +192,7 @@ The next page will display the general settings, along with the Server URL for t
 
 In our case, when we hit the connect button, we saw the same network error message we saw at the beginning. 
 
-Alternatively, We can also view some of the Repository settings in the CR.
+Alternatively, We can also view Repository connection URL in the CR as `add_repo_ce_wsi_url`.
 
 ```yaml
 ic_icn_init_info:
@@ -200,24 +200,7 @@ ic_icn_init_info:
     - add repo id: "OS01геро"
       // highlight-next-line
       add_repo_ce_wsi_url: "http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"
-      add_repo_os_sym_name: "OS01"
-      add_repo_os_dis_name: "OS01"
-      add_repo_workflow_enable: false 
-      add_repo_work_conn_pnt: "pe_conn_os1:1" 
-      add_repo_protocol: "FileNetP8WSI"
-  icn desktop:
-    - add_desktop_id: "desktop1"
-      add_desktop_name: "icn_desktop" 
-      add_desktop_description: "This is ICN desktop"
-      add_desktop_is_default: false
-      add_desktop_repo_id: "OS01repo"
-      add_desktop_repo_workflow_enable: false
-```
-
-The team payed specific attention to the Server URL being used for the Repository connection:
-
-```
-"http://{{ meta.name }}-cpe-stateless-svc.{{ meta.namespace }}.svc:9080/wsi/FNCEWS40MTOM/"
+      ...
 ```
 
 We then compared the Server URL to the service in the FileNet namespace using the command:
@@ -233,7 +216,7 @@ NAME                          TYPE      CLUSTER-IP      EXTERNAL- IP    PORT(S) 
 fncmdeploy-cpe-stateless-svc  NodePort  172.20.74.23    <none>          9443:31688/TCP,9103:30012/TCP   167d
 ```
 
-Here the team noticed differences in the service and the Repository connection Server URL. The service was using port `9443` while the Server URL was trying to connect to port `9080`. Also the service was using `https` while the Server URL was using `http`. 
+Here the team noticed differences in the service and the Repository connection Server URL. For more information reference [Upgrading FNCM containers](/docs/3-Create/Upgrade/upgrade.mdx#upgrading-fncm-containers). As of version 5.5.11, the `add_repo_ce_wsi_url` was updated in the default CR shipped with that case. So, the team encountered this issue after upgrading to 5.5.11.
 
 #### The Solution
 
