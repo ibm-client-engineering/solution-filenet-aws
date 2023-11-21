@@ -208,7 +208,7 @@ For this deployment, we will be creating the following databases:
 - `gcddb`
 - `icndb`
 
-And one single object store for now
+Initial Object Store database
 
 - `osdb`
 
@@ -252,6 +252,36 @@ CREATE TABLESPACE osdb_tbs OWNER ceuser LOCATION '/pgsqldata/osdb';
 GRANT CREATE ON TABLESPACE osdb_tbs TO ceuser;
 ```
 
+## IER Databases and Object Stores
+
+For IER support, we will be creating the following databases:
+- `fposdb` - File Plan Object Store
+- `rosdb` - Record Object Store
+
+In this instance we will also be creating two extra table spaces for `rosdb` for the indexarea and workflows.
+
+### Create the tablespace directories
+
+Retrieve the postgres pod id with this command:
+```tsx
+kubectl get pods | grep postgres
+
+// highlight-next-line
+postgres-759fd876ff-d5fxd                     1/1     Running   0          6d10h
+```
+Connect to the postgres pod and create the tablespace directories for `fposdb` and `rosdb` 
+
+```tsx
+kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbindex 
+kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/rosdbwf /pgsqldata/rosdbindex 
+```
+
+Connect to `defaultdb`. Our password will be `p@ssw0rd`.
+
+```tsx
+kubectl exec -it postgres-759fd876ff-d5fxd -- psql -h localhost -U admin --password -p 5432 defaultdb
+```
+
 ## Appendix
 
 ### Adding Object Store Databases
@@ -268,7 +298,9 @@ Extra object stores
 
 FilePlan Object Store and Record Object Store for IER
 - `fposdb`
-- `rosb`
+- `rosdb`
+
+We're also going to create an extra tablespace for `rosdb` called `roswf_tbs`. This extra tablespace will be for workflows.
 
 #### Creating the tablespace directories in postgres pod
 
@@ -285,8 +317,8 @@ postgres-759fd876ff-d5fxd                     1/1     Running   0          7d22h
 
 Now create the tablespace folders on the pod. These will be living in the PVC storage:
 ```tsx
-kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db
-kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db
+kubectl exec -it postgres-759fd876ff-d5fxd -- mkdir /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db /pgsqldata/rosfw
+kubectl exec -it postgres-759fd876ff-d5fxd -- chmod 700 /pgsqldata/fposdb /pgsqldata/rosdb /pgsqldata/os2db /pgsqldata/os3db /pgsqldata/rosfw
 ```
 
 #### Create the databases
@@ -339,3 +371,14 @@ CREATE TABLESPACE rosdb_tbs OWNER ceuser LOCATION '/pgsqldata/rosdb';
 GRANT CREATE ON TABLESPACE rosdb_tbs TO ceuser;
 
 ```
+Now we create the workflow tablespace in ROSDB.
+
+```tsx
+// highlight-start
+CREATE TABLESPACE roswf_tbs OWNER ceuser LOCATION '/pgsqldata/roswf';
+GRANT CREATE ON TABLESPACE roswf_tbs TO ceuser;
+// highlight-end
+
+```
+
+So the ROSDB winds up with a table space for the object storage as well as one for workflows.
