@@ -112,8 +112,36 @@ ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
 
 ```
-## IER CONFIGURATIONS ON ICN 
+## IER Configuration 
+Please make sure below object stores are created and required configurations are in place 
 
+1- ROS - Object Store 
+
+      Configure connection points for ROS. Below is a screenshot for reference 
+
+![ROS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/07ac22da-b1fa-4e32-98ec-ac5f0b69d617)
+
+
+2- FPOS - Object Store 
+
+      Create FPOS object store as shown in Screenshot below
+
+![FPOS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/46a43cb7-bed4-479c-88b0-6459a962fef1)
+
+
+3- IER Task Manager Setup Configuration
+
+      Configuring Task Manager for IER in ICN - In the systems content navigator administration interface go to the settings node.
+Scroll down in the general tab under settings to Task Manager configuration
+Select to enable the task manager service
+Add the task manager url,Specify the log diretcory
+
+Add the TM_JOB_URL environment variable to the Task Manager deployment 
+
+Copy jar files 
+
+
+4- IER Configuration on ICN 
 Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
 
 ![ICNPLUGIN](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d8288174-bfd7-4c9b-ac78-67faa6dd7b4f)
