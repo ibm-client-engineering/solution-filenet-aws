@@ -1,0 +1,276 @@
+---
+id: graphql
+sidebar_position: 4
+title: GraphQL
+---
+
+# GraphQL
+
+## Queries and Mutations
+
+- **Endpoint**: (filenet-root-link)/content-services-graphql/graphql 
+    - where home link comes before /acce/ and /navigator/ for the acce console and navigator, respectively
+- **XSRF Token**: can be found in the page source of the graphiql page
+    - XSRF/CSRF stands for Cross-Site Request Forgery, the token provides protection from this
+
+### Prerequisites
+
+- xsrf authentication is enabled in the CR
+- if using GraphiQL, this also must be enabled in the CR
+
+## Lambda Functions
+
+### Prerequisites
+
+- Endpoint
+- Authorization Header (Bearer Token)
+- [aws cli](https://ibm-client-engineering.github.io/solution-watson-orchestrate/Create/solution-prepare#aws-cli-install) and credentials
+
+### Development Flow
+
+1. If possible, test your query in the graphiql interface (_Note: graphiql does not support file uploads as it cannot access local files_)
+2. Test your query as a curl command
+3. Place the curl command into a Python function, making use of the json and requests libraries
+4. Test running the Python function locally
+5. Modify the Python function to run as a lambda function
+6. Install the required python libraries into the lambda python environment
+7. Invoke the function (ensure your role is allowed to execute the lambda function and if required, access s3 buckets)
+
+#### Example: Uploading a file from an S3 bucket to Filenet
+
+1. curl command:
+- Windows:
+```curl
+curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@\"C:/path/to/file/file.extension\"'
+```
+
+- Mac/Linux:
+```curl
+curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here: ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@/path/to/file/file.extension'
+```
+
+2. Python function:
+
+```python title="file_upload_local_curl_query.py"
+import requests
+import json
+
+file_mac_linux = '/path/to/file/filename.extension'
+file_windows = 'C:/path/to/file/filename.extension'
+file = file_<platform>                                  # pick your platform
+repo_ID = "<insert repo name here>"                     # ex. OS01
+folder_path = "<insert folder path here>"                # ex. /TRAVELERS/TEST-LOAN
+document_name = "<insert document name here>"           # ex. curl upload test
+content_type = "<insert content type here>"             # ex. text/plain
+filenet_home_link = "<insert filenet home link>"
+xsrf_token = "<insert xsrf token here>"
+
+# Define the GraphQL query and variables
+graphql_query = """
+mutation ($contvar: String) {
+    createDocument (
+        repositoryIdentifier: repo_ID
+        fileInFolderIdentifier: folder_path
+        documentProperties: {
+            name: document_name
+            contentElements: {
+                replace: [{
+                    type: CONTENT_TRANSFER
+                    contentType: content_type
+                    subContentTransfer: {
+                        content: $contvar
+                    }
+                }]
+            }
+        }
+        checkinAction: {}
+    ) {
+        id
+        name
+    }
+}
+"""
+
+variables = {"contvar": None}
+
+# Define the GraphQL endpoint URL and headers
+url = filenet_home_link + '/content-services-graphql/graphql'
+headers = {
+    'Authorization': 'Basic ' + xsrf_token,
+}
+
+operations = json.dumps({
+            "query": graphql_query,
+            "variables": variables
+        })
+
+data = {
+    "operations": operations
+}
+
+# Prepare the multipart form data
+files = {
+    'contvar': (file, open(file, 'rb'), content_type)
+}
+
+# Send the request
+response = requests.post(url, headers=headers, files=files, data=data)
+
+# Handle the response
+if response.status_code == 200:
+    result = response.json()
+    print(response)
+    print(response.text)
+    # Process the GraphQL response here
+
+# Handle the error
+else:
+    print(f"Request failed with status code {response.status_code}")
+    print(response.text)
+```
+
+3. Test this function by running `python3 local_curl_query.py`
+4. Python function as a lambda handler:
+
+```python title="file_upload_lambda_handler.py"
+import json
+import requests
+import boto3
+import os
+
+repo_ID = "<insert repo name here>"                                 # ex. OS01
+folder_path = "<insert folder path here>"                           # ex. /TRAVELERS/TEST-LOAN
+document_name = "<insert document name here>"                       # ex. curl upload test
+content_type = "<insert content type here>"                         # ex. text/plain
+filenet_home_link = "<insert filenet home link>"
+xsrf_token = "<insert xsrf token here>"
+s3_bucket_name = '<insert filenet s3 bucket name here>'             # ex. filenet-test-bucket
+file_from_s3_bucket = '<insert file to download from s3 bucket>'    # ex. IBMContentManagerDevice.txt
+target_file = '/tmp/<insert filename here with .extension>'         # ex. test.txt
+
+def lambda_handler(event = None, context = None):
+    # Define your GraphQL query and variables
+    graphql_query = """
+    mutation ($contvar: String) {
+        createDocument (
+            repositoryIdentifier: repo_ID
+            fileInFolderIdentifier: folder_path
+            documentProperties: {
+                name: document_name
+                contentElements: {
+                    replace: [{
+                        type: CONTENT_TRANSFER
+                        contentType: content_type
+                        subContentTransfer: {
+                            content: $contvar
+                        }
+                    }]
+                }
+            }
+            checkinAction: {}
+        ) {
+            id
+            name
+        }
+    }
+    """
+    
+    variables = {"contvar": None}
+
+    # Prepare the multipart form request
+    url = filenet_home_link + '/content-services-graphql/graphql'
+    headers = {
+        'Authorization': 'Basic ' + xsrf_token,
+    }
+
+    operations = json.dumps({
+                "query": graphql_query,
+                "variables": variables
+            })
+
+    data = {
+        "operations": operations
+    }
+
+    # Upload file to Lambda's /tmp directory
+    s3 = boto3.client('s3')
+    s3.download_file(s3_bucket_name, file_from_s3_bucket, target_file)
+
+    files = {
+        'contvar': (target_file, open(target_file, 'rb'), content_type)
+    }
+
+    # Send the request
+    response = requests.post(url, headers=headers, files=files, data=data)
+
+    # Handle the response
+    if response.status_code == 200:
+        result = response.json()
+        # Process the GraphQL response here
+    else:
+        print(f"Request failed with status code {response.status_code}")
+        # Handle the error
+
+    print(response)
+    print(response.text)
+    return result
+```
+
+5. Install required python libraries into the lambda python environment
+
+- Follow these [aws cli setup steps](https://ibm-client-engineering.github.io/solution-watson-orchestrate/Create/solution-prepare#aws-cli-install) if you haven't already
+- Create a role that can execute lambda functions:
+```aws_cli
+aws iam create-role --role-name filenet-lambda-s3 --assume-role-policy-document file://permissions.json
+```
+
+```json title="permissions.json"
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Principal": {
+                "Service": [
+                    "lambda.amazonaws.com"
+                ]
+            }
+        }
+    ]
+}
+```
+- give that role permission to access s3 buckets (in this example we grant permission to perform all s3 bucket actions):
+```aws_cli
+aws iam put-role-policy --role-name filenet-lambda-s3 --policy-name s3_permissions --policy-document file://s3permissions.json
+```
+
+```json title="s3permissions.json"
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+- Continue to the [environment setup](https://ibm-client-engineering.github.io/solution-watson-orchestrate/Create/solution-prepare#environment-setup) to install the **boto3**, **json** and **requests** libraries
+- When creating the package, replace the filename with **file_upload_lambda_handler.py**
+- Then [create the aws lambda function](https://ibm-client-engineering.github.io/solution-watson-orchestrate/Create/solution-prepare#aws-lambda-create-function), replce the _function name_, as well as the _role_ and _zip file path_ parameters
+
+6. Invoke the function, replacing the function name you chose in the previous step:
+
+```aws_cli
+aws lambda invoke --function-name <insert function name here> out --log-type Tail --query 'LogResult' --output test | base64 -d
+```
+
+Your file should now appear in filenet under the chosen directory with the given name like so:
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/7c134a68-dd80-4946-a0b7-cd714f74e7ee)

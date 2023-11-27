@@ -143,4 +143,53 @@ When `nginx.ingress.kubernetes.io/proxy-body-size` is set to 0, this removes the
 
 #### Summary
 
-The NGINX server was rejecting the payload with an error "413 Payload Too Large". This caused the failure when creating a document with content. The team resolved this by removing the payload limitation by adding `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the CR. 
+The NGINX server was rejecting the payload with an error "413 Payload Too Large". This caused the failure when creating a document with content. The team resolved this by removing the payload limitation by adding `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the CR.
+
+
+### IBM Content Navigator
+
+#### The Problem
+
+While modifying settings in the navigator, we encountered the following error:
+
+![](https://media.github.ibm.com/user/436100/files/c026119b-3b95-4323-b2e4-279285b67e7a)
+
+The team proceeded to view the logs within one of the navigator pods and repeated the triggering action, following the debugging steps outlined above under [Dynatrace and Filenet](http://localhost:3000/solution-filenet-aws/Transition/solution-lessons#dynatrace-and-filenet). We were able to find the following system error stack trace:
+
+![](https://media.github.ibm.com/user/436100/files/930eb18f-5d12-4f66-b9af-1bc27cf2aa24)
+
+Thus the problem was identified as a cyrpto error within the Navigator:
+
+```
+com.ibm.ecm.crypto.CipherException: Failed to encrypt
+```
+
+#### The Solution
+
+Matching our error to the one found in [troubleshooting crypto errors in icn](https://www.ibm.com/support/pages/troubleshooting-crypto-errors-ibm-content-navigator), namely **com.ibm.ecm.crypto.CipherException: Failed to encrypt/decrypt**, we followed [the recommended steps](https://www.ibm.com/support/pages/node/876336) to fix the problem.
+
+Using Chrome, we opened the developer tools:
+
+![](https://media.github.ibm.com/user/436100/files/c56bf2b7-c127-4488-a99d-7c47ac14ef83)
+
+Next, we switched to the Console and ran
+
+```py
+# run the first and then the next
+icn.admin.keys.rotateKEK()
+icn.admin.keys.rotateDEKs()
+```
+
+![](https://media.github.ibm.com/user/436100/files/161bc288-a40d-4806-acb2-fd33a058badd)
+
+:::note
+Although the Console may give warnings such as _The action was canceled_, you will know that it was succcessful if you see the _x keys were rotated_ message at the bottom of the browser window, as can be see in the image above.
+:::
+
+After applying these changes, the error was gone and we instead encountered the following message indicating that the setting changes were accepted:
+
+![](https://media.github.ibm.com/user/436100/files/7a6dbd4b-f524-43c4-88d3-83bcaaa9b4d2)
+
+#### Summary
+
+The IBM Content Navigator was blocking all setting changes. This is because either the data encryption key (DEK) was not encrypted using the current key encryption key (KEK) or the secret was not encrypted using the current DEK. This resulted in a `com.ibm.ecm.crypto.CipherException: Failed to encrypt` error, found in the navigator logs. The team resolved this by running the `icn.admin.keys.rotateKEK()` and `icn.admin.keys.rotateDEKs()` commands in the browser console to rotate the keys.
