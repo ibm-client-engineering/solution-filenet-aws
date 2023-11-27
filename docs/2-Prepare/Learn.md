@@ -4,6 +4,9 @@ sidebar_position: 1
 title: Learn
 ---
 
+<img src="https://github.com/ibm-client-engineering/solution-filenet-aws/assets/125045410/6c3f6a43-f8e7-4059-9b80-92585192c3c7" align="left" /> 
+
+
 ## Learning Resources
 
 Before embarking on Containerizing IBM FileNet on AWS, one needs a basic understanding of the AWS ecosystem. Here are some courses that will give you a basic foundation:
