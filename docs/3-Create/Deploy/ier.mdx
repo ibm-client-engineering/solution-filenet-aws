@@ -1,0 +1,207 @@
+---
+id: solution-deploy-ier
+sidebar_position: 4
+title: IBM Enterprise Records
+---
+
+## Deploy IER
+
+If IBM Enterprise Records is required, you should have already staged the image per the previous instructions in Staging.
+
+### Create the `ibm-ier-secret`
+
+If deploying IER, create the following
+ ```tsx
+kubectl create secret generic ibm-ier-secret \
+--from-literal=appLoginUsername="cpadmin" \
+--from-literal=appLoginPassword="Password" \
+--from-literal=keystorePassword="p@ssw0rd" \
+--from-literal=ltpaPassword="p@ssw0rd"
+```
+### Updating CR for IER deployment
+
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
+```yaml
+  content_optional_components:
+    cpe: true
+    graphql: true
+    cmis: false
+    css: false
+    es: false
+    tm: false
+    ban: true
+    // highlight-start
+    ier: true
+    // highlight-end
+
+```
+After the `navigator_configuration` entry in the CR, add the following section
+```yaml
+  ier_configuration:
+    arch:
+      amd64: "3 - Most preferred"
+    replica_count: 2
+    ier_ext_tls_secret_name:
+    ier_auth_ca_secret_name:
+    image:
+      // highlight-start
+      # This should point to whatever repo you staged the image in. Leave this as default if using IBM's registry
+      repository: cp.icr.io/cp/cp4a/ier/ier
+      // highlight-end
+      tag: ga-5218-ier-if005
+      pull_policy: IfNotPresent
+      // highlight-start
+      # This NEEDS to be set to the correct secret name. Make sure it's the one you created above.
+    ier_secret_name: ibm-ier-secret
+      // highlight-end
+    log:
+      format: json
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: 1
+        memory: 1024Mi
+    auto_scaling:
+      enabled: false
+      max_replicas: 3
+      min_replicas: 1
+      target_cpu_utilization_percentage: 80
+    ier_production_setting:
+      license: accept
+    collectd_enable_plugin_write_graphite: false
+    run_as_user: 
+    datavolume:
+      existing_pvc_for_ier_instance: ""
+    probe:
+      readiness:
+        initial_delay_seconds: 120
+        period_seconds: 5
+        timeout_seconds: 10
+        failure_threshold: 6
+      liveness:
+        initial_delay_seconds: 600
+        period_seconds: 5
+        timeout_seconds: 5
+        failure_threshold: 6
+```
+
+### Apply the CR
+ 
+```bash
+kubectl apply -f ibm_fncm_cr_production.yaml
+```
+
+Wait for about five minutes or so and then check to see if the pod has spun up.
+ 
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          3d9h
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          6d7h
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          6d6h
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          6d6h
+// highlight-start
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          7h55m
+// highlight-end
+fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
+postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
+
+```
+## IER CONFIGURATIONS ON ICN 
+
+Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
+
+![ICNPLUGIN](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d8288174-bfd7-4c9b-ac78-67faa6dd7b4f)
+
+Save and Close . Edit the added plugin and scroll down . You will see the file plan repository like this and select Connect and then Click on the FPOS 
+
+![ICNFILEPLANREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/1b23d73e-ba89-4daa-8ca2-0ec7839c77a8)
+
+Create a desktop "IER" and select repository FPOS. General > Authentication > Repository 
+Navigate to Repository Tab and add FPOS and ROS like it is shown below
+![ICNREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/f2126b91-d000-45d2-80c6-202d64ab9232)
+
+log in to IER desk top . Navigate to administration . IER desk top will be visible under desktops and FPOS repository would be visible under Repositories
+ IER desk top will have the options shown below
+
+ ![IERDESKTOP](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/252b6535-f740-4b63-b4c1-551afc79d0bd)
+
+Create a custom menu - Copy Document Context Menu and add the IER option as shown below 
+![CUSTOMMENU](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/3460c13e-e64e-46db-b669-e5239c8f9763)
+Add the menu to the desktop where IER functionality is exceted .Below is the image where you can add the custom menu created on above step
+![CUSTOMMENU1](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/c793b329-9e98-4d55-a3ac-80b7c7fe4055)
+
+## Validate IER Functionality 
+Create a file plan in FPOS and declare a record using the file plan . The document will look like this as a record (electronic/physical etc )
+
+![RECORD](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/0ed9d858-3407-4194-b8b8-f4d80cd1363b)
+
+
+
+
+
+
+## Appendix
+
+### Applying fix for IER
+:::info
+As of 23.0.x release of CP4BA, the following bug was introduced into IBM FileNet Content Manager:
+
+When trying to access the IBM Enterprise Records desktop, an error message says that you cannot connect to the web client.
+The log also shows that an exception was thrown "java.lang.NoClassDefFoundError: org.apache.xerces.xni.parser.XMLEntityResolver".
+
+Cause:
+After moving to Java 11, IERApplicationPlugin.jar is unable to resolve the path to XercesImpl.jar in the ICN container.
+
+Tracked in this [link](https://www.ibm.com/support/pages/ibm-cloud-pak-business-automation-230x-known-limitations#I42202)
+
+The following instructions handle addressing this missing jar file.
+:::
+
+We have included the required files here.
+- [ier-library.xml](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/ier-library.xml)
+- [xercesImpl-2.12.2.jar](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/xercesImpl-2.12.2.jar)
+
+Keep in mind that future releases of CP4BA and FileNet may not require this fix to be applied. This is currently only applicable to 23.0.1.
+
+Determine the navigator pod with the following command:
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          12d
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          9d
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          12d
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          12d
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          12d
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          6d8h
+// highlight-next-line
+fncmdeploy-navigator-deploy-58b9c95c4-kt6jc   1/1     Running   0          3d9h
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          12d
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          10d
+postgres-759fd876ff-d5fxd                     1/1     Running   0          12d
+```
+
+Create the `ier-jars` subdirectory on the navigator pod:
+
+```tsx
+kubectl exec -it fncmdeploy-navigator-deploy-58b9c95c4-kt6jc -- mkdir configDropins/overrides/ier-jars
+```
+
+Upload the `ier-library.xml` and the `xercesImpl-2.12.2.jar` to that subdirectory on the navigator pod.
+
+```tsx
+kubectl cp ier-library.xml fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/
+kubectl cp xercesImpl-2.12.2.jar fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/ier-jars/xercesImpl.jar
+```
+
+Scale the navigator deployment down and up. If your replicas are more that 1, scale appropriately.
+
+```tsx
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=0
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=1
+```
