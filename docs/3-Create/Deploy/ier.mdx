@@ -18,6 +18,69 @@ kubectl create secret generic ibm-ier-secret \
 --from-literal=keystorePassword="p@ssw0rd" \
 --from-literal=ltpaPassword="p@ssw0rd"
 ```
+
+### Create the config map `fncmdeploy-tm-custom-env`
+
+This step is required when deploying IER to the cluster. Task Manager pods require the `TM_JOB_URL` env variable to point to the location of the IER plugin.
+
+`fncmdeploy-tm-custom-env.yaml`
+```tsx
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fncmdeploy-tm-custom-env
+  labels:
+    app: fncmdeploy-tm-custom-env
+data:
+  TM_JOB_URL: "https://fncmdeploy-ier-svc:9443/EnterpriseRecordsPlugin/IERApplicationPlugin.jar"
+```
+In our case, the TM_JOB_URL referenced [here](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records#frmco011__1)
+needs to point to the internal service URL, not the external URL as it does not exist.
+
+This is also a custom env variable for Task Manager that we will enable in the CR below.
+
+Apply it to the cluster
+```bash
+kubectl apply -f fncmdeploy-tm-custom-env.yaml
+```
+
+### Update the CR for Task Manager
+
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
+
+Under the Task Manager application block in the CR add the `custom_configmap` to point to the config map we just created. Also make sure the `security_roles_to_group_mapping` are set to `cpadmins` and `cpusers` as these are the groups that exist in LDAP.
+
+```tsx
+        // highlight-start
+        custom_configmap:
+         - name: fncmdeploy-tm-custom-env
+           is_env: true
+        // highlight-end
+        # - name: <name of configmap>
+        #   volume_path:  # optional
+
+        ## All users/groups belong to one of three roles (Admin, User, or Auditor) that are specific to Task Manager.
+        ## Each role takes a list of users/groups (e.g., groups: [taskAdmins, taskAdmins2]).  Refer to Knowledge Center documentation for details.
+        security_roles_to_group_mapping:
+          task_admins:
+        // highlight-next-line
+            groups: [cpadmins]
+            users: []
+          task_users:
+        // highlight-next-line
+            groups: [cpusers]
+            users: []
+          task_auditors:
+        // highlight-next-line
+            groups: [cpadmins]
+            users: []
+```
+
+
+:::note
+There are extra tasks to perform once the CR is applied to the running operator in order to fully support IER deployment. See below in Appendix under Task Manager Extra Tasks.
+:::
+
 ### Updating CR for IER deployment
 
 In the filenet CR you used to deploy the cluster, make the following changes and additions:
@@ -28,7 +91,7 @@ In the filenet CR you used to deploy the cluster, make the following changes and
     cmis: false
     css: false
     es: false
-    tm: false
+    tm: true
     ban: true
     // highlight-start
     ier: true
@@ -87,6 +150,41 @@ After the `navigator_configuration` entry in the CR, add the following section
         failure_threshold: 6
 ```
 
+### Uploading config jars to the Task Manager pod
+
+Before we apply the modified CR, let's prepare the Task Manager pod.
+
+The following files are required for the Task Manager pod:
+- [`Jace.jar`](/deployment_files/IER_config/Jace.jar)
+- [`pe.jar`](/deployment_files/IER_config/pe.jar)
+- [`peResources.jar`](/deployment_files/IER_config/peResources.jar)
+- [`TM-Liberty.xml`](/deployment_files/IER_config/TM-Liberty.xml)
+
+The above files and how to get them are referenced [here](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records#frmco011__1), but we've included them in our repo.
+
+Retrieve the name of your existing Task Manager pod
+
+```tsx
+kubectl get pods | grep tm-deploy
+//highlight-next-line
+fncmdeploy-tm-deploy-9db6b7f7f-6zzjb          1/1     Running   0          5d20h
+```
+
+Push the jars downloaded above to the `configDropins/overrides` directory on the Task Manager pod.
+
+```tsx
+kubectl cp Jace.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+kubectl cp pe.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+kubectl cp peResources.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+```
+
+Push up the `TM-Liberty.xml` file to `configDropins/overrides`
+```tsx
+kubectl cp TM-Liberty.xml fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+```
+
+
+
 ### Apply the CR
  
 ```bash
@@ -110,8 +208,9 @@ fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
 fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
 ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
 postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
-
 ```
+
+
 ## IER CONFIGURATIONS ON ICN 
 
 Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
