@@ -1,0 +1,59 @@
+---
+id: content-search-services
+sidebar_position: 5
+title: Content Search Services
+---
+
+## Configuration
+
+Initialize and configure CSS by editing the CR. First, get the CR yaml file:
+
+```bash
+kubectl get fncmcluster fncmdeploy -o yaml > fncm_prod_cr.yaml
+```
+
+Now, open it up in your editor of choice and find _initialize_configuration_. Under this section, add a section for ic_css_creation, ic_css_index_area, and ic_enable_cbr and fill in the following fields:
+
+```yaml
+  initialize_configuration:
+    ic_css_creation:
+    - affinity_group_name: <affinity_group_name>
+      css_site_name: <css_site_name>
+      css_text_search_server_credential: RNUNEWc=
+      css_text_search_server_host: '{{ meta.name }}-css-name-number.{{ meta.namespace }}.svc'
+      css_text_search_server_mode: 0
+      css_text_search_server_name: '{{ meta.name }}-css-1'
+      css_text_search_server_port: 8199
+      css_text_search_server_ssl_enable: "true"
+      css_text_search_server_status: 0
+    ic_css_index_area:
+    - affinity_group_name: <affinity_group_name>
+      index_area_name: os<x>_index_area
+      max_indexes: <int e.g. 20>
+      max_objects_per_index: <int e.g. 10000>
+      object_store_name: <object_store_name>
+      root_dir: /opt/ibm/indexareas
+    ic_enable_cbr:
+    - class_name: Document
+      indexing_languages: en
+      object_store_name: <object_store_name>
+```
+
+Finally, apply the new CR by running:
+
+```
+kubectl apply -f fncm_prod_cr.yaml
+```
+
+## Running Searches
+
+Adding the _CONTAINS_ clause allows you to full-text search (to search the contents of the documents). Below is an example SQL query with it:
+
+```SQL
+SELECT d.This
+FROM Document d 
+INNER JOIN ContentSearch c ON d.This = c.QueriedObject
+WHERE CONTAINS(d.*,'lion AND tiger')
+ORDER BY c.Rank
+OPTIONS (FULLTEXTROWLIMIT 500)
+```
