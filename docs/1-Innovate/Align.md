@@ -1,16 +1,16 @@
 ---
-id: define
+id: align
 sidebar_position: 2
-title: Define
+title: Align
 ---
 
-<img src="https://github.com/ibm-client-engineering/solution-filenet-aws/assets/125045410/712b1c30-b8d1-4c4e-979f-968d76f734ae" alt="valueenglogo" style="float: left;" />
+![](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/125045410/712b1c30-b8d1-4c4e-979f-968d76f734ae)
 
 IBM and the client aligned on a compelling business opportunity. Additionally, the teams defined the scope to prove FileNet's capabilities and its installation, configuration, and deployment on AWS EKS. 
 
 The IBM team successfully proved the following: 
 - FileNet’s capabilities in cloud-native environments
-- Successful deployment and configuration of FileNet in Travelers' infrastructure
+- Successful deployment and configuration of FileNet in the client's infrastructure
 
 Additionally, the IBM team conducted interactive, hands-on keyboard training sessions encompassing a range of critical topics, including:
 - Gaining a detailed understanding of Kubernetes, delving into its complex features and capabilities
