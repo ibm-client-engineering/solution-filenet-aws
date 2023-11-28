@@ -1,0 +1,8 @@
+<server>
+        <library id="ecmTaskManagerLib">
+                <fileset dir="${server.config.dir}/lib" includes="*.jar" scanInterval="5s" />
+                <folder dir="/opt/ibm/orm" />
+		<folder dir="/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides" />
+        </library>
+        
+</server>

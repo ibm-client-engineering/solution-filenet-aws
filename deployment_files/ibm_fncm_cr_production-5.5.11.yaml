@@ -42,7 +42,7 @@ spec:
     cmis: false
     css: false
     es: false
-    tm: false
+    tm: true
     ban: true
     ier: true
 
@@ -1334,23 +1334,23 @@ spec:
         ## The volume_path is optional for a configmap that holds files as its data and if it's not specified,
         ## then the files will be mounted to the overrides directory.  If the configmap data holds environment variables
         ## then is_env is required and set it to true.
-        #custom_configmap:
+        custom_configmap:
+         - name: fncmdeploy-tm-custom-env
+           is_env: true
         # - name: <name of configmap>
         #   volume_path:  # optional
-        # - name: <name of configmap>
-        #   is_env: # required if the configmap holds environment variables.
 
         ## All users/groups belong to one of three roles (Admin, User, or Auditor) that are specific to Task Manager.
         ## Each role takes a list of users/groups (e.g., groups: [taskAdmins, taskAdmins2]).  Refer to Knowledge Center documentation for details.
         security_roles_to_group_mapping:
           task_admins:
-            groups: [taskAdmins]
+            groups: [cpadmins]
             users: []
           task_users:
-            groups: [taskUsers]
+            groups: [cpusers]
             users: []
           task_auditors:
-            groups: [taskAuditors]
+            groups: [cpadmins]
             users: []
 
       ## Enable/disable monitoring where metrics can be sent to Graphite or scraped by Prometheus
