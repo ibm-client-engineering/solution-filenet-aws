@@ -16,9 +16,8 @@ The files we are creating below can be found combined here. This yaml is purely 
 
 Let's create a configmap for the PGSQL database to use:
 
-`postgres_configmap.yaml`
 
-```yaml
+```yaml title="postgres_configmap.yaml"
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -35,9 +34,8 @@ data:
 
 Now lets create a pair of ebs storage device PVCs for the database data and tablespaces.
 
-`postgres-pvc.yaml`
 
-```yaml
+```yaml title="postgres-pvc.yaml"
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -77,9 +75,8 @@ Create a deployment for postgres. As per the IBM recommendations we are setting 
 - `max_prepared_transactions=500`
 - `max_connections=500`
 
-`postgres-deploy.yaml`
 
-```yaml
+```yaml title="postgres-deploy.yaml"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -134,9 +131,8 @@ spec:
 ### Create the service
 
 Create the service for postgres
-`postgres-service.yaml`
 
-```yaml
+```yaml title="postgres-service.yaml"
 kind: Service
 apiVersion: v1
 metadata:
