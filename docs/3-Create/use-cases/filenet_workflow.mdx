@@ -1,0 +1,135 @@
+---
+id: solution-filenet-workflow
+sidebar_position: 1
+title: Workflows
+---
+
+# FileNet Workflows
+
+## Creating Workflows
+
+### Claim Filing & Processing
+
+The following workflow was demonstrated and then subsequently recreated and tested in Traveler's environment. It is a sample workflow for processing a claim application. We expanded on this by triggering it via a document upload using a subscription created in the acce console, which we will also mark as an initiating attachment to automatically include it in the triggered workflow (see below).
+
+Workflow preview:
+![](https://media.github.ibm.com/user/436100/files/4465abd7-143d-4385-8050-ee2a57a91bb7)
+
+![](https://media.github.ibm.com/user/436100/files/0e65b54f-53bf-4f68-861b-18682b2608a7)
+
+Workflow download:
+
+[ClaimApplication.pep.zip](https://github.ibm.com/ibm-client-engineering/solution-filenet-aws/files/1242809/ClaimApplication.pep.zip)
+
+### Using Web Services
+
+- In order to enable pasting wsdl partner links, navigate to _View -> Configuration_:
+
+![](https://media.github.ibm.com/user/436100/files/db04cbaf-6cdd-439e-9310-38b6e2d594b6)
+
+- Right click on the connection point and click _Properties..._:
+
+![](https://media.github.ibm.com/user/436100/files/bb20e3ed-ad22-4927-9bac-531eec0f55e1)
+
+- Under _Web Services_, check _Enable Process Designer to enter WSDL links without browsing for Web services_:
+
+![](https://media.github.ibm.com/user/436100/files/95c4e89d-fabc-41d0-85ec-a51fe141a1b5)
+
+- Now you can paste links in _Workflow Properties_ under _Web Services_ in the _Partner Links_ section:
+
+![](https://media.github.ibm.com/user/436100/files/29c67c90-2903-4f98-92cb-8a3d0ad3dd26)
+
+- Next, open up the Palette Menu and check _Web Services Palette_:
+
+![](https://media.github.ibm.com/user/436100/files/7a174e99-650e-4a98-8860-f368ba4eb496)
+
+- Now you can drag in _Invoke_ and select the created _Partner Link_ as well as the desired _Operation_:
+
+![](https://media.github.ibm.com/user/436100/files/719a4799-369b-4e6b-b09a-ec76c3e24a78)
+
+:::note
+
+For web services that require SSL (ex. _https://..._), you must add a secret containing the certificate to the trusted_certificate_list in the CR.
+
+:::
+
+### Initiating Attachments
+
+Initiating attachments are attachments to Workflows that automatically get incorporated into them on upload, via a Subscription that triggers a workflow on Document Creation.
+
+#### Creating a Subclass (optional)
+
+If desired, you can create a subclass of an exisitng one to use as a more specific type. This can provide finer granularity when, for example, triggering workflows.
+
+
+- Within the acce console, navigte to your choice of object store, go to _Classes_ under _Data Design_ and double click on a class you would like to form a subclass for. Next, click on _Actions_ and _New Class_:
+
+![](https://media.github.ibm.com/user/436100/files/6374e1f9-7a2e-46ec-9ca0-5250ffdcd8ea)
+
+- Enter a name and description:
+
+![](https://media.github.ibm.com/user/436100/files/6a4aad75-72ae-46c0-8d5c-04c90fb04096)
+
+- Click _Finish_:
+
+![](https://media.github.ibm.com/user/436100/files/cc0ab9b9-380f-4701-91ec-387615d123f2)
+
+#### Creating the Subscription
+- In the acce console under your choice of object store, navigate to _Events, Actions, Processes_ and then to _Subscriptions_:
+
+![](https://media.github.ibm.com/user/436100/files/a8d51fa1-55e2-4640-a5ef-68bbf59a4d1f)
+
+- Click _New_ and enter a name and description:
+
+![](https://media.github.ibm.com/user/436100/files/298624d4-42a4-4a91-a864-d9c9e89dc50f)
+
+- Specify the class (and optionally subclass) you would like to subscribe to:
+
+![](https://media.github.ibm.com/user/436100/files/714ebd0f-246e-4d54-a576-56e4bcbd45c0)
+
+- Check _Create a workflow subscription_ to allow this subscription to trigger a workflow:
+
+![](https://media.github.ibm.com/user/436100/files/e51cc792-63ef-489e-9eba-ebcdc5f723a0)
+
+- Select the events you would like to trigger the workflow. _Creation_ of a document signifies a document upload:
+
+![](https://media.github.ibm.com/user/436100/files/e3158b7a-0eeb-43a4-b50a-76f0a48d1883)
+
+- Specify which Workflow you would like this subscription to trigger:
+
+![](https://media.github.ibm.com/user/436100/files/e1b73b54-2bcf-48b8-b992-94dc940f5907)
+
+- Optionally map properties from the uploaded document (_Property name_) to the Workflow (_Data field name_): 
+
+![](https://media.github.ibm.com/user/436100/files/1c47382e-f8b2-4f32-b001-03af611448b2)
+
+- Ensure the subscription is enabled and if you would like, include subclasses:
+
+![](https://media.github.ibm.com/user/436100/files/72fdeb48-fbf6-40d8-935f-1c4fdae3ae7c)
+
+- Review the details and click _Finish_:
+
+![](https://media.github.ibm.com/user/436100/files/73330507-6e63-4524-a224-45e5cfb928ec)
+![](https://media.github.ibm.com/user/436100/files/bb803613-3dd6-4134-8272-c40790343a2d)
+
+#### Workflow Init Attachment
+
+- Under _Workflow Properties_ in the _Attachments_ tab, create an attachment by double clicking under the _Name_ field, typing a name and pressing Enter:
+
+![](https://media.github.ibm.com/user/436100/files/75ca2f4b-f3f5-4aec-ab24-f5c05553aed1)
+
+- On the right sidebar, mark this as the _Initiating attachment_ by clicking the following icon, which should then appear left of the attachment name:
+
+![](https://media.github.ibm.com/user/436100/files/c9a35503-02b8-44c1-bec0-7da6611ba876)
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+![](https://media.github.ibm.com/user/436100/files/33d603f9-6313-4a6f-9036-10d4ad9e82e2)
+
+- From the palette menu, drag in a component node:
+
+![](https://media.github.ibm.com/user/436100/files/83dabcd3-90e6-4dbb-b881-cbce049fb45f)
+
+- Configure this component by selecting an operation to extract information from the uploaded attachment, such as its given title, for example, which corresponds to symbolicPropName:
+
+![](https://media.github.ibm.com/user/436100/files/320f420c-2c6d-454a-8203-4a55799f3edf)
+
+This then populates the return value, which can be used elsewhere in the Workflow as desired.

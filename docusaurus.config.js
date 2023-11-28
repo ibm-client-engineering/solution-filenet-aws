@@ -18,12 +18,12 @@ async function createconfig() {
     favicon: "img/favicon.ico",
 
     // Set the production url of your site here
-    url: "https://filenet-eks.thinkforward.work/",
+    url: "https://ibm-client-engineering.github.io",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: "/",
+    baseUrl: "/solution-filenet-aws/",
 
-    // GitHub pages deployment config.
+    // GitHub pages deployment config. force build
     // If you aren't using GitHub pages, you don't need these.
     organizationName: "ibm-client-engineering", // Usually your GitHub org/user name.
     projectName: "solution-filenet-aws", // Usually your repo name.

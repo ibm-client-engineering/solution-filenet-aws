@@ -160,7 +160,6 @@ When `nginx.ingress.kubernetes.io/proxy-body-size` is set to 0, this removes the
 
 The NGINX server was rejecting the payload with an error "413 Payload Too Large". This caused the failure when creating a document with content. The team resolved this by removing the payload limitation by adding `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the CR. 
 
-
 ### IBM Content Navigator
 
 #### The Problem
@@ -328,3 +327,4 @@ The way we resolved this issue is straightforward. We need to modify the Server 
 #### Summary
 
 When logging into Navigator, Navigator would attempt to connect to the repository that was associated with the default desktop. Since this repository had the wrong Server URL, it failed to connect and FileNet displayed a network error message. This issue was resolved by changing the Server URL to the correct URL.  
+

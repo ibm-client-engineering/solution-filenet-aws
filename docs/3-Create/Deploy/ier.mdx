@@ -4,276 +4,460 @@ sidebar_position: 4
 title: IBM Enterprise Records
 ---
 
-## Deploy IER Operator
+## Deploy IER
 
-If IBM Enterprise Records is required, you should have already staged the operator per the previous instructions in Staging.
+If IBM Enterprise Records is required, you should have already staged the image per the previous instructions in Staging.
 
-Clone the ier-samples github repo https://github.com/ibm-ecm/ier-samples
+### Create the `ibm-ier-secret`
 
+If deploying IER, create the following
+ ```tsx
+kubectl create secret generic ibm-ier-secret \
+--from-literal=appLoginUsername="cpadmin" \
+--from-literal=appLoginPassword="Password" \
+--from-literal=keystorePassword="p@ssw0rd" \
+--from-literal=ltpaPassword="p@ssw0rd"
 ```
-git clone git@github.com:ibm-ecm/ier-samples.git
+
+### Create the config map `fncmdeploy-tm-custom-env`
+
+This step is required when deploying IER to the cluster. Task Manager pods require the `TM_JOB_URL` env variable to point to the location of the IER plugin.
+
+`fncmdeploy-tm-custom-env.yaml`
+```tsx
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fncmdeploy-tm-custom-env
+  labels:
+    app: fncmdeploy-tm-custom-env
+data:
+  TM_JOB_URL: "https://fncmdeploy-ier-svc:9443/EnterpriseRecordsPlugin/IERApplicationPlugin.jar"
+```
+In our case, the TM_JOB_URL referenced [here](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records#frmco011__1)
+needs to point to the internal service URL, not the external URL as it does not exist.
+
+This is also a custom env variable for Task Manager that we will enable in the CR below.
+
+Apply it to the cluster
+```bash
+kubectl apply -f fncmdeploy-tm-custom-env.yaml
 ```
 
-### Preparing our env for IER operator
+### Update the CR for Task Manager
 
-:::note
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
 
-The following step is only required if you did not install the FileNet operator.
+Under the Task Manager application block in the CR add the `custom_configmap` to point to the config map we just created. Also make sure the `security_roles_to_group_mapping` are set to `cpadmins` and `cpusers` as these are the groups that exist in LDAP.
 
-:::
+```tsx
+        // highlight-start
+        custom_configmap:
+         - name: fncmdeploy-tm-custom-env
+           is_env: true
+        // highlight-end
+        # - name: <name of configmap>
+        #   volume_path:  # optional
 
-Create a shared PVC
+        ## All users/groups belong to one of three roles (Admin, User, or Auditor) that are specific to Task Manager.
+        ## Each role takes a list of users/groups (e.g., groups: [taskAdmins, taskAdmins2]).  Refer to Knowledge Center documentation for details.
+        security_roles_to_group_mapping:
+          task_admins:
+        // highlight-next-line
+            groups: [cpadmins]
+            users: []
+          task_users:
+        // highlight-next-line
+            groups: [cpusers]
+            users: []
+          task_auditors:
+        // highlight-next-line
+            groups: [cpadmins]
+            users: []
+```
 
-This PVC is needed for jdbc drivers.
+### Updating CR for IER deployment
 
+In the filenet CR you used to deploy the cluster, make the following changes and additions:
 ```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: operator-shared-pvc
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 21.0.3
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: efs-sc
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: cp4a-shared-log-pvc
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 21.0.3
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: efs-sc
-  resources:
-    requests:
-      storage: 100Gi
-```
-
-Apply to the cluster
+  content_optional_components:
+    cpe: true
+    graphql: true
+    cmis: false
+    css: false
+    es: false
+    tm: true
+    ban: true
+    // highlight-start
+    ier: true
+    // highlight-end
 
 ```
-kubectl create -f descriptors/operator-shared-pvc.yaml
+After the `navigator_configuration` entry in the CR, add the following section
+```yaml
+  ier_configuration:
+    arch:
+      amd64: "3 - Most preferred"
+    replica_count: 2
+    ier_ext_tls_secret_name:
+    ier_auth_ca_secret_name:
+    image:
+      // highlight-start
+      # This should point to whatever repo you staged the image in. Leave this as default if using IBM's registry
+      repository: cp.icr.io/cp/cp4a/ier/ier
+      // highlight-end
+      tag: ga-5218-ier-if005
+      pull_policy: IfNotPresent
+      // highlight-start
+      # This NEEDS to be set to the correct secret name. Make sure it's the one you created above.
+    ier_secret_name: ibm-ier-secret
+      // highlight-end
+    log:
+      format: json
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: 1
+        memory: 1024Mi
+    auto_scaling:
+      enabled: false
+      max_replicas: 3
+      min_replicas: 1
+      target_cpu_utilization_percentage: 80
+    ier_production_setting:
+      license: accept
+    collectd_enable_plugin_write_graphite: false
+    run_as_user: 
+    datavolume:
+      existing_pvc_for_ier_instance: ""
+    probe:
+      readiness:
+        initial_delay_seconds: 120
+        period_seconds: 5
+        timeout_seconds: 10
+        failure_threshold: 6
+      liveness:
+        initial_delay_seconds: 600
+        period_seconds: 5
+        timeout_seconds: 5
+        failure_threshold: 6
 ```
 
-### Create Docker Registry Secret
+### Uploading config jars to the Task Manager pod
 
-If your cluster does not already have this secret `admin.registrykey` this needs to be created.
+Before we apply the modified CR, let's prepare the Task Manager pod.
 
-Typically this would point to the IBM Cloud Registry, but can be modified to point to private registries instead.
+The following files are required for the Task Manager pod:
+- [`Jace.jar`](/deployment_files/IER_config/Jace.jar)
+- [`pe.jar`](/deployment_files/IER_config/pe.jar)
+- [`peResources.jar`](/deployment_files/IER_config/peResources.jar)
+- [`TM-Liberty.xml`](/deployment_files/IER_config/TM-Liberty.xml)
 
+The above files and how to get them are referenced [here](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records#frmco011__1), but we've included them in our repo.
+
+Retrieve the name of your existing Task Manager pod
+
+```tsx
+kubectl get pods | grep tm-deploy
+//highlight-next-line
+fncmdeploy-tm-deploy-9db6b7f7f-6zzjb          1/1     Running   0          5d20h
 ```
-imagePullSecrets:
-   name: "admin.registrykey"
 
+Push the jars downloaded above to the `configDropins/overrides` directory on the Task Manager pod.
+
+```tsx
+kubectl cp Jace.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+kubectl cp pe.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+kubectl cp peResources.jar fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
 ```
 
-:::note
-The secret_name must match the imagePullSecrets.name parameter in the operator custom resource definition (.yaml) file, for example, admin.registrykey.
+Push up the `TM-Liberty.xml` file to `configDropins/overrides`
+```tsx
+kubectl cp TM-Liberty.xml fncmdeploy-tm-deploy-9db6b7f7f-6zzjb:configDropins/overrides
+```
+
+
+
+### Apply the CR
+ 
+```bash
+kubectl apply -f ibm_fncm_cr_production.yaml
+```
+
+Wait for about five minutes or so and then check to see if the pod has spun up.
+ 
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          6d6h
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          3d9h
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          6d7h
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          6d6h
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          6d6h
+// highlight-start
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          7h55m
+// highlight-end
+fncmdeploy-navigator-deploy-58b9c95c4-k9gx7   1/1     Running   0          157m
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          6d6h
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          4d2h
+postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
+```
+
+## IER Configuration 
+Please make sure below object stores are created and required configurations are in place 
+
+1- ROS - Object Store 
+
+      Configure connection points for ROS. Below is a screenshot for reference 
+
+![ROS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/07ac22da-b1fa-4e32-98ec-ac5f0b69d617)
+
+
+2- FPOS - Object Store 
+
+      Create FPOS object store as shown in Screenshot below
+
+![FPOS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/46a43cb7-bed4-479c-88b0-6459a962fef1)
+
+IBM Enterprise Records (IER) works in conjunction with FileNet Content Manager to provide the foundation for an enterprise compliance platform.
+Below diagram is how the content in FileNet Content Manager and the record objects work together
+
+![Design](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/99fc2f22-93c4-4ca9-89a9-e44599fd1553)
+
+
+On the left side is a folder in FileNet Content Manager that is in a record-enabled FileNet object store.
+On the right side is a special object store that contains the record objects. This is called a File Plan Object Store.
+
+
+
+
+3- IER Task Manager Setup Configuration
+
+      Configuring Task Manager for IER in ICN - In the systems content navigator administration interface go to the settings node.
+Scroll down in the general tab under settings to Task Manager configuration
+Select to enable the task manager service
+Add the task manager url,Specify the log diretcory
+
+Add the TM_JOB_URL environment variable to the Task Manager deployment 
+
+Copy jar files 
+
+
+4- IER Configuration on ICN 
+Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
+
+![ICNPLUGIN](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d8288174-bfd7-4c9b-ac78-67faa6dd7b4f)
+
+Save and Close . Edit the added plugin and scroll down . You will see the file plan repository like this and select Connect and then Click on the FPOS 
+
+![ICNFILEPLANREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/1b23d73e-ba89-4daa-8ca2-0ec7839c77a8)
+
+Create a desktop "IER" and select repository FPOS. General > Authentication > Repository 
+Navigate to Repository Tab and add FPOS and ROS like it is shown below
+![ICNREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/f2126b91-d000-45d2-80c6-202d64ab9232)
+
+log in to IER desk top . Navigate to administration . IER desk top will be visible under desktops and FPOS repository would be visible under Repositories
+ IER desk top will have the options shown below
+
+ ![IERDESKTOP](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/252b6535-f740-4b63-b4c1-551afc79d0bd)
+
+Create a custom menu - Copy Document Context Menu and add the IER option as shown below 
+![CUSTOMMENU](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/3460c13e-e64e-46db-b669-e5239c8f9763)
+Add the menu to the desktop where IER functionality is exceted .Below is the image where you can add the custom menu created on above step
+![CUSTOMMENU1](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/c793b329-9e98-4d55-a3ac-80b7c7fe4055)
+
+## Validate IER Functionality 
+Create a file plan in FPOS and declare a record using the file plan . The document will look like this as a record (electronic/physical etc )
+
+![RECORD](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/0ed9d858-3407-4194-b8b8-f4d80cd1363b)
+
+
+## Managing Records
+
+
+      Creating an Advanced dispostion schedule - 
+
+There are two distinct types of disposition schedules available for your use.Basic dispostion schedule and Advanced dispostion schedule.
+
+A Basic disposition schedule is the first. A basic schedule is a record category that specifies the retention period and the retention trigger property (event).
+The value of using a Basic disposition schedule is faster time to process dispositions and less complexity in defining the schedule specifics.
+
+
+An Advanced disposition schedule contains the retention period, the cut off trigger event (when the clock starts ticking), record phases and disposal instructions.
+An administrator can associate a disposition schedule with one or more record categories, record folders or record types.
+A record folder can have its own disposition schedule, or it can inherit the disposition schedule associated with a parent record category.
+
+
+In a disposition schedule, an administrator will specify the retention rules for records and instructions for disposing of records at the end of the retention period.
+ Disposition instructions and workflows include -
+
+• Review
+
+• Transfer to an archive for permanent preservation
+
+• Export to another location
+
+• Destroy (with approval)
+
+• Auto-destroy
+
+Below are the steps how to create a dispostion schedule.
+
+1- Navigate to IER desktop and click on Configuration Tab. Select "Advanced Dispostion Schedules" from dropdown as shown below.
+
+
+![Dispostion](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/39827486-20a0-4584-a0ce-5eef86065f83)
+
+
+2- Click "Add Dispostion Schedule" to create a new dispostion schedule 
+
+
+![AddDispostion](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d89728ab-3e1e-40be-9e62-6b89d06bd33c)
+
+
+3- Now we need to enter the properties for the dispostion schedule as shown below example 
+
+
+![DispostionProp](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/59b49906-74de-4d6e-8262-a2913bc0033f)
+
+
+4- Scroll down on dispostion schedule page.You can see the "Contract dispostion" added like below
+
+
+![DispostionSchedule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/a7cdeb64-4e1a-4ff3-abf6-20a621b3fc22)
+
+5- A new dispostion schedule is scuessfully added to the list 
+
+
+
+      Applying and executing disposition schedule - 
+
+Disposition is normally executed on an automated schedule basis. There may be times that, as a Records Administrator, you would want to apply and execute a disposition schedule manually.
+Although this is not the most common mechanism for executing a disposition schedule, it can be done if the need arises. 
+
+1- Click on the top navigator icon on left corner and navigate to "File Plans" 
+
+
+![FilePlan](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d20f11e4-66cf-4811-8e88-78f189dab931)
+
+
+2- Navigate to record category and clcik "Add Record Category" . Below is a screenshot for reference.
+
+![RecordCategory](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/77320014-36ea-4fa3-a051-d853fdc12e43)
+
+
+3- Fill in recordcategory properties as shown in below example and click "Add" button
+
+![RecordProp](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/691b190a-7a61-4adf-abdf-73aff3ba10b4)
+
+
+4- Now the records category with DateCreated is visible .Below is a refrence screenshot.
+
+![DispostionInstruction](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/79cc265e-25b7-4be9-afd2-571eeb7aff85)
+
+5- Re-classify previous manually declared record to new Record category.Below is an example to refer.
+
+![Classifyrecord](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/14e93a1b-a4bf-4f46-93aa-0055b36700ff)
+
+in Move Record plan enter "2023 Compliance Rule" and the new record category . Click Move . Below is a screenshot to refer.
+
+![MoveRecord](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d61b1f41-946f-4315-ba19-1fd8a3e69e86)
+
+You can now see the under record category like below. 
+
+![RecordMoved](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/26e81b8c-e718-41f9-9e7d-6c6eb1e6a381)
+
+
+6- Now we can run the dispostion sweep to prepare above record gategory for dispostion. 
+
+      On top left Navigator click on "Tasks" and Click on Schedule > Schedule Basic Dispostion Sweep and shown below
+
+
+![DispostionSweep](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/9bb0887a-292e-4aa3-a16f-1612f3812b67)
+
+
+Select FPOS and fill in details as shown in refrence screenshot and Schedule Sweep
+
+
+![FPOS](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/4e3ff62b-08a5-40da-98a8-18f727e19ac0)
+
+
+![ScheduleSweep](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/cd7c19e6-7fa3-4200-955f-71bd6ace6e0e)
+
+You will see the scheduled sweep with a Status of Scheduled. Click Refresh until you see it shows Completed.
+
+
+![DispostionSchedule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/98bf60c6-1af1-4fa5-b29b-eb8e910d68d9)
+
+![DispostionComplete](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/7164acd1-a15e-4a6d-aa8a-029794c64bda)
+
+Optionally click "Download Report" button to view the report is generated . Below are few screenshots for refrence.
+
+![DownloadReport](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/883929f9-ca61-4028-aab9-9138ddc8cb25)
+
+![ReportScreenshot](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/b3566ee3-83ad-4092-a4c1-ee84e20edecf)
+
+
+
+
+## Appendix
+
+### Applying fix for IER
+:::info
+As of 23.0.x release of CP4BA, the following bug was introduced into IBM FileNet Content Manager:
+
+When trying to access the IBM Enterprise Records desktop, an error message says that you cannot connect to the web client.
+The log also shows that an exception was thrown "java.lang.NoClassDefFoundError: org.apache.xerces.xni.parser.XMLEntityResolver".
+
+Cause:
+After moving to Java 11, IERApplicationPlugin.jar is unable to resolve the path to XercesImpl.jar in the ICN container.
+
+Tracked in this [link](https://www.ibm.com/support/pages/ibm-cloud-pak-business-automation-230x-known-limitations#I42202)
+
+The following instructions handle addressing this missing jar file.
 :::
 
-For an external Docker registry.
+We have included the required files here.
+- [ier-library.xml](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/ier-library.xml)
+- [xercesImpl-2.12.2.jar](https://github.com/ibm-client-engineering/solution-filenet-aws/blob/main/static/deployment_files/ExtraJars/xercesImpl-2.12.2.jar)
 
-```
-kubectl create secret docker-registry admin.registrykey \
---docker-server=<registry_url> \
---docker-username=<your_account> \
---docker-password=<your_password> \
---docker-email=iertest@ibm.com
-```
+Keep in mind that future releases of CP4BA and FileNet may not require this fix to be applied. This is currently only applicable to 23.0.1.
 
-### Deploying the IER operator manually
-
-Under the `ier-samples` repo, the following files need to be updated
-
-`ier-samples/operator/descripters/operator.yaml`
-
-Modify the `image` parameter for containers (ansible and operator) and the `imagePullSecrets` name in `descriptors/operator.yaml` to a valid image registry URL. The value for `imagePullSecrets` should be the IBM Pull secret or the registry secret set for your private registry.
-
-Also update the tag to the latest ifix level for the operator.
-```
-      containers:
-        - name: operator
-          # Replace this with the built image name
-#          image: cp.icr.io/cp/cp4a/icp4a-operator@sha256:8c88f9268d06d1f8f86b572cfd0a481758f13ea2fb67011a473a1cc4a99523ac
-          image: cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023
-  -    
-  -   
-  - name: operator
-       # Replace this with the built image name
-       image: "cp.icr.io/cp/cp4a/icp4a-operator:21.0.3-IF023"      
- 
- imagePullSecrets:
-   - name: "admin.registrykey"
+Determine the navigator pod with the following command:
+```tsx
+kubectl get pods
+NAME                                          READY   STATUS    RESTARTS   AGE
+fncmdeploy-cmis-deploy-654774fd5f-5xtnr       1/1     Running   0          12d
+fncmdeploy-cpe-deploy-7d7dbffc94-n86tt        1/1     Running   0          9d
+fncmdeploy-css-deploy-1-66bbd484b-qzrl9       1/1     Running   0          12d
+fncmdeploy-es-deploy-58f9659b8b-klmjh         1/1     Running   0          12d
+fncmdeploy-graphql-deploy-775766b99d-cx899    1/1     Running   0          12d
+fncmdeploy-ier-deploy-6f7465cd5d-sxp9d        1/1     Running   0          6d8h
+// highlight-next-line
+fncmdeploy-navigator-deploy-58b9c95c4-kt6jc   1/1     Running   0          3d9h
+fncmdeploy-tm-deploy-7d4fd64759-x28qw         1/1     Running   0          12d
+ibm-fncm-operator-748884b478-qkd4f            1/1     Running   0          10d
+postgres-759fd876ff-d5fxd                     1/1     Running   0          12d
 ```
 
-Edit the namespace spec in the `service_account.yaml` and `operator.yaml` files to point to your namespace.
+Create the `ier-jars` subdirectory on the navigator pod:
 
-```
-metadata:
-   name: ibm-cp4a-operator
-   namespace: <my-project>
+```tsx
+kubectl exec -it fncmdeploy-navigator-deploy-58b9c95c4-kt6jc -- mkdir configDropins/overrides/ier-jars
 ```
 
-Accept the IER license by setting value as "accept" for ier_license parameter in operator.yaml
+Upload the `ier-library.xml` and the `xercesImpl-2.12.2.jar` to that subdirectory on the navigator pod.
 
-To deploy each file on certified Kubernetes:
-
-```plaintext-ibm
-kubectl apply -f ./descriptors/ibm_cp4a_crd.yaml
-kubectl apply -f ./descriptors/service_account.yaml
-kubectl apply -f ./descriptors/role.yaml
-kubectl apply -f ./descriptors/role_binding.yaml
-kubectl apply -f ./descriptors/operator.yaml
+```tsx
+kubectl cp ier-library.xml fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/
+kubectl cp xercesImpl-2.12.2.jar fncmdeploy-navigator-deploy-58b9c95c4-kt6jc:configDropins/overrides/ier-jars/xercesImpl.jar
 ```
 
-## Deploying IER CR
+Scale the navigator deployment down and up. If your replicas are more that 1, scale appropriately.
 
-The following is an example CR for the IER operator.
-
-Make sure to set the following secret name in the CR:
+```tsx
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=0
+kubectl scale deploy fncmdeploy-navigator-deploy --replicas=1
 ```
-     ier_secret_name: ibm-fncm-secret
-```
-This is important if you've already installed the FileNet operator in the cluster.
-
-Also be sure to update the image repository paths to point to the correct registry if you are pre-staging the images in a private registry.
-
-`ier_cr_full.yaml`
-```
-###############################################################################
-#
-# Licensed Materials - Property of IBM
-#
-# (C) Copyright IBM Corp. 2019. All Rights Reserved.
-#
-# US Government Users Restricted Rights - Use, duplication or
-# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-#
-###############################################################################
-apiVersion: icp4a.ibm.com/v1
-kind: ICP4ACluster
-metadata:
-  name: ier
-  labels:
-    app.kubernetes.io/instance: ibm-dba
-    app.kubernetes.io/managed-by: ibm-dba
-    app.kubernetes.io/name: ibm-dba
-    release: 5.2.1.8
-spec:
-  ## TIPS: The names of all variables in the spec field are converted to snake_case by the operator before running ansible
-  ## For example, serviceAccount in the spec becomes service_account in ansible.
-  ## It is recommended that you perform some type validation in Ansible on the variables to ensure that
-  ## your application is receiving expected input.
-  appVersion: 5.2.1.8
-  ## MUST exist, used to accept ibm license, valid value only can be "accept"
-  ibm_license: "accept"
-  ## shared configuration among all tribe
-  shared_configuration:
-    no_log: false
-    ## This is the deployment context is ier. No update it required.
-    sc_deployment_context: ier
-    sc_image_repository: cp.icr.io
-    root_ca_secret: icp4a-root-ca
-    sc_optional_components: ier
-    ## Specify the RunAsUser for the security context of the pod.  This is usually a numeric value that corresponds to a user ID.
-    sc_run_as_user:
-    ## Shared custom TLS secret which will be used to sign all external routes if defined.
-    ## If this is not defined, all external routes will be signed with `root_ca_secret`
-    external_tls_certificate_secret: "letsencrypt-filenet-east-prod-cluster-cert"
-    ## For ROKS, this is used to enable the creation of ingresses. The default value is "false", which routes will be created.
-    sc_ingress_enable: true
-    ## For ROKS Ingress, provide TLS secret name for Ingress controller.
-    sc_ingress_tls_secret_name: "letsencrypt-filenet-east-prod-cluster-cert"
-    sc_deployment_hostname_suffix: "filenet.filenet-east.frwd-labs.link"
-    storage_configuration:
-      sc_slow_file_storage_classname: "efs-sc"
-      sc_medium_file_storage_classname: "efs-sc"
-      sc_fast_file_storage_classname: "efs-sc"
-    image_pull_secrets:
-    - "admin.registrykey"
-    ## This is the deployment type and the possible values are: user, non-production, and production.
-    sc_deployment_license: User
-    ## The deployment type as selected by the user.  Possible values are: Starter and Production
-    sc_deployment_type: Production
-    ## The platform to be deployed specified by the user.  Possible values are: OCP, ROKS, and other.  This is normally populated by the User script
-    ## based on input from the user.
-    sc_deployment_platform: "other"
-   
-
-  ########################################################################
-
-  ########   IBM Enterprise Records configuration      ########
-
-  ########################################################################
-  ier_configuration:
-      arch:
-        amd64: "3 - Most preferred"
-      replica_count: 2
-     # Optional: Use an existing certificate for automatic creation of OpenShift routes.
-     # Set this key if you have an external TLS certificate. Leave this empty if you don't have an external TLS certificate, operator will generate one for you.
-      ier_ext_tls_secret_name:
-     ## Optional. The Certificate Authority (CA) used to sign the external TLS secret for automatic creation of OpenShift routes.
-     ## Set this key if you have a CA to sign the external TLS certificate, leave this parameter empty if you don't have the CA of your external TLS certificate.
-      ier_auth_ca_secret_name:
-      
-      image:
-        repository: cp.icr.io/cp/cp4a/ier/ier
-        tag: ga-5218-ier-if005
-#        tag: ga-5217-ier-if012
-        pull_policy: IfNotPresent
-      ier_secret_name: ibm-fncm-secret
-     # Logging for workloads
-      log:
-        format: json
-     # resource and autoscaling setting
-      resources:
-        requests:
-          cpu: 500m
-          memory: 512Mi
-        limits:
-          cpu: 1
-          memory: 1536Mi
-     # Horizontal Pod Autoscaler
-      auto_scaling:
-        enabled: false
-        max_replicas: 3
-        min_replicas: 1
-        target_cpu_utilization_percentage: 80
-     # IER Production setting
-      ier_production_setting:
-        license: accept
-      collectd_enable_plugin_write_graphite: false
-      run_as_user: 
-     # Specify the names of existing persistent volume claims to be used by your application.
-     # Specify an empty string if you don't have existing persistent volume claim.
-      datavolume:
-        existing_pvc_for_ier_instance: ""
-        
-      probe:
-        readiness:
-          initial_delay_seconds: 120
-          period_seconds: 5
-          timeout_seconds: 10
-          failure_threshold: 6
-        liveness:
-          initial_delay_seconds: 600
-          period_seconds: 5
-          timeout_seconds: 5
-          failure_threshold: 6
-```
-
-
-

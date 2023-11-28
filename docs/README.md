@@ -10,11 +10,12 @@ full_website: https://ibm-client-engineering.github.io/solution-filenet-aws/
 
 ### This is a Solution Blueprint
 
-This _living document_ delivers a "flight path" or adoption journey using IBM Client Engineering's Value Engineering Method. The flight path is an open blueprint for a successful implementation for a _Proof of Concept_ aimed at adopting **IBM FileNet Content Manager on Amazon Elastic Kubernetes Service (EKS)** at one of IBM's customers.
+This "Flight Path" is a _living document_ that showcases an adoption journey and blueprint for a successful _Proof of Technology_ implementation showcasing the capabilities of  **IBM FileNet Content Manager** on **Amazon Elastic Kubernetes Service (EKS)**. This repository and its contents is the result of a real customer engagement.
 
 [![IBM Client Engineering](https://github-readme-stats.vercel.app/api/pin/?username=ibm-client-engineering&repo=solution-filenet-aws)](https://github.com/ibm-client-engineering/solution-filenet-aws)
 
 All of this journey, along with all code, architecture and assets is published and maintained in this repository. Click above to go to the GitHub repo.
+
 ## Value Engineering Method
 
 <center><img src="https://user-images.githubusercontent.com/95059/234157742-2ecebab2-e5b8-44e6-a2d8-666f8ad4dc24.svg" width="500" height="300" /></center>

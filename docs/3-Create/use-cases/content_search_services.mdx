@@ -1,0 +1,92 @@
+---
+id: solution-filenet-content-search-services
+sidebar_position: 5
+title: Content Search Services
+---
+
+# Content Search Services
+
+Adding the _CONTAINS_ clause allows you to full-text search (to search the contents of the documents).
+
+### Prerequisites
+
+- [Enable CSS](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-operator#enabling-content-search-services) through the CR. 
+
+:::warning Important
+
+Follow the steps in the same Object Store in which CSS is enabled.
+
+:::
+
+## Upload the Sample Document
+
+Here we will upload [this simple text document](https://github.ibm.com/ibm-client-engineering/solution-filenet-aws/files/1252245/doc.txt) containing the word 'several' to filenet. Download it now by clicking on the link.
+
+Open the acce console, navigate to the root folder (or folder of your choice), and create a new Document:
+
+![](https://media.github.ibm.com/user/436100/files/559342cd-45dc-4d88-9396-c0fe55e7ec93)
+
+Give it a name of your choice and ensure that the _With content_ checkbox is selected:
+
+![](https://media.github.ibm.com/user/436100/files/abae3d49-bce2-45ad-a83b-67d2009b5200)
+
+Click _Next_. Under **Content Elements**, click _Add_, then _Browse_ and select the downloaded file:
+
+![](https://media.github.ibm.com/user/436100/files/d2160270-596e-4ba0-b0be-a4bcbf981736)
+
+Click _Add Content_ and ensure that the MIME type is text/plain.
+
+![](https://media.github.ibm.com/user/436100/files/c3b21871-2598-45fd-b8bd-c9d7a0071e6f)
+
+Continue clicking _Next_ until you reach the **Summary** screen: Now, review your choices and click _Finish_:
+
+![](https://media.github.ibm.com/user/436100/files/86e8219d-29db-4ddc-9526-cd626adbc9a3)
+
+![](https://media.github.ibm.com/user/436100/files/7b1b7bfe-57af-449b-aefb-35af14f8e188)
+
+## Run the SQL Query
+
+Navigate to the _Search_ page:
+
+![](https://media.github.ibm.com/user/436100/files/549ea01a-dd0c-4f6a-b7fb-3c5c66081182)
+
+Click on _New Object Store Search_:
+
+![](https://media.github.ibm.com/user/436100/files/89369fb4-d651-4dcf-bbd3-7632a25c16e7)
+
+Switch to the _SQL View_. Here you will see a default query that retreives all metadata for all documents in the index area:
+
+![](https://media.github.ibm.com/user/436100/files/c03f3f6c-2520-4ed2-bc3a-d0ecf10c6b92)
+
+Replace the sample query with the following:
+
+```SQL
+SELECT d.This
+FROM Document d 
+INNER JOIN ContentSearch c ON d.This = c.QueriedObject
+WHERE CONTAINS(d.*,'several')
+OPTIONS (FULLTEXTROWLIMIT 500)
+```
+
+and click _Run_:
+
+![](https://media.github.ibm.com/user/436100/files/dff994dc-db7c-44d4-8255-b41607ee9495)
+
+The uploaded document appears in the search result:
+
+![](https://media.github.ibm.com/user/436100/files/920d3400-490f-4732-a2fb-3fe707f88c1c)
+
+The document was found because its content contains the word 'several'. 
+
+This is made possible due to:
+    - The content search services we enabled
+        - index area corresponding to this object store 
+        - content based retreival
+    - CONTAINS clause in the query
+        - requires an INNER JOIN
+
+:::info
+
+For more information on the SQL syntax, see [CBR queries](https://www.ibm.com/docs/en/filenet-p8-platform/5.5.11?topic=reference-cbr-queries).
+
+:::
