@@ -33,7 +33,7 @@ cd container-samples/scripts
 
 Create `filenetvars.sh`
 
-```tsx
+```tsx title="filenetvars.sh"
 #!/bin/bash
 # set -x
 ###############################################################################
@@ -138,9 +138,7 @@ kubectl create secret generic ibm-ban-secret \
 ### Create the `ldap-bind-secret`
 Create a secret in the filenet namespace for the ldap-bind secret
 
-`ldap_secrets.yaml`
-
-```yaml
+```yaml title="ldap_secrets.yaml"
 kind: Secret
 apiVersion: v1
 metadata:
@@ -176,8 +174,7 @@ Here is our example CR as a reference. It would be applied with the following co
 kubectl apply -f ibm_fncm_cr_production_abrv.yaml
 ```
 
-`ibm_fncm_cr_production_abrv.yaml`
-```yaml
+```yaml title="ibm_fncm_cr_production_abrv.yaml"
 apiVersion: fncm.ibm.com/v1
 kind: FNCMCluster
 metadata:
@@ -1196,6 +1193,43 @@ kubectl apply -f ibm_fncm_cr_production_abrv.yaml
 The initialization of the object stores will take some time, but will ultimately be observable via the ACCE web ui.
 
 ![ACCE](https://zenhub.ibm.com/images/58adc1fd5a3922f84995d86b/42ab81b8-568b-4e6d-9113-e26a5cdcf66d)
+
+### Enabling Content Search Services
+
+Initialize and configure CSS by editing the CR. Open it up and find `initialize_configuration`
+
+
+```yaml
+  initialize_configuration:
+    ic_css_creation:
+    - affinity_group_name: <affinity_group_name>
+      css_site_name: <css_site_name>
+      css_text_search_server_credential: RNUNEWc=
+      css_text_search_server_host: '{{ meta.name }}-css-name-number.{{ meta.namespace }}.svc'
+      css_text_search_server_mode: 0
+      css_text_search_server_name: '{{ meta.name }}-css-1'
+      css_text_search_server_port: 8199
+      css_text_search_server_ssl_enable: "true"
+      css_text_search_server_status: 0
+    ic_css_index_area:
+    - affinity_group_name: <affinity_group_name>
+      index_area_name: os<x>_index_area
+      max_indexes: <int e.g. 20>
+      max_objects_per_index: <int e.g. 10000>
+      object_store_name: <object_store_name>
+      root_dir: /opt/ibm/indexareas
+    ic_enable_cbr:
+    - class_name: Document
+      indexing_languages: en
+      object_store_name: <object_store_name>
+```
+
+Add this to the CR and fill in the items in the angular brackets `<>` above. See tables six, seven and eight of [parameters initialization](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/23.0.1?topic=parameters-initialization) for more details. What's important here is that all three subsections are included at least once:
+  - ic_css_creation: this creates the content search service
+  - ic_css_index_area: this creates an index area under a specific object store
+  - ic_enable_cbr: this enables content based retreival for the files in the index area
+
+Finally, [reapply the CR](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-operator#apply-the-cr-to-the-cluster).
 
 ### Secret menu items
 
