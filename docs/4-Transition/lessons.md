@@ -193,3 +193,57 @@ After applying these changes, the error was gone and we instead encountered the 
 #### Summary
 
 The IBM Content Navigator was blocking all setting changes. This is because either the data encryption key (DEK) was not encrypted using the current key encryption key (KEK) or the secret was not encrypted using the current DEK. This resulted in a `com.ibm.ecm.crypto.CipherException: Failed to encrypt` error, found in the navigator logs. The team resolved this by running the `icn.admin.keys.rotateKEK()` and `icn.admin.keys.rotateDEKs()` commands in the browser console to rotate the keys.
+
+### Web Process Designer
+
+:::warning
+
+Refer to this setup to learn how to setup plugins and edit the menu in ICN. Only follow it exactly if you would like to reproduce the issue- see the solution and summary.
+
+:::
+
+<details>
+<summary>Setup Steps</summary>
+<p>
+1. Download CPE applets plugin from (home-link)/peengine/plugins/CPEAppletsPlugin.jar
+2. Install plug-in to ICN:
+  - Navigate to _ICN Admin console_ -> _plug-ins_
+  - Create new plug-in and follow the steps
+  - Once the plug-in is added, validate that it shows up like this:
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/054e95f3-18a7-4e38-94de-78fa90b49d5c)
+
+3. Create Menu
+  - Pre configuration menu (for reference):
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/cb3f868c-16e4-4925-9006-c033470e2dba)
+
+  - Navigate to _Menus_ -> _Create a custom menu_ (in desktop configuration)
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/6d729ea9-8657-498c-85e2-b91fb98623b2)
+
+4. Navigate to _Desktops_ and open icn_desktop
+5. Go to _Menus_ -> _Feature Context Menus_
+  - Update "Banner tools context menu" with newly created custom menu
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/f20d2932-64d8-45c3-a37c-d5aad7b663a5)
+
+6. Save and close. Open the desktop and now the "Open Process Designer" option should be visible as an option from the navigation bar like so:
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/625de951-a3c8-4e2d-bd74-8cb53bd4cd64)
+</p>
+</details>
+
+#### The Problem
+
+After setting up the web version of Process Designer, opening it results in the following window, which calls for a Java 1.6.0 runtime:
+
+![](https://zenhub.ibm.com/images/649c3ae08710884b790df62c/5975ce59-a3be-4a66-bd6b-6981189b0553)
+
+#### The Solution
+
+The Web version of Process Designer is no longer supported. See the steps [here](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-workflow) to set it up locally.
+
+#### Summary
+
+Web Process Designer has been discontinued; use the local version instead.
