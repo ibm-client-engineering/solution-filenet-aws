@@ -35,9 +35,8 @@ Let's create some configmaps for the ldap service
 
 [Example here](/deployment_files/OpenLDAP/openldap-schemas-configmap.yaml)
 
-`openldap-schemas-configmap.yaml`
 
-```yaml showLineNumbers
+```yaml showLineNumbers title="openldap-schemas-configmap.yaml"
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -60,9 +59,8 @@ kubectl apply -f openldap-schemas-configmap.yaml
 
 [Example here](/deployment_files/OpenLDAP/openldap-ldif-configmap.yaml)
 
-`openldap-ldif-configmap.yaml`
 
-```yaml
+```yaml title="openldap-ldif-configmap.yaml"
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -137,9 +135,8 @@ kubectl apply -f openldap-ldif-configmap.yaml
 
 Create an env configmap
 
-`openldap-env-configmap.yaml`
 
-```yaml
+```yaml title="openldap-env-configmap.yaml"
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -163,9 +160,8 @@ kubectl apply -f openldap-env-configmap.yaml
 
 And finally create a secret for the LDAP_ADMIN_PASSWORD. In this example we are setting the default admin password to `p@ssw0rd`
 
-`openldap-admin-secret.yaml`
 
-```yaml
+```yaml title="openldap-admin-secret.yaml"
 kind: Secret
 apiVersion: v1
 metadata:
@@ -180,9 +176,8 @@ stringData:
 kubectl apply -f openldap-admin-secret.yaml
 ```
 
-`openldap-secrets.yaml`
 
-```yaml showLineNumbers
+```yaml showLineNumbers title="openldap-secrets.yaml"
 kind: Secret
 apiVersion: v1
 metadata:
@@ -207,9 +202,8 @@ kubectl apply -f openldap-secrets.yaml
 
 Now let's create a deployment.
 
-`openldap-deploy.yaml`
 
-```yaml
+```yaml title="openldap-deploy.yaml"
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -307,9 +301,8 @@ kubectl apply -f openldap-deploy.yaml
 
 ### Create a service for openldap
 
-`openldap-service.yaml`
 
-```yaml
+```yaml title="openldap-service.yaml"
 kind: Service
 apiVersion: v1
 metadata:
@@ -374,9 +367,8 @@ The example ldif is linked here. Once again, this is purely for reference and ma
 
 Additional users are highlighted below:
 
-`openldap-ldif-configmap.yaml`
 
-```yaml
+```yaml title="openldap-ldif-configmap.yaml"
 kind: ConfigMap
 apiVersion: v1
 metadata:
