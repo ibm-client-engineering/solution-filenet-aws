@@ -2,11 +2,168 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</id>
     <title>IBM Client Engineering Blog</title>
-    <updated>2023-11-09T00:00:00.000Z</updated>
+    <updated>2023-11-17T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog"/>
     <subtitle>IBM Client Engineering Blog</subtitle>
     <icon>https://ibm-client-engineering.github.io/solution-filenet-aws/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 38 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38"/>
+        <updated>2023-11-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+<ul>
+<li>The team scaled the FNCM operator down to 0 and set readOnlyRootFilesystem to false in the IER deployment directly.</li>
+<li>The team then added explicit Dynatrace annotations to the IER deployment that were supposed to disable the agent injection.</li>
+<li>We then modified the daemonset for Dynatrace to scale it to 0. After applying this change, the IER pods came online.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<ul>
+<li>The client will verify the IER pod comes up again after scaling the FNCM operator back up.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<ul>
+<li>
+<p>The team will examine the state of the IER deployment and will move to resume use cases and demos.</p>
+<ul>
+<li><a href="https://trello.com/c/3WHHYbfl/3-functionality-verification" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws</a></li>
+<li>This flight log is being submitted via PR "11/21/2023 Documentation"</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-38#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<p><strong>Cases open: 1</strong></p>
+<ul>
+<li>Case TS014753369</li>
+</ul>
+<p><strong>Cases closed: 3</strong></p>
+<ul>
+<li>Case TS014232963</li>
+<li>Case TS014348824</li>
+<li>Case TS014370797</li>
+</ul>]]></content>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 37 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37"/>
+        <updated>2023-11-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+<ul>
+<li>The team continued working on the IER deployment.</li>
+<li>The IER pods were in a failed state, but after further investigation it appears DynaTrace is causing the issue.</li>
+<li>The team collected logs from this session and opened a case on the issue.</li>
+<li>The team then walked through some Workflow functionality.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<ul>
+<li>The team has opened a case and will be working closely with IBM support to resolve this issue.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<ul>
+<li>
+<p>The team will continue to work to get the IER deployment up and running.</p>
+<ul>
+<li><a href="https://trello.com/c/3WHHYbfl/3-functionality-verification" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws</a></li>
+<li>This flight log is being submitted via PR "11/21/2023 Documentation"</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-37#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<p><strong>Cases open: 1</strong></p>
+<ul>
+<li>Case TS014753369</li>
+</ul>
+<p><strong>Cases closed: 3</strong></p>
+<ul>
+<li>Case TS014232963</li>
+<li>Case TS014348824</li>
+<li>Case TS014370797</li>
+</ul>]]></content>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 36 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36"/>
+        <updated>2023-11-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+<ul>
+<li>The team checked the status of the IER deployment and noticed the IER pod was failing.</li>
+<li>The team spent time troubleshooting the IER deployment.</li>
+<li>The team tried adjusting the FileNet CR and gathered logs from the session.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<ul>
+<li>The team will examine the logs gathered from this session for further troubleshooting.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<ul>
+<li>
+<p>The team will continue to work to get the IER deployment up and running.</p>
+<ul>
+<li><a href="https://trello.com/c/3WHHYbfl/3-functionality-verification" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws</a></li>
+<li>This flight log is being submitted via PR "11/21/2023 Documentation"</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-36#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<p><strong>Cases open: 0</strong></p>
+<p><strong>Cases closed: 3</strong></p>
+<ul>
+<li>Case TS014232963</li>
+<li>Case TS014348824</li>
+<li>Case TS014370797</li>
+</ul>]]></content>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 35 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35</id>
+        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35"/>
+        <updated>2023-11-14T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
+<ul>
+<li>With the help of IBM support the team troubleshooted some workflow errors.</li>
+<li>There were some settings misconfigured in the workflow that were causing errors.</li>
+<li>The team gathered logs from today’s session and will be working closely with IBM support to investigate the workflow error.</li>
+<li>The team configured the CR to enable IER.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
+<ul>
+<li>The client's team will apply the CR changes and monitor its status.</li>
+<li>We will continue to work closely with IBM support and have provided them logs of today’s session.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<ul>
+<li>
+<p>The team will examine the state of the IER deployment and will move to resume use cases and demos.</p>
+<ul>
+<li><a href="https://trello.com/c/3WHHYbfl/3-functionality-verification" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws</a></li>
+<li>This flight log is being submitted via PR "11/21/2023 Documentation"</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-35#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<p><strong>Cases open: 0</strong></p>
+<p><strong>Cases closed: 3</strong></p>
+<ul>
+<li>Case TS014232963</li>
+<li>Case TS014348824</li>
+<li>Case TS014370797</li>
+</ul>]]></content>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Log - Sprint 34 🛫]]></title>
         <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34</id>
@@ -36,7 +193,7 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-34#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 0</strong></p>
-<p><strong>Cases closed: 2</strong></p>
+<p><strong>Cases closed: 3</strong></p>
 <ul>
 <li>Case TS014232963</li>
 <li>Case TS014348824</li>
@@ -644,146 +801,6 @@
 <p><strong>Cases closed: 1</strong></p>
 <ul>
 <li>Case TS014232963</li>
-</ul>]]></content>
-        <category label="log" term="log"/>
-        <category label="sprint" term="sprint"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Log - Sprint 18 🛫]]></title>
-        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18</id>
-        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18"/>
-        <updated>2023-09-27T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
-<ul>
-<li>Today the team continued the walk-through of some of the functionality of Process Designer.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
-<ul>
-<li>The team is working closely with the support team to address the questions raised in today’s session.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<ul>
-<li>
-<p>The team will work to answer the questions from today’s session and prep for Event Actions in our next session.</p>
-<ul>
-<li><a href="https://zenhub.ibm.com/workspaces/st5-action-information-center-64343620d0cfd0000f03a114/issues/ibm-client-engineering/solution-filenet-aws/17" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws#17</a></li>
-<li>This flight log is being submitted via PR "09/28/2023 Documentation"</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-18#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
-<p><strong>Cases open: 0</strong></p>
-<p><strong>Cases closed: 1</strong></p>
-<ul>
-<li>Case TS014232963</li>
-</ul>]]></content>
-        <category label="log" term="log"/>
-        <category label="sprint" term="sprint"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Log - Sprint 17 🛫]]></title>
-        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17</id>
-        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17"/>
-        <updated>2023-09-26T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
-<ul>
-<li>The team continued with the installation of Process Designer in the customer's environment.</li>
-<li>In the previous session the team was encountering a authentication issue with Process Designer in the customer's environment. The team didn't make any changes to the customer's environment, but the authentication issue was no longer present. We took the logs back to the support team and await their feedback on the situation.</li>
-<li>The team then began a walk-through of some of the functionality of Process Designer.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
-<ul>
-<li>The team plans to continue the Process Designer walk-through in the next session.</li>
-<li>The team received the logs from today’s session. We will work with support and get their feedback.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<ul>
-<li>
-<p>The team will continue the walk-through of Process Designer then move to other use cases and demos.</p>
-<ul>
-<li><a href="https://zenhub.ibm.com/workspaces/st5-action-information-center-64343620d0cfd0000f03a114/issues/ibm-client-engineering/solution-filenet-aws/17" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws#17</a></li>
-<li>This flight log is being submitted via PR "09/28/2023 Documentation"</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-17#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
-<p><strong>Cases open: 0</strong></p>
-<p><strong>Cases closed: 1</strong></p>
-<ul>
-<li>Case TS014232963</li>
-</ul>]]></content>
-        <category label="log" term="log"/>
-        <category label="sprint" term="sprint"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Log - Sprint 16 🛫]]></title>
-        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16</id>
-        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16"/>
-        <updated>2023-09-21T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
-<ul>
-<li>The team continued to walk through the installation of Process Designer in the client's environment.</li>
-<li>The team was able to resolve the previous session’s startup error. When unpacking Process Designer, Windows added an additional folder that altered and made the file path incorrect. However, the team encountered a new authentication error while attempting to login.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
-<ul>
-<li>The team updated the open ticket with this new issue and the team is working with support to troubleshoot this error.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<ul>
-<li>
-<p>The team will continue to work on the installation of Process Designer in our next session.</p>
-<ul>
-<li><a href="https://zenhub.ibm.com/workspaces/st5-action-information-center-64343620d0cfd0000f03a114/issues/ibm-client-engineering/solution-filenet-aws/17" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws#17</a></li>
-<li>This flight log is being submitted via PR "09/22/2023 Documentation"</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-16#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
-<p><strong>Cases open: 0</strong></p>
-<p><strong>Cases closed: 1</strong></p>
-<ul>
-<li>Case TS014232963</li>
-</ul>]]></content>
-        <category label="log" term="log"/>
-        <category label="sprint" term="sprint"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Log - Sprint 15 🛫]]></title>
-        <id>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15</id>
-        <link href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15"/>
-        <updated>2023-09-20T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
-<ul>
-<li>Today the team began to walk through an installation of Process Designer in the client's environment.</li>
-<li>The team ran into an error while trying to setup Process Designer in the Windows VM.</li>
-<li>There were some differences in the java versions. We were using the JDK and the client had the JRE. But after setting the JAVA_HOME, it looks like Process Designer was able to locate Java. However, Process Designer gave an error that it was unable to load "main class".</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
-<ul>
-<li>We opened a ticket and the team is working with support to troubleshoot this error.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<ul>
-<li>
-<p>The team will continue to work on the installation of Process Designer in our next session.</p>
-<ul>
-<li><a href="https://zenhub.ibm.com/workspaces/st5-action-information-center-64343620d0cfd0000f03a114/issues/ibm-client-engineering/solution-filenet-aws/17" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws#17</a></li>
-<li>This flight log is being submitted via PR "09/22/2023 Documentation"</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-15#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
-<ul>
-<li><strong>Cases open: 1</strong>
-<ul>
-<li>Case TS014232963</li>
-</ul>
-</li>
 </ul>]]></content>
         <category label="log" term="log"/>
         <category label="sprint" term="sprint"/>
