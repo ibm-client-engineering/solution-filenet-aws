@@ -127,14 +127,14 @@ On the right side is a special object store that contains the record objects. Th
 
       Please make sure below object stores are created and mentioned configurations are in place.These are the prerequisite for IER Functaionality to work correctly.
 
-1- ROS - Object Store 
+1. ROS - Object Store 
 
       Configure connection points for ROS. Below is a screenshot for reference 
 
 ![ROS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/07ac22da-b1fa-4e32-98ec-ac5f0b69d617)
 
 
-2- FPOS - Object Store 
+2. FPOS - Object Store 
 
      Validate FPOS object store is created shown in Screenshot below
 
@@ -142,14 +142,14 @@ On the right side is a special object store that contains the record objects. Th
 
 
 
-3- In Acce console create Code Module as shown below 
+3. In Acce console create Code Module as shown below 
 
 ![CodeModule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/7fd4b69c-c98d-47c9-b705-20f35514816b)
 
 
 
 
-4- IER Task Manager Setup Configuration
+4. IER Task Manager Setup Configuration
 
       Configuring Task Manager for IER in ICN - In the systems content navigator administration interface go to the settings node.
 
@@ -164,7 +164,7 @@ Select to enable the task manager service
 Add the task manager url,Specify the log diretcory.
 
 Task Manager URL - Specify the URL uing which other applications can comunicate with TM . URL Format Example - http or https  
-ServerName/Portnumber/taskManagerWeb/api/V1.
+_ServerName/Portnumber/taskManagerWeb/api/V1._
 
 
 ![TMConfig](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/e1b091b4-d11d-497e-8717-1f2cb6cb775d)
@@ -175,10 +175,10 @@ Add the TM_JOB_URL environment variable to the Task Manager deployment .Below is
 [Task Manager in Container](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records)
 
 
-5- IER Configuration on ICN 
+5. IER Configuration on ICN 
 
 
-Log in to ICN and navigate to Plugins and create a "New Plu-in" 
+Log in to ICN and navigate to Plugins and create a _New Plug-in_
 
 ![AddPlugin](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/5d96ce91-7660-4fb2-a9d0-d8d5e6d86ec7)
 
@@ -193,7 +193,7 @@ Save and Close . Edit the added plugin and scroll down . You will see the file p
 
 ![ICNFILEPLANREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/1b23d73e-ba89-4daa-8ca2-0ec7839c77a8)
 
-Create a desktop "IER" and select repository FPOS. General > Authentication > Repository 
+Create a desktop IER and select repository FPOS. General > Authentication > Repository 
 Navigate to Repository Tab and add FPOS and ROS like it is shown below
 ![ICNREPO](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/f2126b91-d000-45d2-80c6-202d64ab9232)
 
