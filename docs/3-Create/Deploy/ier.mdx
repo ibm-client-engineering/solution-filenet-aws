@@ -113,7 +113,19 @@ postgres-759fd876ff-d5fxd                     1/1     Running   0          6d9h
 
 ```
 ## IER Configuration 
-Please make sure below object stores are created and required configurations are in place 
+
+
+IBM Enterprise Records (IER) works in conjunction with FileNet Content Manager to provide the foundation for an enterprise compliance platform.
+Below diagram is a presentation how the content in FileNet Content Manager and the record objects work together.
+
+![Design](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/99fc2f22-93c4-4ca9-89a9-e44599fd1553)
+
+
+On the left side is a folder in FileNet Content Manager that is in a record-enabled FileNet object store.
+On the right side is a special object store that contains the record objects. This is called a File Plan Object Store.
+
+
+      Please make sure below object stores are created and mentioned configurations are in place.These are the prerequisite for IER Functaionality to work correctly.
 
 1- ROS - Object Store 
 
@@ -124,36 +136,56 @@ Please make sure below object stores are created and required configurations are
 
 2- FPOS - Object Store 
 
-      Create FPOS object store as shown in Screenshot below
+     Validate FPOS object store is created shown in Screenshot below
 
 ![FPOS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/46a43cb7-bed4-479c-88b0-6459a962fef1)
 
-IBM Enterprise Records (IER) works in conjunction with FileNet Content Manager to provide the foundation for an enterprise compliance platform.
-Below diagram is how the content in FileNet Content Manager and the record objects work together
-
-![Design](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/99fc2f22-93c4-4ca9-89a9-e44599fd1553)
 
 
-On the left side is a folder in FileNet Content Manager that is in a record-enabled FileNet object store.
-On the right side is a special object store that contains the record objects. This is called a File Plan Object Store.
+3- In Acce console create Code Module as shown below 
+
+![CodeModule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/7fd4b69c-c98d-47c9-b705-20f35514816b)
 
 
 
 
-3- IER Task Manager Setup Configuration
+4- IER Task Manager Setup Configuration
 
       Configuring Task Manager for IER in ICN - In the systems content navigator administration interface go to the settings node.
-Scroll down in the general tab under settings to Task Manager configuration
+
+
+ Below are refrence screenshots.
+
+![TMSetting](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/84f03641-1390-4516-b032-36d8d52a9f28)
+
+
+Scroll down in the general tab under settings to Task Manager configuration.
 Select to enable the task manager service
-Add the task manager url,Specify the log diretcory
+Add the task manager url,Specify the log diretcory.
 
-Add the TM_JOB_URL environment variable to the Task Manager deployment 
+Task Manager URL - Specify the URL uing which other applications can comunicate with TM . URL Format Example - http or https  
+ServerName/Portnumber/taskManagerWeb/api/V1.
 
-Copy jar files 
+
+![TMConfig](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/e1b091b4-d11d-497e-8717-1f2cb6cb775d)
 
 
-4- IER Configuration on ICN 
-Log in to ICN and navigate to Plugins and add a new pulg in .Add JAR file path and hit load . It will looks like this 
+Add the TM_JOB_URL environment variable to the Task Manager deployment .Below is the refrence url. 
+
+[Task Manager in Container](https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records)
+
+
+5- IER Configuration on ICN 
+
+
+Log in to ICN and navigate to Plugins and create a "New Plu-in" 
+
+![AddPlugin](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/5d96ce91-7660-4fb2-a9d0-d8d5e6d86ec7)
+
+
+
+
+Add JAR file path and hit load . It will look like this 
 
 ![ICNPLUGIN](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d8288174-bfd7-4c9b-ac78-67faa6dd7b4f)
 
@@ -175,136 +207,7 @@ Create a custom menu - Copy Document Context Menu and add the IER option as show
 Add the menu to the desktop where IER functionality is exceted .Below is the image where you can add the custom menu created on above step
 ![CUSTOMMENU1](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/c793b329-9e98-4d55-a3ac-80b7c7fe4055)
 
-## Validate IER Functionality 
-Create a file plan in FPOS and declare a record using the file plan . The document will look like this as a record (electronic/physical etc )
 
-![RECORD](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/0ed9d858-3407-4194-b8b8-f4d80cd1363b)
-
-
-## Managing Records
-
-
-      Creating an Advanced dispostion schedule - 
-
-There are two distinct types of disposition schedules available for your use.Basic dispostion schedule and Advanced dispostion schedule.
-
-A Basic disposition schedule is the first. A basic schedule is a record category that specifies the retention period and the retention trigger property (event).
-The value of using a Basic disposition schedule is faster time to process dispositions and less complexity in defining the schedule specifics.
-
-
-An Advanced disposition schedule contains the retention period, the cut off trigger event (when the clock starts ticking), record phases and disposal instructions.
-An administrator can associate a disposition schedule with one or more record categories, record folders or record types.
-A record folder can have its own disposition schedule, or it can inherit the disposition schedule associated with a parent record category.
-
-
-In a disposition schedule, an administrator will specify the retention rules for records and instructions for disposing of records at the end of the retention period.
- Disposition instructions and workflows include -
-
-• Review
-
-• Transfer to an archive for permanent preservation
-
-• Export to another location
-
-• Destroy (with approval)
-
-• Auto-destroy
-
-Below are the steps how to create a dispostion schedule.
-
-1- Navigate to IER desktop and click on Configuration Tab. Select "Advanced Dispostion Schedules" from dropdown as shown below.
-
-
-![Dispostion](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/39827486-20a0-4584-a0ce-5eef86065f83)
-
-
-2- Click "Add Dispostion Schedule" to create a new dispostion schedule 
-
-
-![AddDispostion](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d89728ab-3e1e-40be-9e62-6b89d06bd33c)
-
-
-3- Now we need to enter the properties for the dispostion schedule as shown below example 
-
-
-![DispostionProp](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/59b49906-74de-4d6e-8262-a2913bc0033f)
-
-
-4- Scroll down on dispostion schedule page.You can see the "Contract dispostion" added like below
-
-
-![DispostionSchedule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/a7cdeb64-4e1a-4ff3-abf6-20a621b3fc22)
-
-5- A new dispostion schedule is scuessfully added to the list 
-
-
-
-      Applying and executing disposition schedule - 
-
-Disposition is normally executed on an automated schedule basis. There may be times that, as a Records Administrator, you would want to apply and execute a disposition schedule manually.
-Although this is not the most common mechanism for executing a disposition schedule, it can be done if the need arises. 
-
-1- Click on the top navigator icon on left corner and navigate to "File Plans" 
-
-
-![FilePlan](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d20f11e4-66cf-4811-8e88-78f189dab931)
-
-
-2- Navigate to record category and clcik "Add Record Category" . Below is a screenshot for reference.
-
-![RecordCategory](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/77320014-36ea-4fa3-a051-d853fdc12e43)
-
-
-3- Fill in recordcategory properties as shown in below example and click "Add" button
-
-![RecordProp](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/691b190a-7a61-4adf-abdf-73aff3ba10b4)
-
-
-4- Now the records category with DateCreated is visible .Below is a refrence screenshot.
-
-![DispostionInstruction](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/79cc265e-25b7-4be9-afd2-571eeb7aff85)
-
-5- Re-classify previous manually declared record to new Record category.Below is an example to refer.
-
-![Classifyrecord](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/14e93a1b-a4bf-4f46-93aa-0055b36700ff)
-
-in Move Record plan enter "2023 Compliance Rule" and the new record category . Click Move . Below is a screenshot to refer.
-
-![MoveRecord](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/d61b1f41-946f-4315-ba19-1fd8a3e69e86)
-
-You can now see the under record category like below. 
-
-![RecordMoved](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/26e81b8c-e718-41f9-9e7d-6c6eb1e6a381)
-
-
-6- Now we can run the dispostion sweep to prepare above record gategory for dispostion. 
-
-      On top left Navigator click on "Tasks" and Click on Schedule > Schedule Basic Dispostion Sweep and shown below
-
-
-![DispostionSweep](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/9bb0887a-292e-4aa3-a16f-1612f3812b67)
-
-
-Select FPOS and fill in details as shown in refrence screenshot and Schedule Sweep
-
-
-![FPOS](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/4e3ff62b-08a5-40da-98a8-18f727e19ac0)
-
-
-![ScheduleSweep](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/cd7c19e6-7fa3-4200-955f-71bd6ace6e0e)
-
-You will see the scheduled sweep with a Status of Scheduled. Click Refresh until you see it shows Completed.
-
-
-![DispostionSchedule](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/98bf60c6-1af1-4fa5-b29b-eb8e910d68d9)
-
-![DispostionComplete](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/7164acd1-a15e-4a6d-aa8a-029794c64bda)
-
-Optionally click "Download Report" button to view the report is generated . Below are few screenshots for refrence.
-
-![DownloadReport](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/883929f9-ca61-4028-aab9-9138ddc8cb25)
-
-![ReportScreenshot](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/b3566ee3-83ad-4092-a4c1-ee84e20edecf)
 
 
 
