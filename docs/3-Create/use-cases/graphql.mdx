@@ -4,6 +4,9 @@ sidebar_position: 4
 title: GraphQL
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # GraphQL
 
 ## Queries and Mutations
@@ -39,15 +42,18 @@ title: GraphQL
 #### Example: Uploading a file from an S3 bucket to Filenet
 
 1. curl command:
-- Windows:
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
 ```curl
 curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@\"C:/path/to/file/file.extension\"'
 ```
-
-- Mac/Linux:
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
 ```curl
 curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here: ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@/path/to/file/file.extension'
 ```
+  </TabItem>
+</Tabs>
 
 2. Python function:
 
