@@ -1,10 +1,10 @@
 ---
 id: solution-deploy-workflow
 sidebar_position: 5
-title: Workflows
+title: Process Designer
 ---
 
-# Workflows Setup
+# Process Designer & Workflow Tab
 
 ## Standalone Process Designer
 
@@ -29,13 +29,13 @@ title: Workflows
 4. Under _Table Spaces_ ->_Data_, enter the tablespace where you want workflow files to be stored. 
 :::tip
 
-See [Create Databases](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-postgres#create-the-databases) for the tablespaces configuration, including their names.
+See [Create Databases](solution-deploy-postgres#create-the-databases) for the tablespaces configuration, including their names.
 
 :::
 5. Under _Workflow System Security Groups_ ->_Administration Group_, enter the admin group you want to assign to the Workflow System. These two can be found in your filenet configuration within the CR.
 :::tip
 
-See [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-operator#deploying-cr). The admin group is specified under `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
+See [Deploying CR](solution-deploy-operator#deploying-cr). The admin group is specified under `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
 
 :::
 
@@ -154,7 +154,7 @@ path-to-java-home/bin/keytool -delete -keystore path-to-java-home/lib/security/c
 ## Enabling Workflow Tab on Content Navigator
 
 #### Prerequisites
-- Workflow system and connection point have been [created](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/use-cases/solution-filenet-workflow#creating-a-workflow-system-and-connection-point-within-filenet) via the acce console in Object Store X (OSX)
+- Workflow system and connection point have been [created](#creating-a-workflow-system-and-connection-point-within-filenet) via the acce console in Object Store X (OSX)
 - A repository has been setup within the Navigator
 
 #### Configuration Steps
