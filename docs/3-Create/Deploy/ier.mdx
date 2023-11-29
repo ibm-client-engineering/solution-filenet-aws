@@ -217,11 +217,11 @@ On the left side is a folder in FileNet Content Manager that is in a record-enab
 On the right side is a special object store that contains the record objects. This is called a File Plan Object Store.
 
 
-[Create the following objects stores](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-operator#adding-object-stores) and configure them as mentioned. These are the prerequisite for IER Functaionality to work correctly.
+[Create the following objects stores](/Create/Deploy/solution-deploy-operator#adding-object-stores) and configure them as mentioned. These are the prerequisite for IER Functaionality to work correctly.
 
 1. ROS - Object Store 
 
-      [Configure connection points](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-workflow#creating-a-workflow-system-and-connection-point-within-filenet) for ROS. Below is a screenshot for reference 
+      [Configure connection points](/Create/Deploy/solution-deploy-workflow#creating-a-workflow-system-and-connection-point-within-filenet) for ROS. Below is a screenshot for reference 
 
 ![ROS](https://github.com/ibm-client-engineering/solution-processmining/assets/136734452/07ac22da-b1fa-4e32-98ec-ac5f0b69d617)
 
@@ -252,7 +252,10 @@ Scroll down in the general tab under settings to Task Manager configuration and 
 - Enable the task manager service
 - Enter the task manager url
   - This is the URL uing which other applications can comunicate with TM
-  - e.g. - http or https  _://ServerName/Portnumber/taskManagerWeb/api/V1._
+  - e.g. - _http_ or _https_  _://ServerName:Portnumber/taskManagerWeb/api/V1._
+    - ServerName =
+      - _ServiceName_ if the IER pod is in the same namespace
+      - _ServiceName.Namespace_ if the IER pod is in another namespace
 - Specify the log diretcory
 
 

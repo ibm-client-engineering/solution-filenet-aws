@@ -161,7 +161,7 @@ When `nginx.ingress.kubernetes.io/proxy-body-size` is set to 0, this removes the
 The NGINX server was rejecting the payload with an error "413 Payload Too Large". This caused the failure when creating a document with content. The team resolved this by removing the payload limitation by adding `nginx.ingress.kubernetes.io/proxy-body-size: "0"` annotation to the CR.
 
 
-### IBM Content Navigator
+### Changing Settings in Navigator Fails, Displays App Server Error Message
 
 #### The Problem
 
@@ -169,7 +169,7 @@ While modifying settings in the navigator, we encountered the following error:
 
 ![](https://media.github.ibm.com/user/436100/files/c026119b-3b95-4323-b2e4-279285b67e7a)
 
-The team proceeded to view the logs within one of the navigator pods and repeated the triggering action, following the debugging steps outlined above under [Dynatrace and Filenet](http://localhost:3000/solution-filenet-aws/Transition/solution-lessons#dynatrace-and-filenet). We were able to find the following system error stack trace:
+The team proceeded to view the logs within one of the navigator pods and repeated the triggering action, following the debugging steps outlined above under [Dynatrace and Filenet](#dynatrace-and-filenet). We were able to find the following system error stack trace:
 
 ![](https://media.github.ibm.com/user/436100/files/930eb18f-5d12-4f66-b9af-1bc27cf2aa24)
 
@@ -257,7 +257,7 @@ After setting up the web version of Process Designer, opening it results in the 
 
 #### The Solution
 
-The Web version of Process Designer is no longer supported. See the steps [here](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-workflow) to set it up locally.
+The Web version of Process Designer is no longer supported. See the steps [here](../Create/Deploy/solution-deploy-workflow) to set it up locally.
 
 #### Summary
 
