@@ -1,5 +1,5 @@
 ---
-id: graphql
+id: solution-filenet-graphql
 sidebar_position: 4
 title: GraphQL
 ---
@@ -41,12 +41,12 @@ title: GraphQL
 1. curl command:
 - Windows:
 ```curl
-curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@\"C:/path/to/file/file.extension\"'
+curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here ex. CUSTOMERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@\"C:/path/to/file/file.extension\"'
 ```
 
 - Mac/Linux:
 ```curl
-curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here: ex. TRAVELERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@/path/to/file/file.extension'
+curl -H 'Authorization: Basic <insert xsrf token here>' -H 'content-type: multipart/form-data' --verbose '(filenet-root-link)/content-services-graphql/graphql' -F graphql='{"query":"mutation ($contvar:String) { createDocument (repositoryIdentifier: \"<insert repo name here: ex. OS01>\" fileInFolderIdentifier: \"/<insert filenet folder path here: ex. CUSTOMERS/TEST-LOAN>\" documentProperties: {name: \"<insert document name here>\" contentElements:{replace: [{type: CONTENT_TRANSFER contentType: \"<insert content type here: ex. text/plain>\" subContentTransfer: {content:$contvar} }]}} checkinAction: {} ) { id name }}", "variables":{"contvar":null}}' -F 'contvar=@/path/to/file/file.extension'
 ```
 
 2. Python function:
@@ -59,7 +59,7 @@ file_mac_linux = '/path/to/file/filename.extension'
 file_windows = 'C:/path/to/file/filename.extension'
 file = file_<platform>                                  # pick your platform
 repo_ID = "<insert repo name here>"                     # ex. OS01
-folder_path = "<insert folder path here>"                # ex. /TRAVELERS/TEST-LOAN
+folder_path = "<insert folder path here>"                # ex. /CUSTOMERS/TEST-LOAN
 document_name = "<insert document name here>"           # ex. curl upload test
 content_type = "<insert content type here>"             # ex. text/plain
 filenet_home_link = "<insert filenet home link>"
@@ -139,7 +139,7 @@ import boto3
 import os
 
 repo_ID = "<insert repo name here>"                                 # ex. OS01
-folder_path = "<insert folder path here>"                           # ex. /TRAVELERS/TEST-LOAN
+folder_path = "<insert folder path here>"                           # ex. /CUSTOMERS/TEST-LOAN
 document_name = "<insert document name here>"                       # ex. curl upload test
 content_type = "<insert content type here>"                         # ex. text/plain
 filenet_home_link = "<insert filenet home link>"
