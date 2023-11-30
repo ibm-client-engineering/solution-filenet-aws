@@ -4,7 +4,7 @@ slug: /
 title: 'Flight Path'
 full_website: https://ibm-client-engineering.github.io/solution-filenet-aws/
 ---
-[![Site Build](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml/badge.svg)](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml)  ![Site Build](https://img.shields.io/badge/Stage-Co--Create-Co--Create)
+[![Site Build](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml/badge.svg)](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml)  
 
 ## Bottom Line Up Front
 
