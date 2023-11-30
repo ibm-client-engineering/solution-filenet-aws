@@ -1,26 +1,32 @@
 ---
 id: solution-deploy-workflow
 sidebar_position: 5
-title: Workflows
+title: Process Designer
 ---
 
-# Workflows Setup
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Process Designer & Workflow Tab
 
 ## Standalone Process Designer
 
-#### Version info
+### Version info
 - IBM Content Platform Engine - 5.5.11.0
 - IBM Content Navigator 3.0.14
 
-#### Prerequisites
+### Prerequisites
 - A [Java Runtime Environment](https://www.java.com/en/download/) (JRE 1.8 or newer)
 - [Add Java to PATH](https://www.ibm.com/docs/en/b2b-integrator/6.0.2?topic=installation-setting-java-variables)
-- Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the part number `M0CTDML`
+- Install the Filenet Content Manager CPE tools package from IBM Passport Advantage using the appropriate part number
 
-#### Setup Steps
+### Setup Steps
 
-##### Creating a Workflow System and Connection Point within Filenet
-1. Open up and log into the acce console
+#### Creating a Workflow System and Connection Point within Filenet
+
+<Tabs groupId="GUIvCR">
+  <TabItem value="GUI" label="Graphical User Interface (acce)">
+1. Log into ACCE
 2. Open the Object Store in which you want to store Workflow data
 3. Click on _Administrative_ ->_Workflow System_ and click _New_:
 
@@ -29,13 +35,13 @@ title: Workflows
 4. Under _Table Spaces_ ->_Data_, enter the tablespace where you want workflow files to be stored. 
 :::tip
 
-See [Create Databases](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-postgres#create-the-databases) for the tablespaces configuration, including their names.
+See [Create Databases](solution-deploy-postgres#create-the-databases) for the tablespaces configuration, including their names.
 
 :::
 5. Under _Workflow System Security Groups_ ->_Administration Group_, enter the admin group you want to assign to the Workflow System. These two can be found in your filenet configuration within the CR.
 :::tip
 
-See [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/Deploy/solution-deploy-operator#deploying-cr). The admin group is specified under `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
+See [Deploying CR](solution-deploy-operator#deploying-cr). The admin group is specified under `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
 
 :::
 
@@ -61,9 +67,46 @@ See [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws
 11. Navigate to _Workflow System_ ->_Connection Points_ to double check that it was successfully created:
 
 ![](https://media.github.ibm.com/user/436100/files/1a9dac79-2998-46c0-b446-6e0ab0d3c17a)
+  </TabItem>
+  <TabItem value="CR" label="Custom Resource">
+Initialize a Workflow System and Connection Point by editing the CR. Open it up and find `ic_obj_store_creation.object_stores`
+
+```yaml
+    ic_obj_store_creation:
+      object_stores:
+      - oc_cpe_obj_store_enable_workflow: true
+        oc_cpe_obj_store_workflow_data_tbl_space: <workflow-table-space>
+        oc_cpe_obj_store_workflow_admin_group: <workflow-admin-group>
+        oc_cpe_obj_store_workflow_pe_conn_point_name: <connection-point-name>
+        oc_cpe_obj_store_workflow_region_name: <isolated-region-name>
+        oc_cpe_obj_store_workflow_region_number: <number-of-regions-in-this-object-store>
+```
+
+Add this to the CR and fill in the items in the angular brackets `<>` above. See table five of [parameters initialization](https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/23.0.1?topic=parameters-initialization) for more details.
+
+:::tip
+
+See [Create Databases](solution-deploy-postgres#create-the-databases) for the tablespaces configuration, including their names.
+
+:::
+
+:::tip
+
+See [Deploying CR](solution-deploy-operator#deploying-cr). The admin group is specified under `initialize_configuration: ic_ldap_admins_groups_name` in the CR.
+
+:::
+
+:::note
+The isolated region number should be 1 if it is the first connection point in this object store. Increment accordingly thereafter.
+
+:::
+
+Finally, [reapply the CR](solution-deploy-operator#apply-the-cr-to-the-cluster).
+  </TabItem>
+</Tabs>
 
 
-##### SSL Configuration (adding the site certificate into the jre keystore)
+#### SSL Configuration (adding the site certificate into the jre keystore)
 1. Launch [Google Chrome](https://www.google.com/chrome/)
 2. Navigate to the ACCE console
 3. Click on the following:
@@ -85,14 +128,20 @@ See [Deploying CR](https://ibm-client-engineering.github.io/solution-filenet-aws
 ![](https://media.github.ibm.com/user/436100/files/0b848a56-7cd9-43bb-b44c-32dc49fe35b5)
 
 5. Run the appropriate command to import it into your JRE keystore (keystore tool is found in the JAVA HOME directory under the bin folder)
-  - Windows:
+
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
 ```bash
 path-to-java-home\bin\keytool -import -keystore path-to-java-home\lib\security\cacerts -file cpe_websphere_ssl_cert.crt
 ```
-  - Mac/Linux:
-```bash
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
+```shell
 path-to-java-home/bin/keytool -import -keystore path-to-java-home/lib/security/cacerts -file cpe_websphere_ssl_cert.crt
 ```
+  </TabItem>
+</Tabs>
+
 6. When prompted with _Trust this certificate? [no]_, respond with _yes_
 7. You should see an `added to keystore` message
 
@@ -103,23 +152,33 @@ Importing a key subsequent times will result in the following error given that t
 `keytool error: java.lang.Exception: Certificate not imported, alias <key-alias-name> already exists`
 
 In which case you must delete the old key before importing the new one. Do so by running the following command with administrator priviledges (On Windows, run cmd as an Administrator. On Mac/Linux prepend `sudo` to the following command):
+
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
 ```bash
+path-to-java-home\bin\keytool -delete -keystore path-to-java-home\lib\security\cacerts -alias <key-alias-name>
+```
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
+```shell
 path-to-java-home/bin/keytool -delete -keystore path-to-java-home/lib/security/cacerts -alias <key-alias-name>
 ```
+  </TabItem>
+</Tabs>
 
 :::
 
 
-##### Configuring and Launching the Process Designer
+#### Configuring and Launching the Process Designer
 1. Unzip the Process Designer zip file and all zip files within it for your platform. Beware that on Windows, unzipping the folders leads to a slightly different folder structure by default- there will be two peclient folders, one inside another. This can be 'fixed' by moving the one with the content into its parent.
-2. Navigate to: `<unzipped_folder>/cpetools-<platform>/peclient/`
-3. Open this folder in any text editor or IDE (ex. code .).
+2. Navigate to: 
+<Tabs groupId="operating-systems"><TabItem value="win" label="Windows">`(unzipped_folder)\cpetools-win\peclient\`</TabItem><TabItem value="mac/linux" label="macOS/Linux">`(unzipped_folder)/cpetools-linux/peclient/`</TabItem></Tabs>
+3. Open this folder in any text editor or IDE (e.g. code .).
 4. Open:
-  - `shell/cpetoolenv.sh` (Linux/Mac)
-  - `batch/cpetoolenv.bat` (Windows)
-4. Set the `PE_CLIENT_INSTALL_DIR` to the full path of the `cpe_tools-<platform>` directory, i.e., `/Users/…/<unzipped_folder>/cpetools-linux`, beware of any spaces in the folder path.
-5. Open `config/WcmApiConfig.properties`.
-6. Set the `RemoteServerUrl`
+<Tabs groupId="operating-systems"><TabItem value="win" label="Windows">`batch\cpetoolenv.bat`</TabItem><TabItem value="mac/linux" label="macOS/Linux">`shell/cpetoolenv.sh`</TabItem></Tabs>
+5. Set the `PE_CLIENT_INSTALL_DIR` to the full path of the `cpe_tools-<platform>` directory, i.e., `/Users/…/<unzipped_folder>/cpetools-linux`, beware of any spaces in the folder path.
+6. Open `config/WcmApiConfig.properties`.
+7. Set the `RemoteServerUrl`
   - If you access the acce console at `<host_link>/acce/`, then confirm you can access the ping page at `<host_link>/peengine/IOR/ping`
 
   ![](https://media.github.ibm.com/user/436100/files/b287ddce-8d76-44a8-a848-b01e06184755)
@@ -129,35 +188,48 @@ path-to-java-home/bin/keytool -delete -keystore path-to-java-home/lib/security/c
   ![](https://media.github.ibm.com/user/436100/files/ff515d36-8ec7-4c9f-b7c9-0a3bcbf02907)
 
 
-7. Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).
-8. Navigate (cd) to:
-  - Windows: 
-  ```bash
-  cd <unzipped_folder>/cpetools-win/peclient/batch
-  ```
-  - Mac/Linux: 
-  ```bash
+8. Open a command line utility (i.e., Terminal [Mac], cmd [Windows]).
+9. Navigate (cd) to:
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
+```bash
+  cd <unzipped_folder>\cpetools-win\peclient\batch
+```
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
+```shell
   cd <unzipped_folder>/cpetools-linux/peclient/shell
-  ```
-9. Run:
-  - Windows: 
-  ```bash
+```
+  </TabItem>
+</Tabs>
+10. Run:
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
+```bash
   pedesigner.bat <connection-point>
-  ```
-  - Mac/Linux: 
-  ```shell
+```
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
+```shell
   sh ./pedesigner.sh <connection-point>
-  ```
-10. Enter credentials used to login to the ACCE console.
-11. Process Designer should open up!
+```
+  </TabItem>
+</Tabs>
+11. Enter credentials used to login to the ACCE console:
+
+![](https://media.github.ibm.com/user/436100/files/5c9ede33-02fa-41c1-927b-fb09bc524230)
+
+12. Process Designer should open up!
+
+![](https://media.github.ibm.com/user/436100/files/dfb7c23c-7698-4e95-8e7e-6ac7c67aa85c)
 
 ## Enabling Workflow Tab on Content Navigator
 
-#### Prerequisites
-- Workflow system and connection point have been [created](https://ibm-client-engineering.github.io/solution-filenet-aws/Create/use-cases/solution-filenet-workflow#creating-a-workflow-system-and-connection-point-within-filenet) via the acce console in Object Store X (OSX)
+### Prerequisites
+- Workflow system and connection point have been [created](#creating-a-workflow-system-and-connection-point-within-filenet) via the acce console in Object Store X (OSX)
 - A repository has been setup within the Navigator
 
-#### Configuration Steps
+### Configuration Steps
 1. Open the Navigator
 2. Navigate to *Administration->Repositories->OSX* (double click)
 3. Click *Connect*
