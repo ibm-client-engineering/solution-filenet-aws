@@ -1,0 +1,98 @@
+---
+id: solution-stage-rds
+sidebar_position: 5
+title: AWS RDS for Postgres
+---
+
+## Configuring Postgres RDS/DB on AWS (Optional)
+
+:::note
+Follow these instructions if you will be utilizing AWS RDS to host your Postgresql instance instead of deploying to the cluster locally.
+:::
+
+Create a security group. We're going to get our vpc for our filenet cluster first and use that here since we don't have any default vpc.
+
+Let's export the following env vars
+
+```
+export clustername=filenet-cluster-east
+export region=us-east-1
+
+```
+Now let's retrieve our vpc id
+```
+vpc_id=$(aws eks describe-cluster \
+    --name $clustername \
+    --query "cluster.resourcesVpcConfig.vpcId" \
+    --region $region \
+    --output text)
+```
+And with those vars set, let's now create our security group
+```
+security_group_id=$(aws ec2 create-security-group \
+    --group-name RDSFilenetSecGroup \
+    --description "RDS Access to Filenet Cluster" \
+    --vpc-id $vpc_id \
+    --region $region \
+    --output text)
+```
+Retrieve the CIDR range for your cluster's VPC and store it in a variable for use in a later step.
+```
+cidr_range=$(aws ec2 describe-vpcs \
+    --vpc-ids $vpc_id \
+    --query "Vpcs[].CidrBlock" \
+    --output text \
+    --region $region)
+```
+Let's authorize access to that group for Oracle which uses port 1521
+```
+aws ec2 authorize-security-group-ingress \
+    --group-id $security_group_id \
+    --protocol tcp \
+    --port 1521 \
+    --region $region \
+    --cidr $cidr_range
+```
+Let's create a db subnet group. First get our existing subnet ids from our vpc
+```
+aws ec2 describe-subnets \
+    --filters "Name=vpc-id,Values=$vpc_id" \
+    --query 'Subnets[*].{SubnetId: SubnetId,AvailabilityZone: AvailabilityZone,CidrBlock: CidrBlock}' \
+    --region $region \
+    --output table
+
+----------------------------------------------------------------------
+|                           DescribeSubnets                          |
++------------------+--------------------+----------------------------+
+| AvailabilityZone |     CidrBlock      |         SubnetId           |
++------------------+--------------------+----------------------------+
+|  us-east-1a      |  192.168.0.0/19    |  subnet-08ddff738c8fac2db  |
+|  us-east-1b      |  192.168.32.0/19   |  subnet-0e11acfc0a427d52d  |
+|  us-east-1b      |  192.168.128.0/19  |  subnet-0dd9067f0f828e49c  |
+|  us-east-1c      |  192.168.160.0/19  |  subnet-0da98130d8b80f210  |
+|  us-east-1a      |  192.168.96.0/19   |  subnet-02b159221adb9b790  |
+|  us-east-1c      |  192.168.64.0/19   |  subnet-01987475cac20b583  |
++------------------+--------------------+----------------------------+
+```
+Now let's create our db subnet group
+```
+aws rds create-db-subnet-group \
+--db-subnet-group-name "filenet-rds-subnet-group" \
+--db-subnet-group-description "This is our cluster subnet ids authorized and grouped for RDS" \
+--subnet-ids "subnet-08ddff738c8fac2db" "subnet-0e11acfc0a427d52d" "subnet-0dd9067f0f828e49c" "subnet-0da98130d8b80f210" "subnet-02b159221adb9b790" "subnet-01987475cac20b583"
+```
+Now with all those prerequisites completed, let's create the RDS instance:
+```
+aws rds create-db-instance \
+    --engine postgresql \
+    --db-instance-identifier filenet-east-db \
+    --allocated-storage 300 \
+    --multi-az \
+    --db-subnet-group-name filenet-rds-subnet-group \
+    --db-instance-class db.t3.large \
+    --vpc-security-group-ids $security_group_id \
+    --master-username filenetuser \
+    --master-user-password filenetpass \
+    --backup-retention-period 3
+```
+A default DB called `postgres` will be created

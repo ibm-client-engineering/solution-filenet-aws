@@ -1,0 +1,68 @@
+---
+id: solution-stage-aws
+sidebar_position: 3
+title: AWS Account and Client
+---
+
+## Set Up AWS Account
+
+- CMDLINE Client install (MacOS)
+
+Download the client
+
+```
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+```
+
+Install it with sudo (to use for all users)
+
+```
+sudo installer -pkg ./AWSCLIV2.pkg -target /
+```
+
+Now let's configure our client env
+
+```
+aws configure
+```
+
+Answer all the questions with the info you got. If you already have a profile configured, you can add a named profile to your credentials
+
+```tsx
+vi ~/.aws/credentials
+
+[default]
+aws_access_key_id =
+aws_secret_access_key =
+
+[748107796891_AWSAdmin]
+aws_access_key_id=
+aws_secret_access_key=
+```
+
+Also add location info to the config file
+
+```tsx
+vi ~/.aws/config
+
+[default]
+region = us-east-1
+output = json
+
+[profile techzone_user]
+region=us-east-1
+output=json
+```
+
+We are also going to use some env magic to make sure we stick with the second profile
+
+```
+export AWS_PROFILE=748107796891_AWSAdmin
+```
+
+You may also copy the following out of the aws portal and paste it into your shell
+
+```
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+```
