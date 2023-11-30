@@ -1,0 +1,59 @@
+---
+id: solution-stage-pre-reqs
+sidebar_position: 1
+title: Pre-Requisites
+---
+## Software Pre-requisites
+
+- Minimum Requirements
+  - IBM FileNet Software (Images)
+  - Kubectl
+  - AWS CLI
+  - IAM
+    - AWS EKS Security Group should ALLOW communication on assigned NodePorts
+
+- Hardware
+  - EKS
+    - `m5.xlarge` and region as `us-east-1`. (this has 4 vcpu and 16 gigs ram)
+    - Default storage class defined
+  - Jump Server/Bastion Host for staging requirements
+
+## Cluster Sizing
+
+### Small (targets development)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|1000|1000|3072|3072|1|
+|CSS|1000|1000|4096|4096|1|
+|CSGraphQL|500|1000|1536|1536|1|
+|Navigator|1000|1000|3072|3072|1|
+|External Share|500|1000|1536|1536|1|
+|Task Manager|500|1000|1536|1536|1|
+|CMIS|500|1000|1536|1536|1|
+
+### Medium (targets production with high-availability)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|1500|2000|3072|3072|2|
+|CSS|1000|2000|8192|8192|2|
+|CSGraphQL|500|2000|3072|3072|2|
+|Navigator|2000|3000|4096|4096|2|
+|External Share|500|1000|1536|1536|2|
+|Task Manager|500|1000|1536|1536|2|
+|CMIS|500|1000|1536|1536|2|
+
+### Large (targets production with high-availability)
+
+|Component |CPU Request (m)|CPU Limit (m)|Memory Request (Mi)|Memory Limit (Mi)|Number of replicas|
+|---|----|---|---|---|--|
+|CPE|3000|4000|8192|8192|2|
+|CSS|2000|2000|8192|8192|2|
+|CSGraphQL|1000|2000|3072|3072|6|
+|Navigator|2000|4000|6144|6144|6|
+|External Share|500|1000|1536|1536|2|
+|Task Manager|500|1000|1536|1536|2|
+|CMIS|500|1000|1536|1536|2|
+
+We are going with MEDIUM, so technically we only need 12 vcpus and 24 gigs RAM. We are going to provision a 6 node cluster with the `m5.xlarge` sizing as this will give us 24 vcpu and 96 gigs RAM, which is way more than we need anyway. Man, if there was only a sizing in AWS that was 4 VCPU/8 GIGS, that would be ideal as we're going to have twice as many vpcus and 4 times as much RAM as we need.

@@ -1,0 +1,27 @@
+# Staging
+
+In this section we will examine the pre-requisite actions that need to take place in order to prepare your environment for FileNet Content Manager.
+
+## 1. [Pre-Requisites](/Prepare/Stage/solution-stage-pre-reqs)
+
+This document describes the cluster sizing and software minimum requirements.
+
+## 2. [Image Pre-Staging](/Prepare/Stage/solution-stage-image-prep)
+
+This is a purely optional pre-requisite that should only be followed if you require the FileNet Content Manager images to be pre-staged in a private repository as your environment is living on a private VPC. 
+
+## 3. [Account and Clients](/Prepare/Stage/solution-stage-aws)
+
+This walks you through the configuration of the `aws-cli` for your local computer.
+
+## 4. [EKS Cluster](/Prepare/Stage/solution-stage-eks)
+
+This section will take you through deploying an EKS cluster in AWS using `aws-cli` as well as the `eksctl` command line utilities. It will also guide you through installing the required cluster components:
+- NGINX Ingress Controller
+- EBS for block storage
+- EFS for file storage
+- AWS Load Balancer Controller
+
+## 5. [RDS](/Prepare/Stage/solution-stage-rds)
+
+This is an optional pre-requisite. In the course of our example deployment we will be describing the installation and configuration of Postgres as a pod running in your cluster. If you prefer to use the AWS managed database services, this document will take you through spinning up an RDS Postgres instance in AWS.
