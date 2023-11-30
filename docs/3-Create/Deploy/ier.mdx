@@ -4,6 +4,9 @@ sidebar_position: 4
 title: IBM Enterprise Records
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Deploy IER
 
 If IBM Enterprise Records is required, you should have already staged the image per the previous instructions in Staging.
@@ -303,14 +306,35 @@ Add the menu to the desktop where IER functionality is exceted .Below is the ima
 
 ## Profile Creation
 
-Above steps required objectstores are created 
+Prerequsites :
+
+1.File Plan Object Store is created
+
+2.Record Object Store is created
+
+3.Connection Point for IER is created 
+
 To start Configuration Manager use below commands . _ier_install_path_  is the location where IBM Enterprise Record is installed.
 
 
-AIX/Linux - ./ier_install_path/configure/configmgr 
+<Tabs groupId="operating-systems">
+  <TabItem value="win" label="Windows">
+```bash
+
+ier_install_path\configure\configmgr.exe
+
+```
+  </TabItem>
+  <TabItem value="mac/linux" label="macOS/Linux">
+```shell
+./ier_install_path/configure/configmgr 
+```
+  </TabItem>
+</Tabs>
 
 
-Windows - ier_install_path\configure\configmgr.exe
+
+
 
 1. Follow below steps for profile creation . Do a _Save_ and _Run Task_ for each of those.
 
@@ -327,7 +351,7 @@ Configure File Plan Object Store:
 ![ConfigFPOS](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/45f75363-24e8-4e52-9417-2dd3a3e706ed)
 
 
-Configure RecordObject Store:
+Configure Record Object Store:
 
 ![ConfigROS](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/1502302d-770a-4ab2-bd66-eb37feb64477)
 
