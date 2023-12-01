@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[6833],{8132:e=>{e.exports=JSON.parse('{"title":"Innovate","description":"Innovate to define value","slug":"/category/innovate","permalink":"/solution-filenet-aws/category/innovate","navigation":{"next":{"title":"Align","permalink":"/solution-filenet-aws/Innovate/align"}}}')}}]);
