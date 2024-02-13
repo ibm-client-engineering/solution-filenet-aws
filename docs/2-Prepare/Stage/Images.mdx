@@ -36,30 +36,47 @@ Login to IBM Entitled Registry with Docker
 docker login "$ENTITLED_REGISTRY" -u "$ENTITLED_REGISTRY_USER" -p "$ENTITLED_REGISTRY_KEY"
 ```
 
-The following image list comes from the IBM FileNet Content Manager Case File ver 1.6.2. 
+The following image list comes from the [IBM FileNet P8 Fix Pack Compatibility Matrices](https://www.ibm.com/support/pages/filenet-p8-fix-pack-compatibility-matrices)
+
+:::note
+The following tag formats are subject to change.
+
+Last updated: 2/13/23
+:::
+
+Image tag formats:
+|Component |Repo Link|Tag Format|Latest Version|
+|---|------|---|---|
+|cpe|cp.icr.io/cp/cp4a/fncm/cpe|ga-55x-p8cpe|5.5.12-0-507 (x = 12)|
+|cpe-sso|cp.icr.io/cp/cp4a/fncm/cpe-sso|ga-55x-p8cpe|5.5.12-0-507 (x = 12)|
+|css|cp.icr.io/cp/cp4a/fncm/css|ga-55x-p8css|5.5.12-0-21 (x = 12)|
+|cmis|cp.icr.io/cp/cp4a/fncm/cmis|ga-30x-cmis-if00x|3.0.7.0 IF004 (x x = 7 4)|
+|extshare|cp.icr.io/cp/cp4a/fncm/extshare|ga-30x-es|3.0.15.0 (x = 15)|
+|graphql|cp.icr.io/cp/cp4a/fncm/graphql|ga-55x-p8cgql|5.5.12-52 (x = 12)|
+|navigator|cp.icr.io/cp/cp4a/ban/navigator|ga-30x-icn|3.0.15.0 (x = 15)|
+|navigator-sso|cp.icr.io/cp/cp4a/ban/navigator-sso|ga-30x-icn|3.0.15.0 (x = 15)|
+|taskmgr|cp.icr.io/cp/cp4a/fncm/taskmgr|ga-30x-tm|3.0.15.0 (x = 15)|
+|operator-bundle|icr.io/cpopen/ibm-fncm-operator-bundle|55.xx.x|5.5.12.0 (xx.x = 12.0)|
+|operator-container|icr.io/cpopen/ibm-fncm-operator-container|icp4a-content-operator:xx.0.x|23.0.2 (xx x = 23 2)|
+|ier|cp.icr.io/cp/cp4a/ier/ier|ga-52xx-IF005-ier-2302|5.2.1.8 IF005 (xx= 18)|
 
 On your local host with docker installed, run the following pull commands:
 
 ```
-docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
-docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001
-docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001
-docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103
-docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102
-docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
-docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102
-docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
-docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
-docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1
+docker pull cp.icr.io/cp/cp4a/fncm/cpe:ga-5512-p8cpe
+docker pull cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe
+docker pull cp.icr.io/cp/cp4a/fncm/css:ga-5512-p8css
+docker pull cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-if004
+docker pull cp.icr.io/cp/cp4a/fncm/extshare:ga-3015-es
+docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5512-p8cgql
+docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3015-icn
+docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn
+docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm
+docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.12.0
+docker pull icr.io/cpopen/icp4a-content-operator:23.0.2
 ```
 
 If including the IER container, also pull that image:
-
-:::note
-
-As of this writing the latest IER version is [5.2.1.8-IER-IF005](https://www.ibm.com/support/fixcentral/swg/doSelectFixes?options.selectedFixes=5.2.1.8-IER-IF005&continue=1&source=dbluesearch&mhsrc=ibmsearch_a&mhq=enterprise+records)
-
-:::
 
 ```
 docker pull cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005
@@ -75,27 +92,27 @@ docker login "$LOCAL_REGISTRY" -u "$LOCAL_REGISTRY_USER" -p "$LOCAL_REGISTRY_KEY
 Let's tag the images we've pulled to be pushed to the private registry:
 
 ```
-docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
-docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
-docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 
-docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 
-docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001
-docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 
-docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103
-docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
-docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102 $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102
-docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
-docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001 $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
-docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
-docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102 $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102
-docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
-docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
-docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
-docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
-docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
-docker tag icr.io/cpopen/icp4a-content-operator:22.0.2-IF003 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003
-docker tag icr.io/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 
-docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.10.1 $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
+docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5512-p8cpe $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5512-p8cpe
+docker tag cp.icr.io/cp/cp4a/fncm/cpe:ga-5512-p8cpe-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5512-p8cpe-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe
+docker tag cp.icr.io/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5512-p8css $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5512-p8css
+docker tag cp.icr.io/cp/cp4a/fncm/css:ga-5512-p8css-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5512-p8css-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-if004 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-if004
+docker tag cp.icr.io/cp/cp4a/fncm/cmis:ga-307-cmis-if004-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-if004-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3015-es $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3015-es
+docker tag cp.icr.io/cp/cp4a/fncm/extshare:ga-3015-es-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3015-es-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5512-p8cgql $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5512-p8cgql
+docker tag cp.icr.io/cp/cp4a/fncm/graphql:ga-5512-p8cgql-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5512-p8cgql-amd64
+docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3015-icn $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3015-icn
+docker tag cp.icr.io/cp/cp4a/ban/navigator:ga-3015-icn-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3015-icn-amd64
+docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3015-icn
+docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3015-icn-amd64
+docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm
+docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64
+docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.12.0 $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.12.0
+docker tag icr.io/cpopen/icp4a-content-operator:23.0.2 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2
+docker tag icr.io/cpopen/icp4a-content-operator:23.0.2 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2-amd64
 ```
 
 If including IER
@@ -106,27 +123,27 @@ docker tag cp.icr.io/cp/cp4a/ier/ier:ga-5218-ier-if005 $LOCAL_REGISTRY/cp/cp4a/i
 Now let's push the images to the local or private registry
 
 ```
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5510-p8cpe-if001-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso,ga-5510-p8cpe-if001 
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5510-p8cpe-if001-amd64 
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5510-p8css-if001-amd64 
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-la103-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3013-es-la102-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5510-p8cgql-if001-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102
-docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3013-icn-la102-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102
-docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3013-icn-la102-amd64
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102
-docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3013-tm-la102-amd64
-docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003
-docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:22.0.2-IF003-amd64 
-docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.10.1
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5512-p8cpe
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe:ga-5512-p8cpe-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cpe-sso:ga-5512-p8cpe-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5512-p8css
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/css:ga-5512-p8css-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-if004
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/cmis:ga-307-cmis-if004-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3015-es
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/extshare:ga-3015-es-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5512-p8cgql
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/graphql:ga-5512-p8cgql-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3015-icn
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator:ga-3015-icn-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3015-icn
+docker push $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3015-icn-amd64
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm
+docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64
+docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2
+docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2-amd64
+docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.12.0
 ```
 
 If including IER
