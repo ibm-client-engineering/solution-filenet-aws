@@ -23,7 +23,7 @@ spec:
   resources:
     requests:
       storage: 50Gi
-  storageClassName: efs-sc
+  storageClassName: ebs-gp3-sc
   volumeMode: Filesystem
 ---
 kind: PersistentVolumeClaim
@@ -38,7 +38,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: efs-sc
+  storageClassName: ebs-gp3-sc
   volumeMode: Filesystem
 ---
 apiVersion: apps/v1

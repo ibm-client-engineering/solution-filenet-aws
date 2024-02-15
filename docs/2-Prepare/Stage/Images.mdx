@@ -56,7 +56,6 @@ Image tag formats:
 |navigator|cp.icr.io/cp/cp4a/ban/navigator|ga-30x-icn|3.0.15.0 (x = 15)|
 |navigator-sso|cp.icr.io/cp/cp4a/ban/navigator-sso|ga-30x-icn|3.0.15.0 (x = 15)|
 |taskmgr|cp.icr.io/cp/cp4a/fncm/taskmgr|ga-30x-tm|3.0.15.0 (x = 15)|
-|operator-bundle|icr.io/cpopen/ibm-fncm-operator-bundle|55.xx.x|5.5.12.0 (xx.x = 12.0)|
 |operator-container|icr.io/cpopen/ibm-fncm-operator-container|icp4a-content-operator:xx.0.x|23.0.2 (xx x = 23 2)|
 |ier|cp.icr.io/cp/cp4a/ier/ier|ga-52xx-IF005-ier-2302|5.2.1.8 IF005 (xx= 18)|
 
@@ -73,7 +72,6 @@ docker pull cp.icr.io/cp/cp4a/fncm/graphql:ga-5512-p8cgql
 docker pull cp.icr.io/cp/cp4a/ban/navigator:ga-3015-icn
 docker pull cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn
 docker pull cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm
-docker pull icr.io/cpopen/ibm-fncm-operator-bundle:55.12.0
 docker pull icr.io/cpopen/icp4a-content-operator:23.0.2
 ```
 
@@ -111,7 +109,6 @@ docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn $LOCAL_REGISTRY/cp/cp
 docker tag cp.icr.io/cp/cp4a/ban/navigator-sso:ga-3015-icn-amd64 $LOCAL_REGISTRY/cp/cp4a/ban/navigator-sso:ga-3015-icn-amd64
 docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm
 docker tag cp.icr.io/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64 $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64
-docker tag icr.io/cpopen/ibm-fncm-operator-bundle:55.12.0 $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.12.0
 docker tag icr.io/cpopen/icp4a-content-operator:23.0.2 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2
 docker tag icr.io/cpopen/icp4a-content-operator:23.0.2 $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2-amd64
 ```
@@ -144,7 +141,6 @@ docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm
 docker push $LOCAL_REGISTRY/cp/cp4a/fncm/taskmgr:ga-3015-tm-amd64
 docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2
 docker push $LOCAL_REGISTRY/cpopen/icp4a-content-operator:23.0.2-amd64
-docker push $LOCAL_REGISTRY/cpopen/ibm-fncm-operator-bundle:55.12.0
 ```
 
 If including IER

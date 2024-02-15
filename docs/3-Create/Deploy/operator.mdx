@@ -5,16 +5,16 @@ title: FNCM Operator
 ---
 ## Deploy Operator
 
-Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.7.1**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+Download the IBM Case file for FileNet Content Manager. As of this writing it is **v1.8.0**. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
 ```
-wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.8.0/ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Extract the case file
 
 ```
-tar zxvf ibm-cp-fncm-case-1.7.1.tgz
+tar zxvf ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Change into the operator directory and extract the container samples file
@@ -22,7 +22,8 @@ Change into the operator directory and extract the container samples file
 ```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
 
-tar xvf container-samples-5.5.11.tar
+// this name is equivalent to the corresponding filenet version and thus may change
+tar xvf container-samples-5.5.12.tar
 ```
 
 ### Scripted Operator deployment
@@ -161,6 +162,8 @@ kubectl apply -f ldap_secrets.yaml
 
 ## Deploying CR
 
+{/* TO DO : DOUBLE CHECK BELOW AND UPDATE FULL CR VERSION TO LATEST VERSION*/}
+
 :::note
 A full version of the CR for release 5.5.11 can be found here. It contains a lot of extra settings that are covered in the Appendix below.
 - [ibm_fncm_cr_production-5.5.11.yaml](/deployment_files/ibm_fncm_cr_production-5.5.11.yaml)
@@ -183,9 +186,9 @@ metadata:
     app.kubernetes.io/instance: ibm-fncm
     app.kubernetes.io/managed-by: ibm-fncm
     app.kubernetes.io/name: ibm-fncm
-    release: 5.5.10
+    release: 5.5.12
 spec:
-  appVersion: 22.0.2
+  appVersion: 23.0.2
   var_setlog_true: false
   var_navigator_no_log: false
   var_fncm_no_log: false
@@ -346,7 +349,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/cpe
-        tag: ga-5510-p8cpe-if001
+        tag: ga-5512-p8cpe
         pull_policy: IfNotPresent
       log:
        format: json
@@ -423,7 +426,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/css
-        tag: ga-5510-p8css-if001
+        tag: ga-5512-p8css
         pull_policy: IfNotPresent
       log:
         format: json
@@ -488,7 +491,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/cmis
-        tag: ga-307-cmis-la103
+        tag: ga-307-cmis-if004
         pull_policy: IfNotPresent
       log:
         format: json
@@ -562,7 +565,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/graphql
-        tag: ga-5510-p8cgql-if001
+        tag: ga-5512-p8cgql
         pull_policy: IfNotPresent
       log:
         format: json
@@ -623,7 +626,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/extshare
-        tag: ga-3013-es-la102
+        tag: ga-3015-es
         pull_policy: IfNotPresent
       resources:
         requests:
@@ -682,7 +685,7 @@ spec:
       image:
         ## The default repository is the IBM Entitled Registry.
         repository: cp.icr.io/cp/cp4a/fncm/taskmgr
-        tag: ga-3013-tm-la102
+        tag: ga-3015-tm
         pull_policy: IfNotPresent
       resources:
         requests:
@@ -753,7 +756,7 @@ spec:
     image:
       ## The default repository is the IBM Entitled Registry
       repository: cp.icr.io/cp/cp4a/ban/navigator
-      tag: ga-3013-icn-la102
+      tag: ga-3015-icn
       pull_policy: IfNotPresent
     log:
       format: json
@@ -840,18 +843,18 @@ spec:
 
 ### Upgrading FNCM in the cluster
 
-This assumes you are running a version older than v1.7.1.
+This assumes you are running a version older than v1.8.0.
 
-Download the most recent IBM Case file for FileNet Content Manager. As of this writing it is v1.7.1. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+Download the most recent IBM Case file for FileNet Content Manager. As of this writing it is v1.8.0. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
 
 ```
-wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.8.0/ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Extract the case file
 
 ```
-tar zxvf ibm-cp-fncm-case-1.7.1.tgz
+tar zxvf ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Change into the operator directory and extract the container samples file
@@ -859,7 +862,8 @@ Change into the operator directory and extract the container samples file
 ```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
 
-tar xvf container-samples-5.5.11.tar
+// this name is equivalent to the corresponding filenet version and thus may change
+tar xvf container-samples-5.5.12.tar
 ```
 
 #### Upgrading the operator manually
@@ -867,7 +871,7 @@ tar xvf container-samples-5.5.11.tar
 :::info
 It's important to note that if you are running airgapped and you have already staged the operator image to your repository, you will need to update the image path in the `operator.yaml` file. The below example uses `sed` and updates every `image:` entry.
 ```
-sed -i "s/image:.*/image: \"<REPO URL>\/path\/to\/icp4a-content-operator:23.0.1-IF003\"/" operator.yaml
+sed -i "s/image:.*/image: \"<REPO URL>\/path\/to\/icp4a-content-operator:23.0.2\"/" operator.yaml
 ```
 This needs to be done **before** applying the `operator.yaml`! 
 
