@@ -6,16 +6,18 @@ title: Upgrade
 
 ## Upgrading FNCM in the cluster
 
-Download the most recent IBM Case file for FileNet Content Manager. As of this writing it is v1.7.1. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+Download the most recent IBM Case file for FileNet Content Manager. As of this writing it is v1.8.0. You can check for newer versions by going [here](https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-fncm-case)
+
+This assumes you are running an older version.
 
 ```
-wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.7.1/ibm-cp-fncm-case-1.7.1.tgz
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-fncm-case/1.8.0/ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Extract the case file
 
 ```
-tar zxvf ibm-cp-fncm-case-1.7.1.tgz
+tar zxvf ibm-cp-fncm-case-1.8.0.tgz
 ```
 
 Change into the operator directory and extract the container samples file
@@ -23,7 +25,8 @@ Change into the operator directory and extract the container samples file
 ```tsx
 cd ibm-cp-fncm-case/inventory/fncmOperator/files/deploy/crs/
 
-tar xvf container-samples-5.5.11.tar
+// this name is equivalent to the corresponding filenet version and thus may change
+tar xvf container-samples-5.5.12.tar
 ```
 
 ### Upgrading the operator manually
@@ -31,7 +34,7 @@ tar xvf container-samples-5.5.11.tar
 :::info
 It's important to note that if you are running airgapped and you have already staged the operator image to your repository, you will need to update the image path in the `operator.yaml` file. The below example uses `sed` and updates every `image:` entry.
 ```
-sed -i "s/image:.*/image: \"<REPO URL>\/path\/to\/icp4a-content-operator:23.0.1-IF003\"/" operator.yaml
+sed -i "s/image:.*/image: \"<REPO URL>\/path\/to\/icp4a-content-operator:23.0.2\"/" operator.yaml
 ```
 This needs to be done **before** applying the `operator.yaml`! 
 
