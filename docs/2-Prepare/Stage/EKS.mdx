@@ -514,32 +514,8 @@ kube-system	efs-csi-controller-sa		arn:aws:iam::748107796891:role/eksctl-filenet
 ```
 Now we just need our add-on registry address. This can be found here: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
 
-Let's install the driver add-on to our clusters. We're going to use `helm` for this.
-```
-helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+Install the driver add-on to the clusters using helm, if you have not already. This is covered in the [enabling EFS](#enable-efs-on-the-cluster) section.
 
-helm repo update
-```
-Install a release of the driver using the Helm chart. Replace the repository address with the cluster's [container image address](https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html).
-
-```
-helm upgrade -i aws-efs-csi-driver aws-efs-csi-driver/aws-efs-csi-driver \
-    --namespace kube-system \
-    --set image.repository=602401143452.dkr.ecr.us-east-1.amazonaws.com/eks/aws-efs-csi-driver \
-    --set controller.serviceAccount.create=false \
-    --set controller.serviceAccount.name=efs-csi-controller-sa
-
-Release "aws-efs-csi-driver" does not exist. Installing it now.
-NAME: aws-efs-csi-driver
-LAST DEPLOYED: Tue Jan 24 12:42:42 2023
-NAMESPACE: kube-system
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-To verify that aws-efs-csi-driver has started, run:
-
-```
 Apply the storage class with
 ```
 kubectl apply -f StorageClass.yaml
