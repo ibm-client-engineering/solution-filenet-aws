@@ -152,7 +152,7 @@ spec:
 
     ## This is the image repository and tag that correspond to shared images for all FNCM components.
     images:
-      keytool_job_container:
+      keytool_init_container:
         repository: cp.icr.io/cp/cp4a/common/dba-keytool-initcontainer
         tag: "23.0.2"
 
