@@ -83,18 +83,20 @@ async function createconfig() {
               "https://github.com/ibm-client-engineering/solution-filenet-aws/tree/main/packages/create-docusaurus/templates/shared/",
           },
           theme: {
-            customCss: require.resolve("./src/css/custom.css"),
+            customCss: require.resolve("./src/css/styles.css"),
           },
           blog: {
+            routeBasePath: "flight-logs",
             path: "flight-logs",
             // Simple use-case: string editUrl
             // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
             // Advanced use-case: functional editUrl
             editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
               `https://github.com/ibm-client-engineering/solution-filenet-aws/edit/main/${blogDirPath}/${blogPath}`,
-            blogTitle: "Journey Log",
-            blogSidebarTitle: "All our logs",
-            postsPerPage: 20,
+            blogTitle: "Flight Logs",
+            blogSidebarTitle: "Flight Logs",
+            blogSidebarCount: "ALL",
+            postsPerPage: "ALL",
             remarkPlugins: [],
             rehypePlugins: [],
           },
