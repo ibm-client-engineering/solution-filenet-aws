@@ -171,6 +171,9 @@ A full version of the CR for releases 5.5.11 and 5.5.12 can be found here. It co
 
 As any file mentioned here, these are reference only. Your best source would be to use the CR that comes with the case file referenced above. It can be found in the `container-samples` tar. That would be the best reference to start with.
 :::
+:::info
+As of 5.5.12, the image repository for the **keytool_init_container** must be included as the various fncm components pull from it. When using a private container registry such as ECR, you will need to edit the repository url to your repository name with /dba-keytool-initcontainer appended at the end.
+:::
 
 Here is our example CR as a reference. It would be applied with the following command to the cluster. Make sure you're in your correct namespace or have your namespace context set. 
 
@@ -242,6 +245,11 @@ spec:
       sc_slow_file_storage_classname: "efs-sc"
       sc_medium_file_storage_classname: "efs-sc"
       sc_fast_file_storage_classname: "efs-sc"
+    images:
+      keytool_init_container:
+        repository: cp.icr.io/cp/cp4a/common/dba-keytool-initcontainer 
+        tag: "23.0.2"
+
 
   ldap_configuration:
   # Our example is actually using OpenLDAP, but this seems to be the only way to get it to work
