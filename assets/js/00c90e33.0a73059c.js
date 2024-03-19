@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[2074],{6482:s=>{s.exports=JSON.parse('{"label":"sprint","permalink":"/solution-filenet-aws/blog/tags/sprint","allTagsPath":"/solution-filenet-aws/blog/tags","count":42,"unlisted":false}')}}]);
