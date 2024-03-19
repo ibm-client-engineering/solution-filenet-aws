@@ -428,9 +428,9 @@ Pull down the NGINX controller deployment
 wget -O nginx-deploy.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml
 ```
 
-Modify the deployment file and add the following annotations
+Modify the deployment file by adding the annotations that do not exist and editing the one(s) that do:
 ```tsx
-service.beta.kubernetes.io/aws-load-balancer-type: "external"
+service.beta.kubernetes.io/aws-load-balancer-type: "external" // set this to "internal" if not using a public ip
 service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
 service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
 ```
