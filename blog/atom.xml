@@ -57,7 +57,7 @@
 <p>Flight Logs contain information relating to steps completed between 03/12/24 - 03/14/24</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
-<li>Client us setting up their AWS gov cloud environment in parallel. Overall the steps in this solution guide worked well for AWS gov cloud.</li>
+<li>Client is setting up their AWS gov cloud environment in parallel. Overall the steps in this solution guide worked well for AWS gov cloud.</li>
 <li>Guided client on how to add css index area for another object store. In the css sections under 'initialize_configuration'need index area per OS.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
@@ -103,35 +103,40 @@ FQDN is not filled out, discussed options.</p>
         <updated>2024-03-05T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
-<p>Flight Logs contain information relating to steps completed between 05/22/23 - 05/26/23</p>
+<p>Flight Logs contain information relating to steps completed between 03/05/24 - 03/07/24</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
-<li>Redesigned our openldap implementation to take the following into account:<!-- -->
-<ul>
-<li>CPE is happier with an openldap implementation that seems like IBM TDS.</li>
-<li>Added annotations to the CR to reflect a TDS installation despite still being an openldap deployment</li>
-<li>Removed any stateful storage from the Openldap deployment</li>
-<li>Added a schema ldif to add specific TDS annotations to the users ldif and updated documentation to reflect those changes - <a href="https://github.com/ibm-client-engineering/solution-filenet-aws/pull/13" target="_blank" rel="noopener noreferrer">PR#13</a></li>
+<li>Client was able to apply FNCM CR. Pods came up without errors and they were able to access ACCE UI.</li>
 </ul>
-</li>
-<li>Updated the <code>ibm-fncm-secret</code> with the correct user (cpadmin vs ldap_admin) in customer environment.</li>
-<li>Successfully boostrapped CPE in the customer environment by deleting the previous <code>fncmcluster</code> and re-applying the CR.</li>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
+<ul>
+<li>IER deployment failed. New case has been opened to look into the issue before next weeks session.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
-<li>Resource restrictions were rearing their ugly head when changes were made to the CR and applied. Apparently the behavior of the when pods need to be redeployed is to actually deploy the new pods and then terminate the old ones once the new ones were up. This was causing violations of the resource quotas.</li>
-<li>Ingress still appears to be broken in both our reference environment and the customer environment. Still tracking this in <a href="https://www.ibm.com/mysupport/s/case/5003p00002iwdgWAAQ/filenet-container-deployment-to-eks" target="_blank" rel="noopener noreferrer">TS013093278</a>.</li>
+<li>
+<p><strong>EKS Cluster clean up :</strong> Client environment has a clean up process that deletes EKS cluster to save cost. This process ran again and client has to provision cluster again. EKS cluster was deleted as part of their monthly clean up cycle.</p>
+</li>
+<li>
+<p><strong>IER Image:</strong> Client is getting Back off error message for IER pod.</p>
+</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
-<li>Continue working with development to solve the ingress issue.</li>
-<li>They are sending our error logs and events to web sphere team to see if they can find the root cause of these errors</li>
+<li>Track the case TS015679454 and resolve the issue before next weeks sessions.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<ul>
+<li>Deploy IBM Enterprise Record.</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<p><strong>Cases open: 1</strong></p>
 <ul>
-<li><a href="https://www.ibm.com/mysupport/s/case/5003p00002iwdgWAAQ/filenet-container-deployment-to-eks" target="_blank" rel="noopener noreferrer">TS013093278</a></li>
-<li><a href="https://zenhub.ibm.com/workspaces/st5-action-information-center-64343620d0cfd0000f03a114/issues/ibm-client-engineering/solution-filenet-aws/8" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws#8</a></li>
-<li>Flight log was added by PR 5/30/2023</li>
+<li>Case TS015679454</li>
+</ul>
+<p><strong>Cases closed: 1</strong></p>
+<ul>
+<li>Case TS015569690</li>
 </ul>]]></content>
         <category label="log" term="log"/>
         <category label="sprint" term="sprint"/>
