@@ -4,43 +4,128 @@
         <title>IBM Client Engineering Blog</title>
         <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog</link>
         <description>IBM Client Engineering Blog</description>
-        <lastBuildDate>Tue, 19 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 02 Apr 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
+            <title><![CDATA[Log - Sprint 7 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45</guid>
+            <pubDate>Tue, 02 Apr 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="flight-landing-log"><strong>Flight Landing Log</strong><a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#flight-landing-log" class="hash-link" aria-label="Direct link to flight-landing-log" title="Direct link to flight-landing-log">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="objective">Objective<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#objective" class="hash-link" aria-label="Direct link to Objective" title="Direct link to Objective">​</a></h3>
+<p>Deploy Filenet on customer-owned AWS EKS infrastructure for use in growth opportunity to transition to AWS Gov Cloud, and provide customer with hands-on experience and education on Kubernetes and deploying containerized applications on AWS</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="milestones">Milestones<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#milestones" class="hash-link" aria-label="Direct link to Milestones" title="Direct link to Milestones">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="completed">Completed<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#completed" class="hash-link" aria-label="Direct link to Completed" title="Direct link to Completed">​</a></h4>
+<ul>
+<li>Determine Deployment Size based on Filenet PoC Hardware Requirements</li>
+<li>Provision AWS Cluster</li>
+<li>Prepare AWS account<!-- -->
+<ul>
+<li>Install command line tools</li>
+</ul>
+</li>
+<li>Stage FileNet images</li>
+<li>Deploy EKS Cluster</li>
+<li>Install OpenLDAP</li>
+<li>Deploy the Database</li>
+<li>Deploy the FNCM Operator</li>
+<li>Enable and Demonstrate Content Search Services</li>
+<li>Educate customer on Kubernetes and AWS</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="decisions-and-action-items-dai">Decisions and Action Items (DAI)<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#decisions-and-action-items-dai" class="hash-link" aria-label="Direct link to Decisions and Action Items (DAI)" title="Direct link to Decisions and Action Items (DAI)">​</a></h3>
+<ul>
+<li>Optional RDS Configuration<!-- -->
+<ul>
+<li>Process Documented, customer may proceed as needed</li>
+</ul>
+</li>
+<li>Discuss and demonstrate Content Replication<!-- -->
+<ul>
+<li>Documented and Handed-off to CSM team</li>
+</ul>
+</li>
+<li>Walk through GraphQL use cases<!-- -->
+<ul>
+<li>Documented and Handed-off to CSM team</li>
+</ul>
+</li>
+<li>Customer load-balancer decision<!-- -->
+<ul>
+<li>Load-balancer and PKI configuration to be determined by the customer</li>
+<li>Affected components:<!-- -->
+<ul>
+<li>Standalone Process Designer Setup</li>
+<li>Creation of Workflows</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IBM Enterprise Records Support<!-- -->
+<ul>
+<li>Tickets were raised with the product team, long-term enhancement request to support IER on AWS</li>
+<li>Handed-off to CSM team to follow-up</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons learned<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-45#lessons-learned" class="hash-link" aria-label="Direct link to Lessons learned" title="Direct link to Lessons learned">​</a></h3>
+<ul>
+<li>Namespace Deletion: Stuck in Terminating State<!-- -->
+<ul>
+<li>Proceeded with <a href="https://www.ibm.com/docs/en/cloud-private/3topic=console-namespace-is-stuck-in-terminating-state#manually-delete-a-terminating-namespace" target="_blank" rel="noopener noreferrer">Manual Deletion Documentation</a> to remove the finalizer</li>
+<li>This IBM Documentation pertains to IBM Cloud Private but is applicable to all clusters including AWS</li>
+</ul>
+</li>
+<li>Documentation Feedback<!-- -->
+<ul>
+<li>Documentation to be more generalized, clear and applicable to other customers</li>
+<li>ECR Tag directory paths, folder structure tags unavailable</li>
+</ul>
+</li>
+<li>Lack of IER Support<!-- -->
+<ul>
+<li>Not officially supported on AWS by IBM</li>
+</ul>
+</li>
+</ul>]]></content:encoded>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+        <item>
             <title><![CDATA[Log - Sprint 6 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44</guid>
             <pubDate>Tue, 19 Mar 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 03/19/24 - 03/21/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
 <li>Client deleted the 'ingress-nginx' namespace instead of cleaning up resources. Shared steps on how to clean up resources if a namespace is stuck in terminating state. Documentation used - <a href="https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=console-namespace-is-stuck-in-terminating-state#manually-delete-a-terminating-namespace" target="_blank" rel="noopener noreferrer">https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=console-namespace-is-stuck-in-terminating-state#manually-delete-a-terminating-namespace</a></li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
 <ul>
 <li>Working with support team to resolve IER deployment failure.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li><strong>IER Image:</strong> Client is getting Back off error message for IER pod.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
 <li>Track the case TS015679454 and resolve the issue.</li>
 <li>Look into s3 config without access keys - enhancement request was approved by product team last year. It improves content replication setup.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Client to run through the steps to Install NGINX Controller.</li>
 <li>Look into the certificate setup and recommend next steps, including any other fields in the YAML that have to be filled.</li>
 <li>Check if cert is now valid from ICN, etc. If so, reimport cert into keystore and retry launching PD.</li>
 <li>Continuing to track the IER image pull issue support case. Deploy IBM Enterprise Record and TM pod setup for IER.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-6#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-44#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS015679454</li>
@@ -50,24 +135,24 @@
         </item>
         <item>
             <title><![CDATA[Log - Sprint 5 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43</guid>
             <pubDate>Tue, 12 Mar 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 03/12/24 - 03/14/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
 <li>Client is setting up their AWS gov cloud environment in parallel. Overall the steps in this solution guide worked well for AWS gov cloud.</li>
 <li>Guided client on how to add css index area for another object store. In the css sections under 'initialize_configuration'need index area per OS.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
 <ul>
 <li>Walked through running the commands to check which file storage the index areas map to. (eg: how /opt/ibm/indexareas maps to efs)</li>
 <li>Went through cert manager setup.</li>
 <li>Working with support team to resolve IER deployment failure.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li>
 <p><strong>Ceritficate issue:</strong>  PD - Security configuration, says not secure and certificate not valid on all the urls.
@@ -78,18 +163,18 @@ FQDN is not filled out, discussed options.</p>
 <p><strong>IER Image:</strong> Client is getting Back off error message for IER pod.</p>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
 <li>Track the case TS015679454 and resolve the issue.</li>
 <li>Look into s3 config without access keys - enhancement request was approved by product team last year. It improves content replication setup.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Look into the certificate setup and recommend next steps, including any other fields in the YAML that have to be filled.</li>
 <li>Check if cert is now valid from ICN, etc. If so, reimport cert into keystore and retry launching PD.</li>
 <li>Continuing to track the IER image pull issue support case. Deploy IBM Enterprise Record and TM pod setup for IER.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-5#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-43#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS015679454</li>
@@ -99,21 +184,21 @@ FQDN is not filled out, discussed options.</p>
         </item>
         <item>
             <title><![CDATA[Log - Sprint 4 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42</guid>
             <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 03/05/24 - 03/07/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
 <li>Client was able to apply FNCM CR. Pods came up without errors and they were able to access ACCE UI.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
 <ul>
 <li>IER deployment failed. New case has been opened to look into the issue before next weeks session.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li>
 <p><strong>EKS Cluster clean up :</strong> Client environment has a clean up process that deletes EKS cluster to save cost. This process ran again and client has to provision cluster again. EKS cluster was deleted as part of their monthly clean up cycle.</p>
@@ -122,15 +207,15 @@ FQDN is not filled out, discussed options.</p>
 <p><strong>IER Image:</strong> Client is getting Back off error message for IER pod.</p>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
 <li>Track the case TS015679454 and resolve the issue before next weeks sessions.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Deploy IBM Enterprise Record.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-4#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-42#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS015679454</li>
@@ -144,31 +229,31 @@ FQDN is not filled out, discussed options.</p>
         </item>
         <item>
             <title><![CDATA[Log - Sprint 3 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41</guid>
             <pubDate>Tue, 27 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 02/27/24 - 02/29/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work In Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#work-in-progress" class="hash-link" aria-label="Direct link to Work In Progress" title="Direct link to Work In Progress">​</a></h2>
 <ul>
 <li>Configure CR and resolve issues that we encounter while applying the yaml.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li><strong>DBA Keytool:</strong> We were getting image pull back error for “dba-keytool-initcontainer:23.0.2” while applying the CRD and pods are in crash back loop.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
 <li>Provided a solution for the client for DBA Keytool image issue. Update the CRD file with the block provided in the comment section of this PR - <a href="https://github.com/ibm-client-engineering/solution-filenet-aws/pull/96" target="_blank" rel="noopener noreferrer">https://github.com/ibm-client-engineering/solution-filenet-aws/pull/96</a></li>
 <li>Track the case and provide any support as client is testing the solution before next weeks sessions.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Client to test the solution for DBA Keytool image issue.</li>
 <li>Go through the FNCM CRD and fill out the configuration.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-3#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-41#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
 <p><strong>Cases open: 1</strong></p>
 <ul>
 <li>Case TS015569690</li>
@@ -178,56 +263,56 @@ FQDN is not filled out, discussed options.</p>
         </item>
         <item>
             <title><![CDATA[Log - Sprint 2 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40</guid>
             <pubDate>Tue, 20 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 02/20/24 - 02/22/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
 <li>Client scripted certain steps which should help if EKS cluster has to be reprovisioned and we need to redo the installation.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li><strong>EKS Cluster clean up :</strong> Client environment has a clean up process that deletes EKS cluster to save cost. Some of the resources in EKS failed to delete during this process. Client had to spend most of the week to create a new cluster and run through what we did the previous week.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons Learned<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#lessons-learned" class="hash-link" aria-label="Direct link to Lessons Learned" title="Direct link to Lessons Learned">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons Learned<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#lessons-learned" class="hash-link" aria-label="Direct link to Lessons Learned" title="Direct link to Lessons Learned">​</a></h2>
 <ul>
 <li>Try to script/automate most of the steps to speed up the process if we run into issues like cluster deletion</li>
 <li>Database connection over SSL in CRD is disabled since we follow a MVP mode. In a production deployment client can set it up for more security.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
 <ul>
 <li>Client wants to know how to move their environment specific data into the extracted case package in an upgrade scenario.</li>
 <li>Any best practices and guidelines we can recommend on moving secrets to aws, etc in a production setting for security purposes.</li>
 <li>Research egress part in CR. For the time being we kept that section but set the sc_restricted_internet_access: false</li>
 <li>Documented differences in CR in the new case file.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Go through the FNCM CRD and fill out the configuration.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-2#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>]]></content:encoded>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-40#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>]]></content:encoded>
             <category>log</category>
             <category>sprint</category>
         </item>
         <item>
             <title><![CDATA[Log - Sprint 1 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1</guid>
+            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39</link>
+            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39</guid>
             <pubDate>Tue, 13 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="date">Date<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#date" class="hash-link" aria-label="Direct link to Date" title="Direct link to Date">​</a></h2>
 <p>Flight Logs contain information relating to steps completed between 02/13/24 - 02/15/24</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-accomplishments">Key Accomplishments<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#key-accomplishments" class="hash-link" aria-label="Direct link to Key Accomplishments" title="Direct link to Key Accomplishments">​</a></h2>
 <ul>
 <li>Client provisioned a small EKS cluster and was able to go through staging steps.</li>
 <li>Customer was able to do the workaround provided yesterday to support hierarchical image naming convention in Amazon ECR.</li>
 <li>Deployed OpenLDAP &amp; Postgresql.</li>
 <li>Successfully deployed the FileNet Operator into the customer's AWS EKS environment by manual process.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges">Challenges<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#challenges" class="hash-link" aria-label="Direct link to Challenges" title="Direct link to Challenges">​</a></h2>
 <ul>
 <li>
 <p><strong>Postgresql Failure:</strong> Permission issue while deploying postgresql.</p>
@@ -240,18 +325,18 @@ FQDN is not filled out, discussed options.</p>
 <p><strong>Amazon ECR:</strong> ECR has a flat structure so to maintain hierarchical naming structure of Filenet images client has to create separate repositories within ECR.</p>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons Learned<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#lessons-learned" class="hash-link" aria-label="Direct link to Lessons Learned" title="Direct link to Lessons Learned">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lessons-learned">Lessons Learned<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#lessons-learned" class="hash-link" aria-label="Direct link to Lessons Learned" title="Direct link to Lessons Learned">​</a></h2>
 <ul>
 <li>Make a note in the documentation to make it clear to use EBS(Block storage) instead of EFS for Postgresql.</li>
 <li>Amazon ECR behavior and workaround needs updated in the documentation.</li>
 <li>Both load balancer and nginx are needed. Nginx only works on ports 80 and 443 and other port goes through the load balancer.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="action-items">Action Items<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#action-items" class="hash-link" aria-label="Direct link to Action Items" title="Direct link to Action Items">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
 <ul>
 <li>Go through the FNCM CRD and fill out the configuration.</li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-1#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>]]></content:encoded>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-39#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>]]></content:encoded>
             <category>log</category>
             <category>sprint</category>
         </item>
@@ -762,47 +847,6 @@ FQDN is not filled out, discussed options.</p>
 <ul>
 <li>Case TS014232963</li>
 <li>Case TS014348824</li>
-</ul>]]></content:encoded>
-            <category>log</category>
-            <category>sprint</category>
-        </item>
-        <item>
-            <title><![CDATA[Log - Sprint 25 🛫]]></title>
-            <link>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25</link>
-            <guid>https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25</guid>
-            <pubDate>Wed, 18 Oct 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="work-in-progress">Work in Progress<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#work-in-progress" class="hash-link" aria-label="Direct link to Work in Progress" title="Direct link to Work in Progress">​</a></h2>
-<ul>
-<li>Today the team continued to troubleshoot the cluster issues.</li>
-<li>The team tried adding custom annotations to disable Dynatrace injections.</li>
-<li>The team deleted the non-postgreSQL driver related jars (from cpe pods).</li>
-<li>The team discussed features included in the new version of FileNet. The team thinks upgrading will help resolve these errors.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="currently-tracking">Currently Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#currently-tracking" class="hash-link" aria-label="Direct link to Currently Tracking" title="Direct link to Currently Tracking">​</a></h2>
-<ul>
-<li>The team will work with the client to upgrade their environment to FileNet 5.5.11</li>
-<li>We will continue to work closely with IBM support.</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps">​</a></h2>
-<ul>
-<li>
-<p>The team will continue working to resolve the cluster issues in the next session.</p>
-<ul>
-<li><a href="https://trello.com/c/o1nc3JXp/1-cluster-and-database-troubleshooting" target="_blank" rel="noopener noreferrer">ibm-client-engineering/solution-filenet-aws</a></li>
-<li>This flight log is being submitted via PR "10/24/2023 Documentation"</li>
-</ul>
-</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tracking">Tracking<a href="https://ibm-client-engineering.github.io/solution-filenet-aws/blog/flight-log-25#tracking" class="hash-link" aria-label="Direct link to Tracking" title="Direct link to Tracking">​</a></h2>
-<p><strong>Cases open: 2</strong></p>
-<ul>
-<li>Case TS014348824</li>
-<li>Case TS014370797</li>
-</ul>
-<p><strong>Cases closed: 1</strong></p>
-<ul>
-<li>Case TS014232963</li>
 </ul>]]></content:encoded>
             <category>log</category>
             <category>sprint</category>
