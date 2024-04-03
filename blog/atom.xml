@@ -73,7 +73,7 @@
 <ul>
 <li>Namespace Deletion: Stuck in Terminating State<!-- -->
 <ul>
-<li>Proceeded with <a href="https://www.ibm.com/docs/en/cloud-private/3topic=console-namespace-is-stuck-in-terminating-state#manually-delete-a-terminating-namespace" target="_blank" rel="noopener noreferrer">Manual Deletion Documentation</a> to remove the finalizer</li>
+<li>Proceeded with <a href="https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=console-namespace-is-stuck-in-terminating-state#manually-delete-a-terminating-namespace" target="_blank" rel="noopener noreferrer">Manual Deletion Documentation</a> to remove the finalizer</li>
 <li>This IBM Documentation pertains to IBM Cloud Private but is applicable to all clusters including AWS</li>
 </ul>
 </li>
