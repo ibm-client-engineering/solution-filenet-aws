@@ -180,3 +180,35 @@ These are some of the most common reports requested by Records Administrators an
 3. Fillin details on report popup and click _Generate Report_ 
 
 ![IERReport3](https://github.com/ibm-client-engineering/solution-filenet-aws/assets/136734452/f4f2dfb1-4efd-4099-b8ca-bb8c89473c5f)
+
+
+## Troubleshoot
+
+### On IER Desktop (The object store FPOS is not configured to allow users to declare records)
+
+```
+[INFO ] FNRRD1149I: ---- Start workflow launch ----
+[ERROR ] FNRRD1035E: The object store FPOS is not configured to allow users to declare records.
+[err] Apr 22, 2024 3:22:09 PM com.ibm.ier.plugin.tasks.BaseIERTask handleErrors
+SEVERE: FNRRD1035E: The object store FPOS is not configured to allow users to declare records.
+com.ibm.ier.ddcp.exception.DDCPRuntimeException: FNRRD1035E: The object store FPOS is not configured to allow users to declare records.
+at com.ibm.ier.ddcp.exception.DDCPRuntimeException.createDDCPRuntimeException(DDCPRuntimeException.java:87)
+at com.ibm.ier.ddcp.ReportGeneration.validateInitWorkflowConfigMap(ReportGeneration.java:1085)
+at com.ibm.ier.ddcp.ReportGeneration.validatePEParams(ReportGeneration.java:1038)
+at com.ibm.ier.ddcp.ReportGeneration.launchDDWorkflows(ReportGeneration.java:747)
+at com.ibm.ier.plugin.tasks.RunDefensibleDisposalReportSweepTask.performBaseTask(RunDefensibleDisposalReportSweepTask.java:212)
+at com.ibm.ier.plugin.tasks.BaseIERTask.performTask(BaseIERTask.java:127)
+at com.ibm.ecm.task.commonj.work.BaseTask.call(BaseTask.java:75)
+at com.ibm.ecm.task.commonj.work.BaseTask.call(BaseTask.java:42)
+at javax.enterprise.concurrent.ManagedExecutors$CallableAdapter.call(ManagedExecutors.java:231)
+at com.ibm.ws.concurrent.internal.ScheduledTask.call(ScheduledTask.java:420)
+```
+
+Workaround:
+Disabling `Declare result files as a record` to prevent this error:
+
+1. Log onto IER Desktop and go to `Administration`.
+
+2. From Repositories, select `FPOS`.
+
+3. In `Basic Schedule Sweep`, change `Declare result files as a record` from Yes to No.

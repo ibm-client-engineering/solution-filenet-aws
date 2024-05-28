@@ -440,3 +440,104 @@ Scale the navigator deployment down and up. If your replicas are more that 1, sc
 kubectl scale deploy fncmdeploy-navigator-deploy --replicas=0
 kubectl scale deploy fncmdeploy-navigator-deploy --replicas=1
 ```
+
+## Troubleshoot
+
+### On Configuration Manager
+
+If you see this error when running the Configure File Plan Object Store task:
+```
+Starting to run Configure File Plan Object Store
+
+Configure File Plan Object Store *************************
+Finished running Configure File Plan Object Store
+An error occurred while running Configure File Plan Object Store
+Running the task failed with the following message: A network error occurred when processing a Web service request or response. See the nested exception for specific details. See full stack trace for details.  Message: Unexpected end of file from server Duration 50,063 milliseconds.
+```
+
+Workaround:
+Update config of `server.xml` in the CPE pod, add a timeout for 10m:
+```
+cat server.xml
+```
+
+```
+<server>
+<httpEndpoint id="defaultHttpEndpoint"
+readTimeout="10m"
+host="*"
+httpPort="9080"
+httpsPort="9443"
+protocolVersion="http/1.1">
+<httpOptions PurgeDataDuringClose="true" />
+</httpEndpoint>
+</server>
+```
+
+### On deploying IER (IER pod doesn't start properly or it starts but getting ssl related error)
+
+If your IER pod doesn't start:
+```
+Unable to attach or mount volumes: unmounted volumes=[custom-config-volume ier-custom-keystore-volume], unattached volumes=[], failed to process volumes=[]: timed out waiting for the condition
+```
+
+OR IER pod running ok but you see some SSL related error prevent IER engine to start:
+```
+[ERROR ] CWWKS9582E: The [cssSSLSettings] sslRef attributes required by the orb element with the defaultOrb id have not been resolved within 10 seconds. As a result, the applications will not start. Ensure that you have included a keyStore element and that Secure Sockets Layer (SSL) is configured correctly. If the sslRef is defaultSSLConfig, then add a keyStore element with the id defaultKeyStore and a password.
+```
+
+There is a workaround by manually uploading the plugin.jar to pod:
+
+1. Copy `IERApplicationPlugin.jar` from the latest IER fixpack.
+
+2. log onto Openshift and retrieve navigator pod:
+```
+oc get pods | grep fncmdeploy-navigator
+
+fncmdeploy-navigator-deploy-f64db4b8f-jj44k   1/1     Running   1 (18d ago)   18d
+```
+
+3. Upload IER plugin jar to plug-in store:
+```
+oc cp IERApplicationPlugin.jar fncmdeploy-navigator-deploy-f64db4b8f-jj44k:/opt/ibm/plugins
+```
+
+4. upload IER plugin jar to Task Manager pod: configdropin/overrrides & :/opt/ibm/extTM:
+```
+oc get pod | grep navigator
+```
+
+```
+oc cp IERApplicationPlugin.jar fncmdeploy-tm-deploy-854595dfcd-ptwm6:configDropins/overrides
+oc cp IERApplicationPlugin.jar fncmdeploy-tm-deploy-854595dfcd-ptwm6:/opt/ibm/extTM
+```
+
+### On Content Navigator (when declaring FPOS as File Plan repository)
+
+If you see error when declaring FPOS as File Plan repository:
+
+1. Create a file named ier-library.xml containing:
+
+```
+<server>
+  <library id="FileNetLib">
+    <fileset dir="${server.config.dir}/configDropins/overrides/ier-jars" includes="*.jar" scanInterval="5s" />
+  </library>
+</server>
+```
+
+2. Copy `xercesImpl-2.12.2.jar` from `<IER_install_path>/API/JARM`
+
+3. Navigate to your navigator pod, cd to `/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides` and create a folder:
+```
+mkdir ier-jars
+```
+
+4. Then upload the files from local machine to pod:
+```
+oc cp ier-library.xml fncmdeploy-navigator-deploy-f64db4b8f-25xz5:/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides
+
+oc cp xercesImpl-2.12.2.jar fncmdeploy-navigator-deploy-f64db4b8f-25xz5::/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides/ier-jars/
+```
+
+###
