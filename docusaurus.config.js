@@ -133,7 +133,7 @@ async function createconfig() {
           },
         },
         navbar: {
-          title: "| IBM FileNet on AWS EKS",
+          title: "| Journey to the Cloud: Migrating FileNet to AWS EKS ",
           logo: {
             alt: "My Site Logo",
             src: "img/logo.svg",

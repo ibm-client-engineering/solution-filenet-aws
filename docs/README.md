@@ -1,16 +1,16 @@
 ---
 sidebar_position: 1
 slug: /
-title: 'Flight Path'
+title: 'Migrating FileNet to AWS EKS'
 full_website: https://ibm-client-engineering.github.io/solution-filenet-aws/
 ---
 [![Site Build](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml/badge.svg)](https://github.com/ibm-client-engineering/solution-filenet-aws/actions/workflows/deploy.yml)  
 
 ## Bottom Line Up Front
 
-### This is a Solution Blueprint
-
 This "Flight Path" is a _living document_ that showcases an adoption journey and blueprint for a successful _Proof of Technology_ implementation showcasing the capabilities of  **IBM FileNet Content Manager** on **Amazon Elastic Kubernetes Service (EKS)**. This repository and its contents is the result of a real customer engagement.
+
+The customer heavily depended on its FileNet and IER systems and was planning to migrate its FileNet system to the cloud. However, this effort was hindered by a lack of internal expertise in Amazon Web Services (AWS) and Elastic Kubernetes Service (EKS). IBM provided the customer with a comprehensive strategy to deploy and configure FileNet on AWS successfully, in addition to hands-on training to ensure the customer possessed the necessary skills and knowledge to achieve its migration goals and manage cloud workloads effectively in the long term.  
 
 [![IBM Client Engineering](https://github-readme-stats.vercel.app/api/pin/?username=ibm-client-engineering&repo=solution-filenet-aws)](https://github.com/ibm-client-engineering/solution-filenet-aws)
 
